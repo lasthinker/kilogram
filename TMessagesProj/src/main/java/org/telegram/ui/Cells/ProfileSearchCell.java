@@ -40,7 +40,7 @@ import org.telegram.ui.Components.CheckBox2;
 import org.telegram.ui.Components.Premium.PremiumGradient;
 import org.telegram.ui.NotificationsSettingsActivity;
 
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.helper.MessageHelper;
 
 public class ProfileSearchCell extends BaseCell implements NotificationCenter.NotificationCenterDelegate {
 

@@ -1,13 +1,11 @@
-# Nagram
+# Kilogram
 
-Nagram is a third-party Telegram client based on [NekoX](https://github.com/NekoX-Dev/NekoX) with some modifications.
+Kilogram is a third-party Telegram client based on [NekoX](https://github.com/NextAlone/Nagram) with some modifications.
 
-- Official Site: <https://nextalone.xyz>
-- Telegram Update Channel: <https://t.me/nagram_channel>
-- Releases: <https://github.com/NextAlone/Nagram/releases>
-- Issues here: <https://github.com/NextAlone/Nagram/issues>
+- Releases: <https://t.me/hiranikabot>
+- Issues here: <https://github.com/lasthinker/kilogram/issues>
 
-## Additional feature over NekoX
+## Additional feature over Nagram
 
 1. Nice icon (thanks to MaitungTM)
 2. Combine message
@@ -91,12 +89,13 @@ For mini release:
 
 ## Localization
 
-Nagram is forked from Telegram, thus most locales follows the translations of Telegram for Android, checkout <https://translations.telegram.org/en/android/>.
+Kilogram is forked from Telegram, thus most locales follows the translations of Telegram for Android, checkout <https://translations.telegram.org/en/android/>.
 
-Is Nagram not in your language, or the translation is incorrect or incomplete? Get involved in the translations on our [Weblate](https://hosted.weblate.org/engage/nekox/).
+Is Kilogram not in your language, or the translation is incorrect or incomplete? Get involved in the translations on our [Weblate](https://hosted.weblate.org/engage/kilogram/).
 
 ## Thanks
 
+- [Nagram](https://github.com/NextAlone/Nagram)
 - [NekoX](https://github.com/NekoX-Dev/NekoX)
 - [Nekogram](https://gitlab.com/Nekogram/Nekogram)
 - [Pigeongram](https://gitlab.com/JasonKhew96/Nekogram)

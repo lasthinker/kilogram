@@ -60,7 +60,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class EditTextBoldCursor extends EditTextEffects {
 
@@ -1035,7 +1035,7 @@ public class EditTextBoldCursor extends EditTextEffects {
             };
             callback.onCreateActionMode(floatingActionMode, floatingActionMode.getMenu());
             extendActionMode(floatingActionMode, floatingActionMode.getMenu());
-            if (NaConfig.INSTANCE.getShowTextUndoRedo().Bool()) {
+            if (KiloConfig.INSTANCE.getShowTextUndoRedo().Bool()) {
                 addUndoRedo(floatingActionMode.getMenu());
             }
             floatingActionMode.invalidate();

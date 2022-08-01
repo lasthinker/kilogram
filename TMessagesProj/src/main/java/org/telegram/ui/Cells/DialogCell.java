@@ -589,7 +589,7 @@ public class DialogCell extends BaseCell {
             }
             String title;
             if (currentChat != null) {
-                title = xyz.nextalone.nagram.helper.MessageHelper.INSTANCE.zalgoFilter(currentChat.title.replace('\n', ' '));
+                title = net.kilogram.messenger.helper.MessageHelper.INSTANCE.zalgoFilter(currentChat.title.replace('\n', ' '));
             } else if (currentUser != null) {
                 if (UserObject.isDeleted(currentUser)) {
                     title = LocaleController.getString("HiddenName", R.string.HiddenName);
@@ -1052,7 +1052,7 @@ public class DialogCell extends BaseCell {
                                 if (!TextUtils.isEmpty(restrictionReason)) {
                                     stringBuilder = SpannableStringBuilder.valueOf(String.format(messageFormat, restrictionReason, messageNameString));
                                 } else if (message.caption != null) {
-                                    CharSequence mess = xyz.nextalone.nagram.helper.MessageHelper.INSTANCE.zalgoFilter(message.caption.toString());
+                                    CharSequence mess = net.kilogram.messenger.helper.MessageHelper.INSTANCE.zalgoFilter(message.caption.toString());
                                     String emoji;
                                     if (!needEmoji) {
                                         emoji = "";
@@ -1127,7 +1127,7 @@ public class DialogCell extends BaseCell {
                                         FileLog.e(e);
                                     }
                                 } else if (message.messageOwner.message != null) {
-                                    CharSequence mess = xyz.nextalone.nagram.helper.MessageHelper.INSTANCE.zalgoFilter(message.messageOwner.message);
+                                    CharSequence mess = net.kilogram.messenger.helper.MessageHelper.INSTANCE.zalgoFilter(message.messageOwner.message);
                                     if (message.hasHighlightedWords()) {
                                         if (message.messageTrimmedToHighlight != null) {
                                             mess = message.messageTrimmedToHighlight;
@@ -1429,7 +1429,7 @@ public class DialogCell extends BaseCell {
             }
         }
     
-        nameString = xyz.nextalone.nagram.helper.MessageHelper.INSTANCE.zalgoFilter(nameString);
+        nameString = net.kilogram.messenger.helper.MessageHelper.INSTANCE.zalgoFilter(nameString);
         int timeWidth;
         if (drawTime) {
             timeWidth = (int) Math.ceil(Theme.dialogs_timePaint.measureText(timeString));

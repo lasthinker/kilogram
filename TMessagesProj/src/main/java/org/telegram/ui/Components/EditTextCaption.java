@@ -55,8 +55,8 @@ import tw.nekomimi.nekogram.transtale.TranslateDb;
 import tw.nekomimi.nekogram.transtale.Translator;
 import tw.nekomimi.nekogram.transtale.TranslatorKt;
 import tw.nekomimi.nekogram.utils.AlertUtil;
-import xyz.nextalone.nagram.NaConfig;
-import xyz.nextalone.nagram.ui.syntaxhighlight.SyntaxHighlight;
+import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.ui.syntaxhighlight.SyntaxHighlight;
 
 public class EditTextCaption extends EditTextBoldCursor {
 
@@ -153,7 +153,7 @@ public class EditTextCaption extends EditTextBoldCursor {
     }
 
     public void makeSelectedMono() {
-        if (!NaConfig.INSTANCE.getCodeSyntaxHighlight().Bool()) {
+        if (!KiloConfig.INSTANCE.getCodeSyntaxHighlight().Bool()) {
             TextStyleSpan.TextStyleRun run = new TextStyleSpan.TextStyleRun();
             run.flags |= TextStyleSpan.FLAG_STYLE_MONO;
             applyTextStyleToSelection(new TextStyleSpan(run));
@@ -177,7 +177,7 @@ public class EditTextCaption extends EditTextBoldCursor {
             editText.setLineColors(getThemedColor(Theme.key_windowBackgroundWhiteInputField), getThemedColor(Theme.key_windowBackgroundWhiteInputFieldActivated), getThemedColor(Theme.key_windowBackgroundWhiteRedText3));
             editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
             editText.setBackgroundDrawable(null);
-            editText.setText(NaConfig.INSTANCE.getDefaultMonoLanguage().String());
+            editText.setText(KiloConfig.INSTANCE.getDefaultMonoLanguage().String());
             editText.requestFocus();
             editText.setPadding(0, 0, 0, 0);
             builder.setView(editText);

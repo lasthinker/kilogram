@@ -309,9 +309,9 @@ import tw.nekomimi.nekogram.utils.EnvUtil;
 import tw.nekomimi.nekogram.utils.PGPUtil;
 import tw.nekomimi.nekogram.utils.ProxyUtil;
 import tw.nekomimi.nekogram.utils.TelegramUtil;
-import xyz.nextalone.nagram.NaConfig;
-import xyz.nextalone.nagram.helper.DoubleTap;
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.helper.DoubleTap;
+import net.kilogram.messenger.helper.MessageHelper;
 
 @SuppressWarnings("unchecked")
 public class
@@ -1412,7 +1412,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
             if (textSelectionHelper.isTryingSelect() || textSelectionHelper.isSelectionMode() || inPreviewMode) {
                 return false;
             }
-            if((scrimPopupWindow != null && NaConfig.INSTANCE.getDoubleTapAction().Int()==DoubleTap.DOUBLE_TAP_ACTION_SHOW_REACTIONS))
+            if((scrimPopupWindow != null && KiloConfig.INSTANCE.getDoubleTapAction().Int()==DoubleTap.DOUBLE_TAP_ACTION_SHOW_REACTIONS))
                 return false;
             wasManualScroll = true;
             boolean result = true;
@@ -1565,10 +1565,10 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
 
         public boolean hasDoubleTap(View view, int position) {
             boolean allowRepeat;
-            if (NaConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_NONE || !(view instanceof ChatMessageCell)) {
+            if (KiloConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_NONE || !(view instanceof ChatMessageCell)) {
                 return false;
             }
-            if (NaConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SEND_REACTIONS || NaConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SHOW_REACTIONS) {
+            if (KiloConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SEND_REACTIONS || KiloConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SHOW_REACTIONS) {
                 TLRPC.TL_availableReaction reaction = getMediaDataController().getReactionsMap().get(getMediaDataController().getDoubleTapReaction());
                 if (reaction == null) {
                     return false;
@@ -1613,7 +1613,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                     }
                     allowEdit = captionsCount < 2;
                 }
-                switch (NaConfig.INSTANCE.getDoubleTapAction().Int()) {
+                switch (KiloConfig.INSTANCE.getDoubleTapAction().Int()) {
                     case DoubleTap.DOUBLE_TAP_ACTION_TRANSLATE:
                         MessageObject messageObject = getMessageForTranslate();
                         if (messageObject != null) {
@@ -1641,16 +1641,16 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
 
         @Override
         public void onDoubleTap(View view, int position, float x, float y) {
-            if (NaConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_NONE || !(view instanceof ChatMessageCell) || getParentActivity() == null || isSecretChat() || isInScheduleMode() || isInPreviewMode()) {
+            if (KiloConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_NONE || !(view instanceof ChatMessageCell) || getParentActivity() == null || isSecretChat() || isInScheduleMode() || isInPreviewMode()) {
                 return;
             }
-            if (NaConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SHOW_REACTIONS) {
+            if (KiloConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SHOW_REACTIONS) {
                 if (isSecretChat() || isInScheduleMode()) {
                     return;
                 }
                 createMenu(view, true, false, x, y, true, true);
                 return;
-            } else if (NaConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SEND_REACTIONS) {
+            } else if (KiloConfig.INSTANCE.getDoubleTapAction().Int() == DoubleTap.DOUBLE_TAP_ACTION_SEND_REACTIONS) {
                 if (isSecretChat() || isInScheduleMode()) {
                     return;
                 }
@@ -1679,7 +1679,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                 var message = cell.getMessageObject();
                 selectedObject = message;
                 selectedObjectGroup = getValidGroupedMessage(message);
-                switch (NaConfig.INSTANCE.getDoubleTapAction().Int()) {
+                switch (KiloConfig.INSTANCE.getDoubleTapAction().Int()) {
                     case DoubleTap.DOUBLE_TAP_ACTION_TRANSLATE:
                         MessageTransKt.translateMessages(ChatActivity.this);
                         break;
@@ -2531,7 +2531,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                         for (int b = 0; b < ids.size(); b++) {
                             Integer messageId = ids.get(b);
                             MessageObject messageObject = selectedMessagesCanCopyIds[a].get(messageId);
-                            if (b == 0 && NaConfig.INSTANCE.getCombineMessage().Int() == 0) {
+                            if (b == 0 && KiloConfig.INSTANCE.getCombineMessage().Int() == 0) {
                                 replyTo = messageObject.replyMessageObject;
                             }
                             if (str.length() != 0) {
@@ -3327,7 +3327,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
         boolean noforward = getMessagesController().isChatNoForwardsWithOverride(currentChat);
 
         if (currentEncryptedChat == null || !noforward) {
-            if (NaConfig.INSTANCE.getShowNoQuoteForward().Bool()) {
+            if (KiloConfig.INSTANCE.getShowNoQuoteForward().Bool()) {
                 actionModeOtherItem.addSubItem(nkbtn_forward_noquote, R.drawable.msg_forward_noquote, LocaleController.getString("NoQuoteForward", R.string.NoQuoteForward));
             }
             actionModeOtherItem.addSubItem(star, R.drawable.msg_fave, LocaleController.getString("AddToFavorites", R.string.AddToFavorites));
@@ -3343,7 +3343,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
         if (NekoConfig.showRepeat.Bool() && !noforward) {
             actionModeOtherItem.addSubItem(nkbtn_repeat, R.drawable.msg_repeat, LocaleController.getString("Repeat", R.string.Repeat));
         }
-        if (NaConfig.INSTANCE.getShowRepeatAsCopy().Bool() || (NaConfig.INSTANCE.getAutoReplaceRepeat().Bool() && noforward)) {
+        if (KiloConfig.INSTANCE.getShowRepeatAsCopy().Bool() || (KiloConfig.INSTANCE.getAutoReplaceRepeat().Bool() && noforward)) {
             actionModeOtherItem.addSubItem(nkbtn_repeatascopy, R.drawable.msg_repeat, LocaleController.getString("RepeatAsCopy", R.string.RepeatAsCopy));
         }
         if (NekoConfig.showMessageHide.Bool()) {
@@ -13776,7 +13776,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                 }
 
                 if (chatMode == MODE_SCHEDULED) {
-                    if (NaConfig.INSTANCE.getShowNoQuoteForward().Bool()) {
+                    if (KiloConfig.INSTANCE.getShowNoQuoteForward().Bool()) {
                         actionModeOtherItem.setSubItemVisibility(nkbtn_forward_noquote, false);
                     }
                     actionModeOtherItem.setSubItemVisibility(nkbtn_savemessage, false);
@@ -13841,9 +13841,9 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                 }
 
                 int copyVisible = copyItem.getVisibility();
-                boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !NaConfig.INSTANCE.getForceCopy().Bool();
+                boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !KiloConfig.INSTANCE.getForceCopy().Bool();
                 copyItem.setVisibility(!noforwardsOverride && selectedMessagesCanCopyIds[0].size() + selectedMessagesCanCopyIds[1].size() != 0 ? View.VISIBLE : View.GONE);
-                combineMessageItem.setVisibility(selectedMessagesCanCopyIds[0].size() + selectedMessagesCanCopyIds[1].size() != 0 ? NaConfig.INSTANCE.getCombineMessage().Int() != 2 ? View.VISIBLE : View.GONE : View.GONE);
+                combineMessageItem.setVisibility(selectedMessagesCanCopyIds[0].size() + selectedMessagesCanCopyIds[1].size() != 0 ? KiloConfig.INSTANCE.getCombineMessage().Int() != 2 ? View.VISIBLE : View.GONE : View.GONE);
                 actionModeOtherItem.setSubItemVisibility(star, getMediaDataController().canAddStickerToFavorites() && (selectedMessagesCanStarIds[0].size() + selectedMessagesCanStarIds[1].size()) == selectedCount);
                 if (selectItem != null) {
                     ArrayList<Integer> ids = new ArrayList<>();
@@ -15207,7 +15207,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                         obj.messageOwner.action instanceof TLRPC.TL_messageActionChatDeleteUser &&
                         obj.messageOwner.from_id instanceof TLRPC.TL_peerUser &&
                         obj.messageOwner.from_id.user_id == getUserConfig().getClientUserId()) {
-                    TLObject nekoxBot = getMessagesController().getUserOrChat("NekoXBot");
+                    TLObject nekoxBot = getMessagesController().getUserOrChat("KiloBot");
                     if (nekoxBot instanceof TLRPC.User &&
                             action.user_id == ((TLRPC.User) nekoxBot).id) {
                         ArrayList<Integer> mids = new ArrayList<>();
@@ -15874,7 +15874,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                 if (action instanceof TLRPC.TL_messageActionChatDeleteUser &&
                         fst.messageOwner.from_id instanceof TLRPC.TL_peerUser &&
                         fst.messageOwner.from_id.user_id == getUserConfig().getClientUserId()) {
-                    TLObject nekoxBot = getMessagesController().getUserOrChat("NekoXBot");
+                    TLObject nekoxBot = getMessagesController().getUserOrChat("KiloBot");
                     if (nekoxBot instanceof TLRPC.User &&
                             action.user_id == ((TLRPC.User) nekoxBot).id) {
                         ArrayList<Integer> mids = new ArrayList<>();
@@ -19476,31 +19476,31 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
 
         menu.add(R.id.menu_translate, R.id.menu_translate, order++, LocaleController.getString("Translate", R.string.Translate));
         SpannableStringBuilder stringBuilder;
-        if (NaConfig.INSTANCE.getShowTextBold().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextBold().Bool()) {
             stringBuilder = new SpannableStringBuilder(LocaleController.getString("Bold", R.string.Bold));
             stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.add(R.id.menu_groupbolditalic, R.id.menu_bold, order++, stringBuilder);
         }
-        if (NaConfig.INSTANCE.getShowTextItalic().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextItalic().Bool()) {
             stringBuilder = new SpannableStringBuilder(LocaleController.getString("Italic", R.string.Italic));
             stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/ritalic.ttf")), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.add(R.id.menu_groupbolditalic, R.id.menu_italic, order++, stringBuilder);
         }
-        if (NaConfig.INSTANCE.getShowTextMono().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextMono().Bool()) {
             stringBuilder = new SpannableStringBuilder(LocaleController.getString("Mono", R.string.Mono));
             stringBuilder.setSpan(new TypefaceSpan(Typeface.MONOSPACE), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             menu.add(R.id.menu_groupbolditalic, R.id.menu_mono, order++, stringBuilder);
         }
         if (currentEncryptedChat == null || AndroidUtilities.getPeerLayerVersion(currentEncryptedChat.layer) >= 101) {
             TextStyleSpan.TextStyleRun run;
-            if (NaConfig.INSTANCE.getShowTextStrikethrough().Bool()) {
+            if (KiloConfig.INSTANCE.getShowTextStrikethrough().Bool()) {
                 stringBuilder = new SpannableStringBuilder(LocaleController.getString("Strike", R.string.Strike));
                 run = new TextStyleSpan.TextStyleRun();
                 run.flags |= TextStyleSpan.FLAG_STYLE_STRIKE;
                 stringBuilder.setSpan(new TextStyleSpan(run), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 menu.add(R.id.menu_groupbolditalic, R.id.menu_strike, order++, stringBuilder);
             }
-            if (NaConfig.INSTANCE.getShowTextUnderline().Bool()) {
+            if (KiloConfig.INSTANCE.getShowTextUnderline().Bool()) {
                 stringBuilder = new SpannableStringBuilder(LocaleController.getString("Underline", R.string.Underline));
                 run = new TextStyleSpan.TextStyleRun();
                 run.flags |= TextStyleSpan.FLAG_STYLE_UNDERLINE;
@@ -19509,16 +19509,16 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
             }
         }
         // NekoX: Move Spoiler back
-        if (NaConfig.INSTANCE.getShowTextSpoiler().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextSpoiler().Bool()) {
             menu.add(R.id.menu_groupbolditalic, R.id.menu_spoiler, order++, LocaleController.getString("Spoiler", R.string.Spoiler));
         }
-        if (NaConfig.INSTANCE.getShowTextCreateLink().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextCreateLink().Bool()) {
             menu.add(R.id.menu_groupbolditalic, R.id.menu_link, order++, LocaleController.getString("CreateLink", R.string.CreateLink));
         }
-        if (NaConfig.INSTANCE.getShowTextCreateMention().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextCreateMention().Bool()) {
             menu.add(R.id.menu_groupbolditalic, R.id.menu_mention, order++, LocaleController.getString("CreateMention", R.string.CreateMention));
         }
-        if (NaConfig.INSTANCE.getShowTextRegular().Bool()) {
+        if (KiloConfig.INSTANCE.getShowTextRegular().Bool()) {
             menu.add(R.id.menu_groupbolditalic, R.id.menu_regular, 13, LocaleController.getString("Regular", R.string.Regular));
         }
     }
@@ -21326,7 +21326,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                             }
                             boolean ignore = false;
                             int count = 0;
-                            if (!NaConfig.INSTANCE.getAlwaysSaveChatOffset().Bool()){
+                            if (!KiloConfig.INSTANCE.getAlwaysSaveChatOffset().Bool()){
                                 for (int a = position - 1; a >= chatAdapter.messagesStartRow; a--) {
                                     int num = a - chatAdapter.messagesStartRow;
                                     if (num < 0 || num >= messages.size()) {
@@ -21897,7 +21897,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
         }
         allowPin = allowPin && message.getId() > 0 && (message.messageOwner.action == null || message.messageOwner.action instanceof TLRPC.TL_messageActionEmpty);
         boolean noforwards = getMessagesController().isChatNoForwards(currentChat) || message.messageOwner.noforwards;
-        boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !NaConfig.INSTANCE.getForceCopy().Bool();
+        boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !KiloConfig.INSTANCE.getForceCopy().Bool();
         boolean allowUnpin = message.getDialogId() != mergeDialogId && allowPin && (pinnedMessageObjects.containsKey(message.getId()) || groupedMessages != null && !groupedMessages.messages.isEmpty() && pinnedMessageObjects.containsKey(groupedMessages.messages.get(0).getId()));
         boolean allowEdit = message.canEditMessage(currentChat) && !chatActivityEnterView.hasAudioToSend() && message.getDialogId() != mergeDialogId;
         if (allowEdit && groupedMessages != null) {
@@ -22182,7 +22182,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                                         items.add(LocaleController.getString("SaveToGallery", R.string.SaveToGallery));
                                         options.add(OPTION_SAVE_TO_GALLERY);
                                         icons.add(R.drawable.msg_gallery);
-                                        if (NaConfig.INSTANCE.getShowCopyPhoto().Bool()){
+                                        if (KiloConfig.INSTANCE.getShowCopyPhoto().Bool()){
                                             items.add(LocaleController.getString("CopyPhoto", R.string.CopyPhoto));
                                             options.add(OPTION_COPY_PHOTO);
                                             icons.add(R.drawable.msg_copy);
@@ -22309,14 +22309,14 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                             }
                         }
                         boolean noforward = getMessagesController().isChatNoForwards(currentChat);
-                        boolean noforwardOverride = noforward && !NekoXConfig.disableFlagSecure && !NaConfig.INSTANCE.getForceCopy().Bool();
+                        boolean noforwardOverride = noforward && !NekoXConfig.disableFlagSecure && !KiloConfig.INSTANCE.getForceCopy().Bool();
                         if (!selectedObject.isSponsored() && chatMode != MODE_SCHEDULED && !selectedObject.needDrawBluredPreview() && !selectedObject.isLiveLocation() && selectedObject.type != 16 && !noforwards) {
                             items.add(LocaleController.getString("Forward", R.string.Forward));
                             options.add(OPTION_FORWARD);
                             icons.add(R.drawable.msg_forward);
                         }
                         if (chatMode != MODE_SCHEDULED && !selectedObject.needDrawBluredPreview() && !selectedObject.isLiveLocation() && selectedObject.type != 16) {
-                            if (!noforward && NaConfig.INSTANCE.getShowNoQuoteForward().Bool()) {
+                            if (!noforward && KiloConfig.INSTANCE.getShowNoQuoteForward().Bool()) {
                                 items.add(LocaleController.getString("NoQuoteForward", R.string.NoQuoteForward));
                                 options.add(nkbtn_forward_noquote);
                                 icons.add(R.drawable.msg_forward_noquote);
@@ -22337,17 +22337,17 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                                     options.add(nkbtn_repeat);
                                     icons.add(R.drawable.msg_repeat);
                             }
-                            if (allowRepeat && (NaConfig.INSTANCE.getShowRepeatAsCopy().Bool() || (NaConfig.INSTANCE.getAutoReplaceRepeat().Bool() && noforward))){
+                            if (allowRepeat && (KiloConfig.INSTANCE.getShowRepeatAsCopy().Bool() || (KiloConfig.INSTANCE.getAutoReplaceRepeat().Bool() && noforward))){
                                 items.add(LocaleController.getString("RepeatAsCopy", R.string.RepeatAsCopy));
                                 options.add(nkbtn_repeatascopy);
                                 icons.add(R.drawable.msg_repeat);
                             }
-                            if (allowRepeat && NaConfig.INSTANCE.getShowInvertReply().Bool()) {
+                            if (allowRepeat && KiloConfig.INSTANCE.getShowInvertReply().Bool()) {
                                 items.add(LocaleController.getString("InvertReply", R.string.InvertReply));
                                 options.add(nkbtn_invertReply);
                                 icons.add(R.drawable.msg_reset);
                             }
-                            if (allowRepeat && NaConfig.INSTANCE.getShowGreatOrPoor().Bool()) {
+                            if (allowRepeat && KiloConfig.INSTANCE.getShowGreatOrPoor().Bool()) {
                                 items.add(LocaleController.getString("Great", R.string.Great));
                                 options.add(nkbtn_greatOrPoor);
                                 icons.add(R.drawable.msg_prpr);
@@ -22533,7 +22533,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                                 items.add(LocaleController.getString("SaveToGallery", R.string.SaveToGallery));
                                 options.add(OPTION_SAVE_TO_GALLERY);
                                 icons.add(R.drawable.msg_gallery);
-                                if (NaConfig.INSTANCE.getShowCopyPhoto().Bool()){
+                                if (KiloConfig.INSTANCE.getShowCopyPhoto().Bool()){
                                     items.add(LocaleController.getString("CopyPhoto", R.string.CopyPhoto));
                                     options.add(OPTION_COPY_PHOTO);
                                     icons.add(R.drawable.msg_copy);
@@ -22689,7 +22689,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
             Rect rect = new Rect();
 
             List<TLRPC.TL_availableReaction> availableReacts = getMediaDataController().getEnabledReactionsList();
-            boolean nekoXShowReactionsView = (NaConfig.INSTANCE.getShowReactions().Bool() || onDoubleTapped); // Show reactions and hide them from tap
+            boolean nekoXShowReactionsView = (KiloConfig.INSTANCE.getShowReactions().Bool() || onDoubleTapped); // Show reactions and hide them from tap
             boolean isReactionsViewAvailable = nekoXShowReactionsView && !isSecretChat() && !isInScheduleMode() && currentUser == null && message.hasReactions() && (!ChatObject.isChannel(currentChat) || currentChat.megagroup) && !availableReacts.isEmpty() && message.messageOwner.reactions.can_see_list;
             boolean isReactionsAvailable;
             if (message.isForwardedChannelPost()) {
@@ -23436,7 +23436,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
         if (item != null) {
             item.setVisibility(View.VISIBLE);
         }
-        if (chatMode != MODE_SCHEDULED && NaConfig.INSTANCE.getShowNoQuoteForward().Bool())
+        if (chatMode != MODE_SCHEDULED && KiloConfig.INSTANCE.getShowNoQuoteForward().Bool())
             actionModeOtherItem.showSubItem(nkbtn_forward_noquote);
         item = actionMode.getItem(delete);
         if (item != null) {
@@ -25658,7 +25658,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
             return;
         }
         boolean noforwards = getMessagesController().isChatNoForwards(currentChat) || (messageObject != null && messageObject.messageOwner != null && messageObject.messageOwner.noforwards);
-        boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !NaConfig.INSTANCE.getForceCopy().Bool();
+        boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !KiloConfig.INSTANCE.getForceCopy().Bool();
         if (url instanceof URLSpanMono) {
             if (!noforwardsOverride) {
                 ((URLSpanMono) url).copyToClipboard();

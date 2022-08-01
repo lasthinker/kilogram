@@ -51,7 +51,7 @@ import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.ChatActivity;
 import org.telegram.ui.ProfileActivity;
 
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.helper.MessageHelper;
 
 public class ChatAvatarContainer extends FrameLayout implements NotificationCenter.NotificationCenterDelegate {
 

@@ -54,7 +54,7 @@ import tw.nekomimi.nekogram.parts.ProxySwitcher;
 import tw.nekomimi.nekogram.utils.DnsFactory;
 import tw.nekomimi.nekogram.ErrorDatabase;
 
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class ConnectionsManager extends BaseController {
 
@@ -324,7 +324,7 @@ SharedPreferences mainPreferences;
                             if (BuildVars.LOGS_ENABLED) {
                                 FileLog.e(object + " got error " + error.code + " " + error.text);
                             }
-                            if (NaConfig.INSTANCE.getShowRPCError().Bool()) {
+                            if (KiloConfig.INSTANCE.getShowRPCError().Bool()) {
                                 ErrorDatabase.showErrorToast(object, errorText);
                             }
                         }

@@ -20,7 +20,7 @@ import org.telegram.ui.Components.RLottieDrawable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class DownloadProgressIcon extends View implements NotificationCenter.NotificationCenterDelegate {
 
@@ -116,7 +116,7 @@ public class DownloadProgressIcon extends View implements NotificationCenter.Not
                 break;
             }
         }
-        if (!has_file && NaConfig.INSTANCE.getAlwaysShowDownloadIcon().Bool()) {
+        if (!has_file && KiloConfig.INSTANCE.getAlwaysShowDownloadIcon().Bool()) {
             showCompletedIcon = true;
         }
         if (showCompletedIcon) {

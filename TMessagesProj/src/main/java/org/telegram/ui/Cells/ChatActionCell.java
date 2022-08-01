@@ -52,7 +52,7 @@ import org.telegram.ui.Components.AvatarDrawable;
 import org.telegram.ui.Components.URLSpanNoUnderline;
 import org.telegram.ui.Components.spoilers.SpoilerEffect;
 import org.telegram.ui.PhotoViewer;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -507,7 +507,7 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
                 }
             } else {
                 text = currentMessageObject.messageText;
-                if (currentMessageObject.messageOwner != null && NaConfig.INSTANCE.getShowServicesTime().Bool()) {
+                if (currentMessageObject.messageOwner != null && KiloConfig.INSTANCE.getShowServicesTime().Bool()) {
                     if (currentMessageObject.messageOwner.action != null) {
                         long date = currentMessageObject.messageOwner.date;
                         String timestamp = LocaleController.getInstance().formatterDay.format(date * 1000);

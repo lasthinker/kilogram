@@ -5123,14 +5123,14 @@ public class Theme {
         themesDict.put("Blue", themeInfo);
 
         themeInfo = new ThemeInfo();
-        themeInfo.name = "NekoX";
+        themeInfo.name = "Kilo";
         themeInfo.assetName = "indigo.attheme";
         themeInfo.previewBackgroundColor = -657931;
         themeInfo.previewInColor = Color.parseColor("#c0ffffff");
         themeInfo.previewOutColor = Color.parseColor("#3f51b5");
         themeInfo.sortIndex = 0;
         themes.add(themeInfo);
-        themesDict.put("NekoX", themeInfo);
+        themesDict.put("Kilo", themeInfo);
 
         themeInfo = new ThemeInfo();
         themeInfo.name = "Dark Blue";

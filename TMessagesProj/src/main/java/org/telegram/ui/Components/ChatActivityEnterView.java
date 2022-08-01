@@ -105,9 +105,9 @@ import androidx.dynamicanimation.animation.SpringForce;
 import androidx.recyclerview.widget.ChatListItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import xyz.nextalone.nagram.NaConfig;
-import xyz.nextalone.nagram.helper.Dialogs;
-import xyz.nextalone.nagram.ui.syntaxhighlight.SyntaxHighlight;
+import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.helper.Dialogs;
+import net.kilogram.messenger.ui.syntaxhighlight.SyntaxHighlight;
 
 import org.jetbrains.annotations.NotNull;
 import org.openintents.openpgp.OpenPgpError;
@@ -8195,7 +8195,7 @@ public class ChatActivityEnterView extends BlurredFrameLayout implements Notific
                     }
                     if (gif instanceof TLRPC.Document) {
                         TLRPC.Document document = (TLRPC.Document) gif;
-                        if (NaConfig.INSTANCE.getAutoInsertGIFCaption().Bool()) {
+                        if (KiloConfig.INSTANCE.getAutoInsertGIFCaption().Bool()) {
                             ArrayList<TLRPC.MessageEntity> entities = MediaDataController.getInstance(currentAccount).getEntities(new CharSequence[]{AndroidUtilities.getTrimmedString(messageEditText.getText())}, supportsSendingNewEntities());
                             String caption = messageEditText.getText().toString();
                             if (caption.startsWith("@gif")) {

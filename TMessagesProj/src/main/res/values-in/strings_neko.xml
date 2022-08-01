@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Setelan Neko</string>
+    <string name="NekoSettings">Setelan Kilo</string>
     <string name="IPv6">Terhubung melalui IPv6</string>
     <string name="MessageMenu">Menu pesan</string>
     <string name="HidePhone">Sembunyikan nomor telepon saya</string>
@@ -25,7 +25,7 @@
     <string name="TransparentStatusBar">Bilah status transparan</string>
     <string name="EnableResidentNotification">Menampilkan pemberitahuan lainnya</string>
     <string name="DisableResidentNotification">Sembunyikan pemberitahuan lainnya</string>
-    <string name="NekogramRunning">Nekogram sedang berjalan</string>
+    <string name="NekogramRunning">Kilogram sedang berjalan</string>
     <string name="EventType">Atur ikon pada bilah samping</string>
     <string name="ChristmasHat">Tampilkan topi natal setiap hari</string>
     <string name="ActionBarDecoration">Dekorasi Title Bar</string>
@@ -118,7 +118,7 @@
     <string name="UseMediaStreamInVoip">Menggunakan Media Stream pada VoIP</string>
     <string name="TakeGIFasVideo">Ubah GIF Menjadi Video</string>
     <string name="DontSendGreetingSticker">Jangan kirim stiker sapaan</string>
-    <string name="enablePublicProxy">Publik Proxy NekoX</string>
+    <string name="enablePublicProxy">Publik Proxy Kilo</string>
     <string name="autoUpdateSubInfo">Perbarui proxy otomatis</string>
     <string name="NekoGeneralNotification">Pemberitahuan</string>
     <string name="disableNotificationBubbles">Matikan gelembung di notifikasi</string>

@@ -214,7 +214,7 @@ import tw.nekomimi.nekogram.utils.LangsKt;
 import tw.nekomimi.nekogram.utils.ProxyUtil;
 import tw.nekomimi.nekogram.utils.ShareUtil;
 import tw.nekomimi.nekogram.utils.UIUtil;
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.helper.MessageHelper;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate, SharedMediaLayout.Delegate {
 
@@ -2955,11 +2955,11 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             } else if (position == nekoRow) {
                 presentFragment(new NekoSettingsActivity());
             } else if (position == questionRow) {
-                Browser.openUrl(getParentActivity(), "https://t.me/NekogramX");
+                Browser.openUrl(getParentActivity(), "https://t.me/kilogram");
             } else if (position == faqRow) {
                 Browser.openUrl(getParentActivity(), NekoXConfig.FAQ_URL);
             } else if (position == policyRow) {
-                Browser.openUrl(getParentActivity(), "https://github.com/NekoX-Dev/NekoX/wiki/Privacy-Policy");
+                Browser.openUrl(getParentActivity(), "https://github.com/lasthinker/kilogram/wiki/Privacy-Policy");
             } else if (position == sendLogsRow) {
                 sendLogs();
             } else if (position == clearLogsRow) {
@@ -3170,7 +3170,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 });
                 builder.addItem(LocaleController.getString("SwitchVersion", R.string.SwitchVersion), R.drawable.msg_retry,
                         (it) -> {
-                    Browser.openUrl(ProfileActivity.this.getParentActivity(), "https://github.com/NextAlone/Nagram/releases");
+                    Browser.openUrl(ProfileActivity.this.getParentActivity(), "https://github.com/lasthinker/kilogram/releases");
                     return Unit.INSTANCE;
                 });
 
@@ -7727,7 +7727,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
         path.mkdirs();
 
-        File logcatFile = new File(path, "Nagram-" + System.currentTimeMillis() + ".log");
+        File logcatFile = new File(path, "Kilogram-" + System.currentTimeMillis() + ".log");
 
         FileUtil.delete(logcatFile);
 
@@ -7891,7 +7891,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     cell.getTextView().setMovementMethod(null);
                     cell.setBackground(Theme.getThemedDrawable(mContext, R.drawable.greydivider_bottom, Theme.key_windowBackgroundGrayShadow));
 
-                    cell.setText("Nagram v" + BuildConfig.VERSION_NAME + "(" + BuildConfig.VERSION_CODE + ") " + FileUtil.getAbi() + " " + BuildConfig.FLAVOR + " " + BuildConfig.BUILD_TYPE);
+                    cell.setText("Kilogram v" + BuildConfig.VERSION_NAME + " " + FileUtil.getAbi() + " " + BuildConfig.FLAVOR + " " + BuildConfig.BUILD_TYPE);
 
                     cell.getTextView().setPadding(0, AndroidUtilities.dp(14), 0, AndroidUtilities.dp(14));
                     view = cell;

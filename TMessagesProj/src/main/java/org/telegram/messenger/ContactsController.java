@@ -40,7 +40,7 @@ import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import tw.nekomimi.nekogram.NekoConfig;
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.helper.MessageHelper;
 
 import androidx.collection.LongSparseArray;
 

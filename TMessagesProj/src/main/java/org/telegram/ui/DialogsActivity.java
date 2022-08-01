@@ -198,7 +198,7 @@ import tw.nekomimi.nekogram.utils.ProxyUtil;
 import tw.nekomimi.nekogram.utils.UIUtil;
 import tw.nekomimi.nekogram.utils.UpdateUtil;
 import tw.nekomimi.nekogram.utils.VibrateUtil;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class DialogsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
     public final static int DIALOGS_TYPE_START_ATTACH_BOT = 14;
@@ -2291,7 +2291,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             if (folderId != 0) {
                 actionBar.setTitle(LocaleController.getString("ArchivedChats", R.string.ArchivedChats));
             } else {
-                actionBar.setTitle(NaConfig.INSTANCE.getCustomTitle().String());
+                actionBar.setTitle(KiloConfig.INSTANCE.getCustomTitle().String());
                 actionBar.setOnLongClickListener(v -> {
                     if (NekoConfig.hideAllTab.Bool() && filterTabsView != null && filterTabsView.getCurrentTabId() != Integer.MAX_VALUE) {
                         filterTabsView.toggleAllTabs(true);
@@ -6839,7 +6839,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             return;
         }
         boolean showDownloads = false;
-        if (NaConfig.INSTANCE.getAlwaysShowDownloadIcon().Bool()) {
+        if (KiloConfig.INSTANCE.getAlwaysShowDownloadIcon().Bool()) {
             showDownloads = true;
         } else {
             for (int i = 0; i < getDownloadController().downloadingFiles.size(); i++){

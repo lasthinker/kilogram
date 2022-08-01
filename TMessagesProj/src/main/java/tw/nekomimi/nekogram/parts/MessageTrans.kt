@@ -12,7 +12,7 @@ import tw.nekomimi.nekogram.utils.AlertUtil
 import tw.nekomimi.nekogram.utils.UIUtil
 import tw.nekomimi.nekogram.utils.uDismiss
 import tw.nekomimi.nekogram.utils.uUpdate
-import xyz.nextalone.nagram.NaConfig
+import net.kilogram.Kilo.KiloConfig
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
@@ -55,7 +55,7 @@ fun MessageObject.translateFinished(locale: Locale): Int {
         val question = db.query(pool.question) ?: return 0
 
         pool.translatedQuestion =
-            "${if (!NaConfig.hideOriginAfterTranslation.Bool()) pool.question + "\n\n--------\n\n" else ""}$question"
+            "${if (!KiloConfig.hideOriginAfterTranslation.Bool()) pool.question + "\n\n--------\n\n" else ""}$question"
 
         pool.answers.forEach {
 
@@ -71,7 +71,7 @@ fun MessageObject.translateFinished(locale: Locale): Int {
                 ?: return 0
 
         messageOwner.translatedMessage =
-            "${if (!NaConfig.hideOriginAfterTranslation.Bool()) messageOwner.message + "\n\n--------\n\n" else ""}$text"
+            "${if (!KiloConfig.hideOriginAfterTranslation.Bool()) messageOwner.message + "\n\n--------\n\n" else ""}$text"
 
     }
 
@@ -195,7 +195,7 @@ fun ChatActivity.translateMessages(target: Locale = NekoConfig.translateToLang.S
                     }
 
                     pool.translatedQuestion =
-                        "${if (!NaConfig.hideOriginAfterTranslation.Bool()) pool.question + "\n\n--------\n\n" else ""}$question"
+                        "${if (!KiloConfig.hideOriginAfterTranslation.Bool()) pool.question + "\n\n--------\n\n" else ""}$question"
 
                     pool.answers.forEach {
 
@@ -271,7 +271,7 @@ fun ChatActivity.translateMessages(target: Locale = NekoConfig.translateToLang.S
                     }
 
                     selectedObject.messageOwner.translatedMessage =
-                        "${if (!NaConfig.hideOriginAfterTranslation.Bool()) selectedObject.messageOwner.message + "\n\n--------\n\n" else ""}$text"
+                        "${if (!KiloConfig.hideOriginAfterTranslation.Bool()) selectedObject.messageOwner.message + "\n\n--------\n\n" else ""}$text"
 
                 }
 

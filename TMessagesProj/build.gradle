@@ -57,7 +57,7 @@ android {
     buildToolsVersion "32.0.0"
     ndkVersion rootProject.ext.ndkVersion
 
-    defaultConfig.applicationId = "xyz.nextalone.nagram"
+    defaultConfig.applicationId = "net.kilogram.messenger"
 
     splits {
 
@@ -85,8 +85,8 @@ android {
         versionName verName
         versionCode verCode
 
-        def appId = "11535358"
-        def appHash = "33d372962fadb01df47e6ceed4e33cd6"
+        def appId = "18004097"
+        def appHash = "f731dc5fdd8de4eb0ee9364c2642e36e"
 
         //obtain your own keys at https://core.telegram.org/api/obtaining_api_id
 
@@ -219,7 +219,7 @@ android {
 
         main {
             jni.srcDirs = []
-            assets.srcDirs = ["src/main/assets", "src/emojis/twitter"]
+            assets.srcDirs = ["src/main/assets", "src/emojis/apple"]
         }
 
         debug {
@@ -301,7 +301,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = outputFileName.replace("TMessagesProj", "Nagram-v" + versionName + "(" + versionCode + ")").replace("-release", "")
+            outputFileName = outputFileName.replace("TMessagesProj", "Kilogram-v" + versionName + "(" + versionCode + ")").replace("-release", "")
         }
     }
 

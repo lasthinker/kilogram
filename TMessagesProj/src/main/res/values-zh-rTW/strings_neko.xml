@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">N-設定</string>
+    <string name="NekoSettings">Kilo 設定</string>
     <string name="IPv6">透過 IPv6 連線</string>
     <string name="MessageMenu">訊息選單</string>
     <string name="HidePhone">隱藏您的手機號碼</string>
@@ -111,7 +111,7 @@
     <string name="ProviderYouDao">有道翻譯</string>
     <string name="UseMediaStreamInVoip">在通話中使用媒體流</string>
     <string name="hideGroupSticker">隱藏群組貼紙</string>
-    <string name="enablePublicProxy">NekoX 公共代理</string>
+    <string name="enablePublicProxy">Kilo 公共代理</string>
     <string name="autoUpdateSubInfo">自動更新代理</string>
     <string name="customGroupVoipAudioBitrate">群組通話音訊位元率</string>
     <string name="useSystemDNS">使用系統 DNS</string>

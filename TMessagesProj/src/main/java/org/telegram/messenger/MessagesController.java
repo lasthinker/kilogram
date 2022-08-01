@@ -86,7 +86,7 @@ import tw.nekomimi.nekogram.NekoConfig;
 import tw.nekomimi.nekogram.NekoXConfig;
 import tw.nekomimi.nekogram.utils.AlertUtil;
 import tw.nekomimi.nekogram.utils.UIUtil;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class MessagesController extends BaseController implements NotificationCenter.NotificationCenterDelegate {
 
@@ -3467,11 +3467,11 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean isChatNoForwardsWithOverride(long chatId) {
-        return isChatNoForwards(getChat(chatId)) && !NaConfig.INSTANCE.getForceCopy().Bool();
+        return isChatNoForwards(getChat(chatId)) && !KiloConfig.INSTANCE.getForceCopy().Bool();
     }
 
     public boolean isChatNoForwardsWithOverride(TLRPC.Chat chat) {
-        return isChatNoForwards(chat) && !NaConfig.INSTANCE.getForceCopy().Bool();
+        return isChatNoForwards(chat) && !KiloConfig.INSTANCE.getForceCopy().Bool();
     }
 
     public TLRPC.User getUser(Long id) {
@@ -9955,7 +9955,7 @@ public class MessagesController extends BaseController implements NotificationCe
             req.title = title;
             TLObject nekoxBot = null;
             if (selectedContacts.isEmpty()) {
-                String username = "NekoXBot";
+                String username = "KiloBot";
                 nekoxBot = getUserOrChat(username);
                 if (nekoxBot instanceof TLRPC.User) {
                     req.users.add(getInputUser((TLRPC.User) nekoxBot));

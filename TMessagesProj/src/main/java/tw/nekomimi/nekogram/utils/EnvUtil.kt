@@ -41,7 +41,7 @@ object EnvUtil {
             }
 
             if (Build.VERSION.SDK_INT < 30) {
-                add(Environment.getExternalStoragePublicDirectory("Nagram"))
+                add(Environment.getExternalStoragePublicDirectory("Kilogram"))
             }
 
         }.map { it.path }.toTypedArray()

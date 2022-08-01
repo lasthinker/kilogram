@@ -2191,7 +2191,7 @@ public class LaunchActivity extends BasePermissionsActivity implements ActionBar
                                             open_settings = 4;
                                         } else if (url.contains("change_number")) {
                                             open_settings = 5;
-                                        } else if (url.contains("neko")) {
+                                        } else if (url.contains("kilo")) {
                                             open_settings = 100;
                                         } else {
                                             open_settings = 1;

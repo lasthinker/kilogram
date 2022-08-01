@@ -39,7 +39,7 @@ import org.telegram.ui.Components.RecyclableDrawable;
 
 import java.util.ArrayList;
 
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class ImageReceiver implements NotificationCenter.NotificationCenterDelegate {
 
@@ -363,7 +363,7 @@ public class ImageReceiver implements NotificationCenter.NotificationCenterDeleg
             if (user.photo != null) {
                 strippedBitmap = user.photo.strippedBitmap;
                 hasStripped = user.photo.stripped_thumb != null;
-                if (animationEnabled && MessagesController.getInstance(currentAccount).isPremiumUser(user) && user.photo.has_video && NaConfig.INSTANCE.getShowPremiumAvatarAnimation().Bool()) {
+                if (animationEnabled && MessagesController.getInstance(currentAccount).isPremiumUser(user) && user.photo.has_video && KiloConfig.INSTANCE.getShowPremiumAvatarAnimation().Bool()) {
                     final TLRPC.UserFull userFull = MessagesController.getInstance(currentAccount).getUserFull(user.id);
                     if (userFull == null) {
                         MessagesController.getInstance(currentAccount).loadFullUser(user, currentGuid, false);

@@ -81,7 +81,7 @@ import java.util.concurrent.Executor;
 import tw.nekomimi.nekogram.NekoConfig;
 import tw.nekomimi.nekogram.utils.VibrateUtil;
 
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class PasscodeView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate {
 
@@ -1001,7 +1001,7 @@ public class PasscodeView extends FrameLayout implements NotificationCenter.Noti
         }
         Activity parentActivity = (Activity) getContext();
         if (parentActivity != null && fingerprintView.getVisibility() == VISIBLE && !ApplicationLoader.mainInterfacePaused) {
-            if (Build.VERSION.SDK_INT >= 28 && NaConfig.INSTANCE.getUseSystemUnlock().Bool()) {
+            if (Build.VERSION.SDK_INT >= 28 && KiloConfig.INSTANCE.getUseSystemUnlock().Bool()) {
                 try {
                     boolean useBiometric;
                     if (Build.VERSION.SDK_INT >= 29) {

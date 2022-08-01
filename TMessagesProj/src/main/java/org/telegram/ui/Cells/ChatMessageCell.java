@@ -165,9 +165,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import tw.nekomimi.nekogram.NekoConfig;
 import tw.nekomimi.nekogram.NekoXConfig;
 
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.KiloConfig;
 
-import static xyz.nextalone.nagram.helper.MessageHelper.showForwardDate;
+import static net.kilogram.messenger.helper.MessageHelper.showForwardDate;
 
 public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate, ImageReceiver.ImageReceiverDelegate, DownloadController.FileDownloadProgressListener, TextSelectionHelper.SelectableView, NotificationCenter.NotificationCenterDelegate {
 
@@ -10674,7 +10674,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         } else {
             timeString = messageObject.messageOwner.date + "";
         }
-        if (NaConfig.INSTANCE.getShowMessageID().Bool() && messageObject.messageOwner != null && (isChat || isMegagroup || ChatObject.isChannel(currentChat))) {
+        if (KiloConfig.INSTANCE.getShowMessageID().Bool() && messageObject.messageOwner != null && (isChat || isMegagroup || ChatObject.isChannel(currentChat))) {
             timeString = timeString + " | " + messageObject.messageOwner.id;
         }
         if (messageObject.messageOwner != null && messageObject.messageOwner.translated) {
@@ -10892,7 +10892,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 adminWidth = (int) Math.ceil(Theme.chat_adminPaint.measureText(adminString));
                 nameWidth -= adminWidth;
             } else if (NekoConfig.labelChannelUser.Bool() && isMegagroup && currentChat != null && currentMessageObject.isSenderChannel()) {
-                final String channelStr = NaConfig.INSTANCE.getCustomChannelLabel().String();
+                final String channelStr = KiloConfig.INSTANCE.getCustomChannelLabel().String();
                 if (NekoConfig.channelAlias.Bool()) {
                     String aliasName = NekoXConfig.getChannelAlias(currentMessageObject.messageOwner.from_id.channel_id);
                     if (aliasName != null) {
@@ -10919,7 +10919,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             }
             int PremiumStarWidth = 0;
             if (currentUser != null) {
-                if (currentUser.premium && NaConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
+                if (currentUser.premium && KiloConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
                     PremiumStarWidth = (int) Math.ceil(Theme.chat_namePaint.measureText("  "));
                 }
             }
@@ -10953,7 +10953,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 nameStringFinal = Emoji.replaceEmoji(nameStringFinal, Theme.chat_namePaint.getFontMetricsInt(), AndroidUtilities.dp(14), false);
             } catch (Exception ignore) {}
             if (nameStringFinal != null && currentUser != null) {
-                if (currentUser.premium && NaConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
+                if (currentUser.premium && KiloConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
                     SpannableStringBuilder spannableStringBuilder = SpannableStringBuilder.valueOf(String.format("  %s", nameStringFinal));
                     spannableStringBuilder.setSpan(new ColoredImageSpan(ContextCompat.getDrawable(getContext(), R.drawable.msg_premium_liststar)), 0, 1, 0);
                     nameStringFinal = spannableStringBuilder;
@@ -11268,7 +11268,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     }
                 }
                 int PremiumStarWidth = 0;
-                if (showReplyPremiumStar && NaConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
+                if (showReplyPremiumStar && KiloConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
                     PremiumStarWidth = (int) Math.ceil(Theme.chat_replyNamePaint.measureText("  "));
                 }
                 CharSequence stringFinalName = name == null ? "" : TextUtils.ellipsize(name.replace('\n', ' '), Theme.chat_replyNamePaint, maxWidth - PremiumStarWidth, TextUtils.TruncateAt.END);
@@ -11278,7 +11278,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 try {
                     replyNameWidth = AndroidUtilities.dp(4 + (needReplyImage ? 44 : 0)) + PremiumStarWidth;
                     if (stringFinalName != null) {
-                        if (showReplyPremiumStar && NaConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
+                        if (showReplyPremiumStar && KiloConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
                             SpannableStringBuilder spannableStringBuilder = SpannableStringBuilder.valueOf(String.format("  %s", stringFinalName));
                             spannableStringBuilder.setSpan(new ColoredImageSpan(ContextCompat.getDrawable(getContext(), R.drawable.msg_premium_liststar)), 0, 1, 0);
                             stringFinalName = spannableStringBuilder;

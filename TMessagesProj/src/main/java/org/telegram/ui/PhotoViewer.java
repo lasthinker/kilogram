@@ -259,8 +259,8 @@ import tw.nekomimi.nekogram.transtale.TranslatorKt;
 import tw.nekomimi.nekogram.ui.BottomBuilder;
 import tw.nekomimi.nekogram.utils.AlertUtil;
 import tw.nekomimi.nekogram.utils.ProxyUtil;
-import xyz.nextalone.nagram.NaConfig;
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.helper.MessageHelper;
 
 @SuppressLint("WrongConstant")
 @SuppressWarnings("unchecked")
@@ -10899,7 +10899,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             isVideo = newMessageObject.isVideo();
             boolean isInvoice = newMessageObject.isInvoice();
             boolean noforwards = MessagesController.getInstance(currentAccount).isChatNoForwards(newMessageObject.getChatId()) || (newMessageObject.messageOwner != null && newMessageObject.messageOwner.noforwards);
-            boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !NaConfig.INSTANCE.getForceCopy().Bool();
+            boolean noforwardsOverride = noforwards && !NekoXConfig.disableFlagSecure && !KiloConfig.INSTANCE.getForceCopy().Bool();
             if (isInvoice) {
                 setItemVisible(masksItem, false, true);
                 menuItem.hideSubItem(gallery_menu_delete);
@@ -11476,7 +11476,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             groupedPhotosListView.fillList();
             pageBlocksAdapter.updateSlideshowCell(pageBlock);
         }
-        if (!NaConfig.INSTANCE.getShowCopyPhoto().Bool()){
+        if (!KiloConfig.INSTANCE.getShowCopyPhoto().Bool()){
             menuItem.hideSubItem(gallery_menu_copy);
         }
 
@@ -11593,7 +11593,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                     menuItem.hideSubItem(gallery_menu_scan);
                     setDoubleTapEnabled(false);
                 }
-                if (canZoom && allowShare && !isVideo && NaConfig.INSTANCE.getShowCopyPhoto().Bool()) {
+                if (canZoom && allowShare && !isVideo && KiloConfig.INSTANCE.getShowCopyPhoto().Bool()) {
                     menuItem.showSubItem(gallery_menu_copy);
                 } else {
                     menuItem.hideSubItem(gallery_menu_copy);

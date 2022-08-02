@@ -7,7 +7,7 @@
     <string name="HidePhone">Ocultar o meu número de telefone</string>
     <string name="MessageMenu">Menu de mensagens</string>
     <string name="IPv6">A ligar através de IPv6</string>
-    <string name="NekoSettings">Definições do Neko</string>
+    <string name="NekoSettings">Definições do Kilo</string>
     <string name="ProviderYouDao">Traduzir YouDao</string>
     <string name="ProviderMicrosoftTranslator">Tradutor Microsoft</string>
     <string name="ProviderDeepLTranslate">Traduzir DeepL</string>
@@ -84,7 +84,7 @@
     <string name="ActionBarDecoration">Decoração da barra de título</string>
     <string name="ChristmasHat">Mostrar chapéu de Natal todos os dias</string>
     <string name="EventType">Conjunto de ícones da barra lateral</string>
-    <string name="NekogramRunning">Nekogram está em execução</string>
+    <string name="NekogramRunning">Kilogram está em execução</string>
     <string name="DisableResidentNotification">Desativar notificação de residente</string>
     <string name="EnableResidentNotification">Mostrar notificação de residente</string>
     <string name="TransparentStatusBar">Barra de estado transparente</string>

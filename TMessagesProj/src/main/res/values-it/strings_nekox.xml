@@ -47,7 +47,7 @@
     <string name="TransToLang">Lingua di destinazione della traduzione</string>
     <string name="TransInputToLang">Lingua di destinazione dell\'inserimento della traduzione</string>
     <string name="More">Altro</string>
-    <string name="NekoXUpdatesChannel">Canale Aggiornamenti NekoX</string>
+    <string name="NekoXUpdatesChannel">Canale Aggiornamenti Kilogram</string>
     <string name="ShowIdAndDc">Mostra ID / DC nel profilo</string>
     <string name="UseDefaultTheme">Usa tema predefinito *</string>
     <string name="NightMode">Modalità Notte</string>
@@ -59,7 +59,7 @@
     <string name="ApplySuggestion">OK, Applica</string>
     <string name="DoNotRemindAgain">Non ricordare di nuovo</string>
     <string name="RemoveTitleEmoji">Rimuovi emoji nel titolo</string>
-    <string name="NekoXProxy">NekoX Proxy Pubblico</string>
+    <string name="NekoXProxy">Kilo Proxy Pubblico</string>
     <string name="PublicPrefix">Pubblico</string>
     <string name="DisableChatAction">Non inviare il mio stato di input</string>
     <string name="FakeScreenshot">Finto screenshot</string>
@@ -87,9 +87,9 @@
     <string name="SortByUnmuted">Ordina per Non Silenziata</string>
     <string name="SortByUser">Ordina per Utente</string>
     <string name="SortByContacts">Ordina per Contatti</string>
-    <string name="NekoXPushService">Servizio Push NekoX</string>
-    <string name="EnablePushAlert">Attiva \"Servizio Push NekoX\"</string>
-    <string name="DisablePushAlert">Disattiva \"Servizio Push NekoX\"</string>
+    <string name="NekoXPushService">Servizio Push Kilo</string>
+    <string name="EnablePushAlert">Attiva \"Servizio Push Kilo\"</string>
+    <string name="DisablePushAlert">Disattiva \"Servizio Push Kilo\"</string>
     <string name="DisableUndo">Disabilita Annulla</string>
     <string name="DisableSystemAccount">Disabilita Account di Sistema</string>
     <string name="FilterMenu">Menu Filtro Finestre</string>
@@ -170,7 +170,7 @@
     <string name="DisableDeveloperMode">Disabilita Modalità Sviluppatore</string>
     <string name="DeveloperSettings">Impostazioni Sviluppatore</string>
     <string name="LoginSettings">Impostazioni di Accesso</string>
-    <string name="NekoXFaq">FAQ NekoX</string>
+    <string name="NekoXFaq">FAQ Kilogram</string>
     <string name="TransSite">Piattaforma di Traduzione</string>
     <string name="OpenKayChain">Client OpenPGP</string>
     <string name="OpenPGPApp">Provider OpenPGP</string>
@@ -268,7 +268,7 @@
     <string name="rememberAllBackMessages">Ricorda tutte le risposte cliccate</string>
     <string name="ShareMessages">Condividi</string>
     <string name="AutoCheckUpdatePreview">Anteprima (Instabile)</string>
-    <string name="AppUpdateNekoX">Aggiorna Nagram</string>
+    <string name="AppUpdateNekoX">Aggiorna Kilogram</string>
     <string name="NekoXUpdateTranslationHint">Premi per tradurre il registro dei cambiamenti</string>
     <string name="channelAlias">Alias del Canale</string>
     <string name="setChannelAliasName">Imposta Alias</string>

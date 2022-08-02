@@ -47,7 +47,7 @@
     <string name="TransToLang">Język tłumaczenia wiadomości</string>
     <string name="TransInputToLang">Język tłum. w polu wprowadzania</string>
     <string name="More">Więcej</string>
-    <string name="NekoXUpdatesChannel">Kanał aktualizacji NekoX</string>
+    <string name="NekoXUpdatesChannel">Kanał aktualizacji Kilogram</string>
     <string name="ShowIdAndDc">Pokaż ID / DC w profilu</string>
     <string name="UseDefaultTheme">Użyj domyślnego motywu *</string>
     <string name="NightMode">Tryb nocny</string>
@@ -59,7 +59,7 @@
     <string name="ApplySuggestion">Zastosuj</string>
     <string name="DoNotRemindAgain">Nie powiadamiaj</string>
     <string name="RemoveTitleEmoji">Usuń emotikony w tytule</string>
-    <string name="NekoXProxy">Publiczny serwer proxy NekoX</string>
+    <string name="NekoXProxy">Publiczny serwer proxy Kilo</string>
     <string name="PublicPrefix">Publiczny</string>
     <string name="DisableChatAction">Nie wysyłaj mojego statusu wprowadzania</string>
     <string name="FakeScreenshot">Symuluj zrzut ekranu</string>
@@ -87,9 +87,9 @@
     <string name="SortByUnmuted">Sortuj według niewyciszonych</string>
     <string name="SortByUser">Sortuj według użytkownika</string>
     <string name="SortByContacts">Sortuj według kontaktów</string>
-    <string name="NekoXPushService">Usługa Push NekoX</string>
-    <string name="EnablePushAlert">Proszę włączyć „Usługa Push NekoX”</string>
-    <string name="DisablePushAlert">Proszę wyłączyć „Usługa Push NekoX”</string>
+    <string name="NekoXPushService">Usługa Push Kilo</string>
+    <string name="EnablePushAlert">Proszę włączyć „Usługa Push Kilo”</string>
+    <string name="DisablePushAlert">Proszę wyłączyć „Usługa Push Kilo”</string>
     <string name="DisableUndo">Wyłącz dymek przywracania usuniętego czatu</string>
     <string name="DisableSystemAccount">Wyłącz konta systemowe</string>
     <string name="FilterMenu">Menu filtrowania czatów</string>
@@ -267,7 +267,7 @@
 \nDuży awatar jako tło</string>
     <string name="ShareMessages">Udostępnij</string>
     <string name="unreadBadgeOnBackButton">Licznik nieprzeczytanych na przycisku wstecz</string>
-    <string name="AppUpdateNekoX">Aktualizacja Nagram</string>
+    <string name="AppUpdateNekoX">Aktualizacja Kilogram</string>
     <string name="NekoXUpdateTranslationHint">Naciśnij, aby przetłumaczyć dziennik zmian</string>
     <string name="AutoCheckUpdatePreview">Podglądowa (niestabilna)</string>
     <string name="Name">Nazwa</string>

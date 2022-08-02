@@ -12,7 +12,7 @@
     <string name="GoogleCloudTransKey">Google Cloud Translate-nyckel</string>
     <string name="FilterNameBots">Bottar</string>
     <string name="SortMenu">Dialog-sorterings Inställningar</string>
-    <string name="NekoXUpdatesChannel">NekoX Uppdateringskanal</string>
+    <string name="NekoXUpdatesChannel">Kilogram Uppdateringskanal</string>
     <string name="FilterNameContactsDescription">Endast meddelanden från sparade användare</string>
     <string name="FilterNameGroupsDescription">Endast meddelanden från gruppchattar</string>
     <string name="FilterNameUnreadDescription">Bara olästa meddelanden</string>
@@ -49,8 +49,8 @@
     <string name="SortByUnmuted">Sortera efter otystad</string>
     <string name="SortByUser">Sortera efter Användare</string>
     <string name="SortByContacts">Sortera efter Kontakter</string>
-    <string name="EnablePushAlert">Vänligen aktivera NekoX Push Service</string>
-    <string name="DisablePushAlert">Vänligen avaktivera NekoX Push Service</string>
+    <string name="EnablePushAlert">Vänligen aktivera Kilo Push Service</string>
+    <string name="DisablePushAlert">Vänligen avaktivera Kilo Push Service</string>
     <string name="DisableUndo">Inaktivera ångra</string>
     <string name="DisableSystemAccount">Inaktivera Systemkonto</string>
     <string name="DeleteAllInChatAlert">Varning! Detta kommer **ta bort alla meddelanden** i den här chatten för **alla** deltagare.</string>
@@ -75,7 +75,7 @@
     <string name="FilterNameUsersDescription">Endast meddelanden från privata chattar</string>
     <string name="CheckUpdate">Kontrollera Uppdatering</string>
     <string name="RemoveTitleEmoji">Ta bort emoji i titeln</string>
-    <string name="NekoXProxy">NekoX Offentlig Proxy</string>
+    <string name="NekoXProxy">Kilo Offentlig Proxy</string>
     <string name="PublicPrefix">Offentlig</string>
     <string name="FakeScreenshot">Låtsas skärmdump</string>
     <string name="ImportPxy">Importera</string>

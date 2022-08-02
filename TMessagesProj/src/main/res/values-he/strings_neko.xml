@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">הגדרות Neko</string>
+    <string name="NekoSettings">הגדרות Kilo</string>
     <string name="IPv6">מתחבר דרך IPv6</string>
     <string name="MessageMenu">תפריט הודעה</string>
     <string name="HidePhone">הסתר את מספר הטלפון שלי</string>
@@ -25,7 +25,7 @@
     <string name="TransparentStatusBar">שורת מצב שקופה</string>
     <string name="EnableResidentNotification">הצגת התראת תושב</string>
     <string name="DisableResidentNotification">השבתת התראות תושבים</string>
-    <string name="NekogramRunning">Nekogram פועל</string>
+    <string name="NekogramRunning">Kilogram פועל</string>
     <string name="EventType">ערכת אייקונים של סרגל הצד</string>
     <string name="ChristmasHat">הצגת כובע סנטה בכל יום</string>
     <string name="ActionBarDecoration">קישוט סרגל הכותרת</string>
@@ -122,7 +122,7 @@
     <string name="disableRemoteEmojiInteractions">השבתת אינטראקציה עם אמוג׳י מהצד המרוחק</string>
     <string name="disableChoosingSticker">לשלוח הקלדה במקום בחירת מדבקה</string>
     <string name="hideGroupSticker">הסתרת מדבקה קבוצתית</string>
-    <string name="enablePublicProxy">המתווך הציבורי של NekoX</string>
+    <string name="enablePublicProxy">המתווך הציבורי של Kilo</string>
     <string name="autoUpdateSubInfo">עדכון מתווכים אוטומטית</string>
     <string name="hideSendAsChannel">הסתרת שליחה כערוץ</string>
     <string name="showSpoilersDirectly">הצגת הודעות ספויילר ישירות</string>

@@ -41,7 +41,7 @@
     <string name="CallTo">Ring samtal till **%1$s**\?</string>
     <string name="AskBeforeCalling">Fråga före samtal</string>
     <string name="AutoPauseVideo">Auto-pausa video</string>
-    <string name="NekoSettings">Neko Inställningar</string>
+    <string name="NekoSettings">Kilo Inställningar</string>
     <string name="IPv6">Anslut med IPv6</string>
     <string name="DeleteAllFromSelfAlert">Varning! Detta kommer **ta bort alla meddelanden från dig** i den här chatten för **alla** deltagare.</string>
     <string name="InvalidAccessToken">Ogiltig åtkomsttoken</string>
@@ -79,7 +79,7 @@
     <string name="Connection">Anslutning</string>
     <string name="AddToSavedMessages">Spara Meddelande</string>
     <string name="CreateMention">Skapa Omnämning</string>
-    <string name="NekogramRunning">Nekogram kör</string>
+    <string name="NekogramRunning">Kilogram kör</string>
     <string name="ChristmasHat">Visa julbockens hatt varje dag</string>
     <string name="Nya">Mjau!</string>
     <string name="TestBackendOn">Detta konto kommer att ansluta till testbackend.</string>

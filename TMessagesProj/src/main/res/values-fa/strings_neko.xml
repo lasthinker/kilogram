@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">تنظیمات Neko</string>
+    <string name="NekoSettings">تنظیمات Kilo</string>
     <string name="IPv6">اتصال از طریق IPv6</string>
     <string name="MessageMenu">منوی پیام</string>
     <string name="HidePhone">مخفی کردن شماره تلفن</string>
@@ -118,7 +118,7 @@
     <string name="UseMediaStreamInVoip">بکارگیری از رسانه‌شناور در VoIP</string>
     <string name="TakeGIFasVideo">نمایش گیف به شکل دیدآوا</string>
     <string name="DontSendGreetingSticker">نفرستادن چسبانک خوش‌آمد گویی</string>
-    <string name="enablePublicProxy">پروکسی همگانی NekoX</string>
+    <string name="enablePublicProxy">پروکسی همگانی Kilo</string>
     <string name="autoUpdateSubInfo">بروزرسانی خودکار پروکسی‌های همگانی</string>
     <string name="hideSendAsChannel">پنهان کردن «فرستادن به نام درگاه»</string>
     <string name="disableSwipeToNextChannel">از کار انداختن نمایش درگاه بعدی با کشیدن انگشت</string>

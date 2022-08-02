@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Paramètres Neko</string>
+    <string name="NekoSettings">Paramètres Kilo</string>
     <string name="IPv6">Connexion via IPv6</string>
     <string name="MessageMenu">Menu des messages</string>
     <string name="HidePhone">Cacher mon numéro de téléphone</string>
@@ -60,7 +60,7 @@
     <string name="Prpr">Peropero</string>
     <string name="EnableResidentNotification">Afficher une notification permanente</string>
     <string name="DisableResidentNotification">Désactiver la notification permanente</string>
-    <string name="NekogramRunning">Nekogram est en cours d\'éxécution</string>
+    <string name="NekogramRunning">Kilogram est en cours d\'éxécution</string>
     <string name="ChristmasHat">Afficher le bonnet de noël tous les jours</string>
     <string name="ActionBarDecoration">Décoration de la barre de titre</string>
     <string name="TransparentStatusBar">Barre de notifications transparente</string>
@@ -123,7 +123,7 @@
     <string name="disableSwipeToNextChannel">Désactiver le glissement vers le canal suivant</string>
     <string name="disableChoosingSticker">Envoyer en tapant au lieu de choisir une vignette</string>
     <string name="SaveToDownloadCount_other">Enregistrement de %1$d fichiers dans les téléchargements</string>
-    <string name="enablePublicProxy">Proxy public de NekoX</string>
+    <string name="enablePublicProxy">Proxy public de Kilo</string>
     <string name="customSavePath">Chemin de stockage personnalisé</string>
     <string name="customSavePathHint">Laissez vide pour enregistrer directement</string>
     <string name="NekoGeneralNotification">Notification</string>

@@ -47,7 +47,7 @@
     <string name="TransToLang">زبان ترجمه مقصد</string>
     <string name="TransInputToLang">زبان ترجمه پیام ورودی</string>
     <string name="More">بیشتر</string>
-    <string name="NekoXUpdatesChannel">کانال بروزرسانی NekoX</string>
+    <string name="NekoXUpdatesChannel">کانال بروزرسانی Kilogram</string>
     <string name="ShowIdAndDc">نمایش ID / DC در پروفایل کاربر</string>
     <string name="UseDefaultTheme">استفاده از تم پیشفرض *</string>
     <string name="NightMode">حالت شب</string>
@@ -59,7 +59,7 @@
     <string name="ApplySuggestion">باشه، اعمال کن</string>
     <string name="DoNotRemindAgain">دیگر یادآوری نشود</string>
     <string name="RemoveTitleEmoji">حذف ایموجی در عنوان</string>
-    <string name="NekoXProxy">پروکسی عمومی NekoX</string>
+    <string name="NekoXProxy">پروکسی عمومی Kilo</string>
     <string name="PublicPrefix">عمومی</string>
     <string name="DisableChatAction">عدم ارسال وضعیت ورودی</string>
     <string name="FakeScreenshot">تظاهر کردن اسکرین‌شات</string>
@@ -87,9 +87,9 @@
     <string name="SortByUnmuted">ترتیب بر اساس صدا دار</string>
     <string name="SortByUser">ترتیب بر اساس کاربر</string>
     <string name="SortByContacts">ترتیب بر اساس مخاطبین</string>
-    <string name="NekoXPushService">خدمات ارسال اعلان NekoX</string>
-    <string name="EnablePushAlert">لطفا خدمات ارسال اعلان NekoX را فعال کنید</string>
-    <string name="DisablePushAlert">لطفا خدمات ارسال اعلان NekoX را غیرفعال کنید</string>
+    <string name="NekoXPushService">خدمات ارسال اعلان Kilo</string>
+    <string name="EnablePushAlert">لطفا خدمات ارسال اعلان Kilo را فعال کنید</string>
+    <string name="DisablePushAlert">لطفا خدمات ارسال اعلان Kilo را غیرفعال کنید</string>
     <string name="DisableUndo">غیرفعال کردن واگرد</string>
     <string name="DisableSystemAccount">غیرفعال کردن حساب سیستم</string>
     <string name="FilterMenu">منوی فیلتر گفتگوها</string>
@@ -170,7 +170,7 @@
     <string name="DisableDeveloperMode">غیرفعالسازی حالت توسعه‌دهنده</string>
     <string name="DeveloperSettings">تنظیمات توسعه‌دهنده</string>
     <string name="LoginSettings">تنظیمات ورود</string>
-    <string name="NekoXFaq">پرسش‌های متداول NekoX</string>
+    <string name="NekoXFaq">پرسش‌های متداول Kilogram</string>
     <string name="TransSite">پلتفرم ترجمه</string>
     <string name="OpenKayChain">OpenPGP Client</string>
     <string name="OpenPGPApp">OpenPGP Provider</string>

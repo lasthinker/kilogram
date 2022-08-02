@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Налаштування Neko</string>
+    <string name="NekoSettings">Налаштування Kilo</string>
     <string name="IPv6">Підключення через IPv6</string>
     <string name="MessageMenu">Меню повідомлення</string>
     <string name="HidePhone">Сховати мій номер телефону</string>
@@ -110,7 +110,7 @@
     <string name="ProviderMicrosoftTranslator">Microsoft Translator</string>
     <string name="ProviderYouDao">YouDao Translate</string>
     <string name="pressTitleToOpenAllChats">Натисніть на заголовок, щоб відкрити теку \"Всі чати\"</string>
-    <string name="enablePublicProxy">Загальнодоступний проксі NekoX</string>
+    <string name="enablePublicProxy">Загальнодоступний проксі Kilo</string>
     <string name="autoUpdateSubInfo">Оновлювати проксі автоматично</string>
     <string name="hideSendAsChannel">Сховати надсилання як канал</string>
     <string name="DontSendGreetingSticker">Не слати вітальної наліпки</string>

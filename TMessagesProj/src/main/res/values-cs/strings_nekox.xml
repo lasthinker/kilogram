@@ -34,7 +34,7 @@
     <string name="NightMode">Noční režim</string>
     <string name="UseDefaultTheme">Použít výchozí motiv *</string>
     <string name="ShowIdAndDc">Ukázat ID / DC v profilu</string>
-    <string name="NekoXUpdatesChannel">Kanál aktualizací NekoX</string>
+    <string name="NekoXUpdatesChannel">Kanál aktualizací Kilogram</string>
     <string name="More">Více</string>
     <string name="ChangeTranslateProvider">Změnit poskytovatele</string>
     <string name="AllowFlashCall">Povolit bleskové volání</string>
@@ -149,7 +149,7 @@
     <string name="CCTarget">Cíl</string>
     <string name="FilterNameBotsDescription">Pouze zprávy od robotů</string>
     <string name="SortByContacts">Seřadit Podle Kontaktů</string>
-    <string name="NekoXProxy">NekoX Veřejná Proxy</string>
+    <string name="NekoXProxy">Kilo Veřejná Proxy</string>
     <string name="SSPluginConflictingName">Několik pluginů používá tuto ID: %s.</string>
     <string name="TransSite">Překládací Platforma</string>
     <string name="UnblockAllWarn">Jste si jisti že chcete odblokovat **všechny uživatele a roboty**\?</string>
@@ -191,7 +191,7 @@
     <string name="ImportSettings">Nastavení vložení</string>
     <string name="PrivacyNotice2fa">Zjistilo se že jste si nenastavili heslo, což by mohlo způsobit že hacker kontrolovaný vládou najde vaši pravou identitu, prosíme nastavte jej!</string>
     <string name="AddProxySSR">Přidat ShadowsocksR Proxy</string>
-    <string name="NekoXFaq">NekoX FAQ</string>
+    <string name="NekoXFaq">Kilogram FAQ</string>
     <string name="DisableVibration">Vypnout Vibraci</string>
     <string name="VersionUpdateIgnore">Ignorovat</string>
     <string name="DisableDeveloperMode">Vypnout Vývojářský Mód</string>

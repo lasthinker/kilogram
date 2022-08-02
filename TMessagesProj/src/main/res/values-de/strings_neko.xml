@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Neko Einstellungen</string>
+    <string name="NekoSettings">Kilo Einstellungen</string>
     <string name="IPv6">Über IPv6 verbinden</string>
     <string name="MessageMenu">Nachrichtenmenü</string>
     <string name="HidePhone">Rufnummer ausblenden</string>
@@ -25,7 +25,7 @@
     <string name="TransparentStatusBar">Transparente Statusleiste</string>
     <string name="EnableResidentNotification">Zeige eine ständig bleibende Benachrichtigung</string>
     <string name="DisableResidentNotification">Deaktiviere die ständig bleibende Benachrichtigung</string>
-    <string name="NekogramRunning">Nekogram läuft</string>
+    <string name="NekogramRunning">Kilogram läuft</string>
     <string name="EventType">Symbol-Seitenleiste einstellen</string>
     <string name="ChristmasHat">Weihnachtsmannmütze jeden Tag anzeigen</string>
     <string name="ActionBarDecoration">Titelleiste dekorieren</string>
@@ -109,7 +109,7 @@
     <string name="ProviderMicrosoftTranslator">Microsoft Übersetzer</string>
     <string name="ProviderYouDao">YouDao Übersetzer</string>
     <string name="AutoPauseVideoAbout">Beim Sperren des Bildschirms / Umschalten auf Hintergrund.</string>
-    <string name="enablePublicProxy">öffentliches Proxy von NekoX</string>
+    <string name="enablePublicProxy">öffentliches Proxy von Kilo</string>
     <string name="autoUpdateSubInfo">Proxys automatisch aktualisieren</string>
     <string name="pressTitleToOpenAllChats">Auf Titel tippen, um den \"Alle Chats\"-Tab zu öffnen</string>
     <string name="hideGroupSticker">Gruppensticker ausblenden</string>

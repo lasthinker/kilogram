@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Neko Ayarları</string>
+    <string name="NekoSettings">Kilo Ayarları</string>
     <string name="IPv6">IPv6 Aracılığıyla Bağlanmayı Dene</string>
     <string name="MessageMenu">Mesaj Menüsü Ögeleri</string>
     <string name="HidePhone">Telefon Numaramı Gizle</string>
@@ -25,7 +25,7 @@
     <string name="TransparentStatusBar">Saydam Durum Çubuğu</string>
     <string name="EnableResidentNotification">Kalıcı bildirim göster</string>
     <string name="DisableResidentNotification">Kalıcı bildirimi devre dışı bırak</string>
-    <string name="NekogramRunning">Nekogram çalışıyor</string>
+    <string name="NekogramRunning">Kilogram çalışıyor</string>
     <string name="EventType">Çekmece Dekorasyonu</string>
     <string name="ChristmasHat">Noel Şapkasını Her Zaman Göster</string>
     <string name="ActionBarDecoration">Başlık Çubuğu Dekorasyonu</string>
@@ -124,7 +124,7 @@
     <string name="hideGroupSticker">Grup çıkartmasını gizle</string>
     <string name="hideSendAsChannel">Kanal olarak göndermeyi gizle</string>
     <string name="channelLabel">kanal</string>
-    <string name="enablePublicProxy">NekoX Herkese Açık Vekil Sunucu</string>
+    <string name="enablePublicProxy">Kilo Herkese Açık Vekil Sunucu</string>
     <string name="SaveToDownloadCount_one">%1$d dosya indirilenler klasörüne kaydediliyor</string>
     <string name="SaveToDownloadCount_two">%1$d dosya indirilenler klasörüne kaydediliyor</string>
     <string name="SaveToDownloadCount_few">%1$d dosya indirilenler klasörüne kaydediliyor</string>

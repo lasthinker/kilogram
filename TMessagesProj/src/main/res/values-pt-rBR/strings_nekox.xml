@@ -47,7 +47,7 @@
     <string name="TransToLang">Idioma de destino para tradução</string>
     <string name="TransInputToLang">Idioma de destino da tradução para envio de mensagens</string>
     <string name="More">Mais</string>
-    <string name="NekoXUpdatesChannel">Canal de atualizações do NekoX</string>
+    <string name="NekoXUpdatesChannel">Canal de atualizações do Kilogram</string>
     <string name="ShowIdAndDc">Mostrar ID / DC no perfil</string>
     <string name="UseDefaultTheme">Usar o tema padrão *</string>
     <string name="NightMode">Modo Noturno</string>
@@ -59,7 +59,7 @@
     <string name="ApplySuggestion">OK, Aplicar</string>
     <string name="DoNotRemindAgain">Não lembre novamente</string>
     <string name="RemoveTitleEmoji">Remover emoji no título</string>
-    <string name="NekoXProxy">Proxy Público do NekoX</string>
+    <string name="NekoXProxy">Proxy Público do Kilo</string>
     <string name="PublicPrefix">Público</string>
     <string name="DisableChatAction">Não enviar meu status de entrada</string>
     <string name="FakeScreenshot">Simular captura de tela</string>
@@ -87,9 +87,9 @@
     <string name="SortByUnmuted">Ordenar por Não-silenciadas</string>
     <string name="SortByUser">Ordenar por Usuário</string>
     <string name="SortByContacts">Ordenar por Contatos</string>
-    <string name="NekoXPushService">Serviço de Notificação NekoX</string>
-    <string name="EnablePushAlert">Por favor ative o \"Serviço de Notificação NekoX\"</string>
-    <string name="DisablePushAlert">Por favor desative o \"Serviço de Notificação NekoX\"</string>
+    <string name="NekoXPushService">Serviço de Notificação Kilo</string>
+    <string name="EnablePushAlert">Por favor ative o \"Serviço de Notificação Kilo\"</string>
+    <string name="DisablePushAlert">Por favor desative o \"Serviço de Notificação Kilo\"</string>
     <string name="DisableUndo">Desativar Desfazer</string>
     <string name="DisableSystemAccount">Desativar Conta do Sistema</string>
     <string name="FilterMenu">Menu de Filtro de Conversas</string>
@@ -170,7 +170,7 @@
     <string name="DisableDeveloperMode">Desativar Modo Desenvolvedor</string>
     <string name="DeveloperSettings">Configurações de Desenvolvedor</string>
     <string name="LoginSettings">Configurações de Login</string>
-    <string name="NekoXFaq">FAQ do NekoX</string>
+    <string name="NekoXFaq">FAQ do Kilogram</string>
     <string name="TransSite">Traduzir Plataforma</string>
     <string name="OpenKayChain">Cliente OpenPGP</string>
     <string name="OpenPGPApp">Provedor OpenPGP</string>
@@ -272,7 +272,7 @@
     <string name="ShareMessages">Compartilhar</string>
     <string name="NekoXUpdateTranslationHint">Pressione para traduzir o histórico de alterações</string>
     <string name="AutoCheckUpdatePreview">Preview (Instável)</string>
-    <string name="AppUpdateNekoX">Atualizar Nagram</string>
+    <string name="AppUpdateNekoX">Atualizar Kilogram</string>
     <string name="setChannelAliasName">Definir Alias</string>
     <string name="labelChannelUser">Marcar Usuário do Canal</string>
     <string name="labelChannelUserDetails">Se o remetente da mensagem for o Canal, ele será rotulado como \"Canal\".</string>

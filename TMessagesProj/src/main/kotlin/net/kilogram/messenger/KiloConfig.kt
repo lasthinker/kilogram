@@ -244,6 +244,11 @@ object KiloConfig {
         ConfigItem.configTypeBool,
         false
     )
+    val useExperimentalFileLoader = addConfig(
+        "UseExperimentalFileLoader",
+        ConfigItem.configTypeBool,
+        false
+    )
 
     private fun addConfig(
         k: String,

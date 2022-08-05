@@ -95,6 +95,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
     private final AbstractConfigCell forceCopyRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getForceCopy()));
     private final AbstractConfigCell audioEnhanceRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getNoiseSuppressAndVoiceEnhance()));
     private final AbstractConfigCell showRPCErrorRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowRPCError()));
+    private final AbstractConfigCell useExperimentalFileLoaderRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getUseExperimentalFileLoader()));
     private final AbstractConfigCell divider1 = cellGroup.appendCell(new ConfigCellDivider());
 
     private UndoView tooltip;

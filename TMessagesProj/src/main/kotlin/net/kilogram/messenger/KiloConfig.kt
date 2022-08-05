@@ -27,6 +27,12 @@ object KiloConfig {
         ArrayList<ConfigItem>()
 
     // Configs
+    var invertedNotification =
+        addConfig(
+            "invertedNotification",
+            ConfigItem.configTypeBool,
+            false
+        )
     val forceCopy =
         addConfig(
             "ForceCopy",

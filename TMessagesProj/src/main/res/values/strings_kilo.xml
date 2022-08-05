@@ -14,6 +14,7 @@
     <string name="TextUndo">Undo</string>
     <string name="TextRedo">Redo</string>
     <string name="NoiseSuppressAndVoiceEnhance">Noise Suppress And Voice Enhance</string>
+    <string name="invertedNotification">Inverted Notification</string>
     <string name="RepeatAsCopy">Repeat as Copy</string>
     <string name="DoubleTapAction">Double Tap Action</string>
     <string name="SendReactions">Send Reactions</string>
@@ -37,10 +38,6 @@
     <string name="ShowPremiumAvatarAnimation">Show Premium Avatar Animation</string>
     <string name="AlwaysSaveChatOffset">AlwaysSaveChatOffset</string>
     <string name="AutoReplaceRepeat">Auto Replace Repeat to Repeat As Copy</string>
-    <string name="AppIconGoogle">Google</string>
-    <string name="AppIconColorful">Colorful</string>
-    <string name="AppIconDarkGreen">Dark Green</string>
-    <string name="AppIconNeon">Neon</string>
     <string name="AutoInsertGIFCaption">Auto insert caption before GIF send</string>
     <string name="DefaultMonoLanguage">Custom default code language</string>
     <string name="DisableGlobalSearch">Disable Global Search</string>

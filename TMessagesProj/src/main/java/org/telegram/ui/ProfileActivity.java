@@ -2955,7 +2955,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             } else if (position == nekoRow) {
                 presentFragment(new NekoSettingsActivity());
             } else if (position == questionRow) {
-                Browser.openUrl(getParentActivity(), "https://t.me/kilogram");
+                Browser.openUrl(getParentActivity(), "https://t.me/kilogram_messenger");
             } else if (position == faqRow) {
                 Browser.openUrl(getParentActivity(), NekoXConfig.FAQ_URL);
             } else if (position == policyRow) {
@@ -7891,7 +7891,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     cell.getTextView().setMovementMethod(null);
                     cell.setBackground(Theme.getThemedDrawable(mContext, R.drawable.greydivider_bottom, Theme.key_windowBackgroundGrayShadow));
 
-                    cell.setText("Kilogram v" + BuildConfig.VERSION_NAME + " " + FileUtil.getAbi() + " " + BuildConfig.FLAVOR + " " + BuildConfig.BUILD_TYPE);
+                    cell.setText("Kilogram v" + BuildConfig.VERSION_NAME + "(" + BuildConfig.VERSION_CODE + ") " + FileUtil.getAbi() + " " + BuildConfig.FLAVOR + " " + BuildConfig.BUILD_TYPE);
 
                     cell.getTextView().setPadding(0, AndroidUtilities.dp(14), 0, AndroidUtilities.dp(14));
                     view = cell;

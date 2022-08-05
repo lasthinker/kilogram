@@ -226,7 +226,7 @@ public final class QRCodeWriter {
             canvas.drawBitmap(icon, imageX, imageX, null);
             icon.recycle();
         } else {
-            Drawable drawable = ApplicationLoader.applicationContext.getResources().getDrawable(R.mipmap.ic_launcher_kilogram);
+            Drawable drawable = ApplicationLoader.applicationContext.getResources().getDrawable(R.mipmap.ic_launcher);
             drawable.setBounds(imageX, imageX, imageX + imageSize, imageX + imageSize);
             drawable.draw(canvas);
         }

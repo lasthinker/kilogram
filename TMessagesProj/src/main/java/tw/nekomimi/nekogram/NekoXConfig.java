@@ -37,8 +37,8 @@ public class NekoXConfig {
 //            1151172683, // NekoX Chat
 //            1299578049, // NekoX Chat Channel
 //            1137038259, // NekoX APKs
-            855646602, // Kilogram
-            855646602, // Kilogram Updates
+            1623323509, // Kilogram Metadata
+            1766831998, // Kilogram Messenger
     };
 
     public static long[] developers = {

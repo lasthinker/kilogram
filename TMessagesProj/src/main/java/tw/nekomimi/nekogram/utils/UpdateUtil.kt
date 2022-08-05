@@ -10,7 +10,7 @@ import org.telegram.ui.ActionBar.AlertDialog
 
 object UpdateUtil {
 
-    const val channelUsername = "kilogram_channel"
+    const val channelUsername = "kilogram_messenger"
 
     @JvmStatic
     fun postCheckFollowChannel(ctx: Context, currentAccount: Int) = UIUtil.runOnIoDispatcher {

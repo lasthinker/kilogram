@@ -174,7 +174,7 @@ public class NekoSettingsActivity extends BaseFragment {
             } else if (position == experimentRow) {
                 presentFragment(new NekoExperimentalSettingsActivity());
             } else if (position == channelRow) {
-                MessagesController.getInstance(currentAccount).openByUserName("kilogram_channel", this, 1);
+                MessagesController.getInstance(currentAccount).openByUserName("kilogram_messenger", this, 1);
             } else if (position == translationRow) {
                 Browser.openUrl(getParentActivity(), "https://hosted.weblate.org/engage/kilogram/");
 //            } else if (position == fdroidRow) {
@@ -182,7 +182,7 @@ public class NekoSettingsActivity extends BaseFragment {
 //            } else if (position == googlePlayRow) {
 //                Browser.openUrl(getParentActivity(), "https://play.google.com/store/apps/details?id=nekox.messenger");
             } else if (position == sourceCodeRow) {
-                Browser.openUrl(getParentActivity(), "https://github.com/lasthinker/kilogram");
+                Browser.openUrl(getParentActivity(), "https://github.com/lasthinker/kilogram/tree/dev");
             } else if (position == datacenterStatusRow) {
                 presentFragment(new DatacenterActivity(0));
             }
@@ -481,7 +481,7 @@ public class NekoSettingsActivity extends BaseFragment {
                 case 3: {
                     TextSettingsCell textCell = (TextSettingsCell) holder.itemView;
                     if (position == channelRow) {
-                        textCell.setTextAndValue(LocaleController.getString("OfficialChannel", R.string.OfficialChannel), "@kilogram", true);
+                        textCell.setTextAndValue(LocaleController.getString("OfficialChannel", R.string.OfficialChannel), "@kilogram_messenger", true);
 //                    } else if (position == fdroidRow) {
 //                        textCell.setText(LocaleController.getString("AppLinkFDroid", R.string.AppLinkFDroid), true);
 //                    } else if (position == googlePlayRow) {

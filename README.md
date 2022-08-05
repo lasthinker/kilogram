@@ -1,11 +1,11 @@
 # Kilogram
 
-Kilogram is a third-party Telegram client based on [NekoX](https://github.com/NextAlone/Nagram) with some modifications.
+Kilogram is a third-party Telegram client based on [NekoX](https://github.com/NekoX-Dev/NekoX) with some modifications.
 
-- Releases: <https://t.me/hiranikabot>
+- Releases: <https://t.me/kilogram_messenger>
 - Issues here: <https://github.com/lasthinker/kilogram/issues>
 
-## Additional feature over Nagram
+## Additional feature over NekoX
 
 1. Nice icon (thanks to MaitungTM)
 2. Combine message
@@ -25,7 +25,7 @@ Telegram API manuals: <https://core.telegram.org/api>
 
 MTproto protocol manuals: <https://core.telegram.org/mtproto>
 
-## Compilation Guide(By NekoX-dev)
+## Compilation Guide (By NekoX)
 
 **NOTE: Building on Windows is, unfortunately, not supported.
 Consider using a Linux VM or dual booting.**
@@ -102,4 +102,4 @@ Is Kilogram not in your language, or the translation is incorrect or incomplete?
 - [Nullgram](https://github.com/qwq233/Nullgram)
 - [TeleTux](https://github.com/TeleTux/TeleTux)
 - [OwlGram](https://github.com/OwlGramDev/OwlGram)
-
+- [GuGugramX](https://github.com/GuGugramX-Dev/GuGugramX)

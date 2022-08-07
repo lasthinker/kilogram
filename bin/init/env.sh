@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ -z "$ANDROID_HOME" ]; then
-  if [ -d "$HOME/Android/sdk" ]; then
-    export ANDROID_HOME="$HOME/Android/sdk"
+  if [ -d "$HOME/Android/Sdk" ]; then
+    export ANDROID_HOME="$HOME/Android/Sdk"
   elif [ -d "$HOME/.local/lib/android/sdk" ]; then
     export ANDROID_HOME="$HOME/.local/lib/android/sdk"
   fi
@@ -25,9 +25,9 @@ export PROJECT=$(realpath .)
 
 if [ ! $(command -v go) ]; then
   if [ -d /usr/lib/go-1.16 ]; then
-    export PATH=$PATH:/usr/lib/go/bin
+    export PATH=$PATH:/usr/lib/go-1.16/bin
   elif [ -d $HOME/.go ]; then
-    export PATH=$PATH:$HOME/go/bin
+    export PATH=$PATH:$HOME/.go/bin
   fi
 fi
 

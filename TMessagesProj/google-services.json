@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "300851528438",
+    "project_id": "kilogram-messenger",
+    "storage_bucket": "kilogram-messenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300851528438:android:c054dadeef6589f4fc22d7",
+        "android_client_info": {
+          "package_name": "net.kilogram.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300851528438-82pbtkmg1ujtjvlod95gb4p2umtpsuji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.kilogram.messenger",
+            "certificate_hash": "d122d9adc3e5d5ff346b32c0413f5cf3a3cc4658"
+          }
+        },
+        {
+          "client_id": "300851528438-545jljlammm34p5ta4tuv6426spg9d9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHYracUt7HWtQjWyLHRNv0JcTHjPvOd9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300851528438-545jljlammm34p5ta4tuv6426spg9d9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

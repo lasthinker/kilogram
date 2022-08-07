@@ -11,6 +11,3 @@ local.properties
 obj/
 service_account_credentials.json
 full/
-**/TMessagesProj/google-services.json
-**/TMessagesProj/release.keystore
-**/TMessagesProj/key.properties

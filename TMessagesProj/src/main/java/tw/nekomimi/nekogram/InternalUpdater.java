@@ -23,7 +23,7 @@ public class InternalUpdater {
     static final int MAX_READ_COUNT = 20;
     static final long CHANNEL_METADATA_ID = 1623323509;
     static final String CHANNEL_METADATA_NAME = "kilogram_metadata";
-    static final long CHANNEL_APKS_ID = 1766831998;
+    static final long CHANNEL_APKS_ID = -1766831998;
     static final String CHANNEL_APKS_NAME = "kilogram_messenger";
 
     static void retrieveUpdateMetadata(retrieveUpdateMetadataCallback callback) {

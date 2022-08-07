@@ -33,7 +33,6 @@ public class NekoXConfig {
     //  public static String FAQ_URL = "https://telegra.ph/NekoX-FAQ-03-31";
     public static String FAQ_URL = "https://github.com/lasthinker/kilogram#faq";
     public static long[] officialChats = {
-            5453079290, // Kilogram Bot
             1783812205, // Kilogram Group
             1623323509, // Kilogram Metadata
             1766831998, // Kilogram Messenger

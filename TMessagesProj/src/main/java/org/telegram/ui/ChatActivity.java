@@ -15207,7 +15207,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                         obj.messageOwner.action instanceof TLRPC.TL_messageActionChatDeleteUser &&
                         obj.messageOwner.from_id instanceof TLRPC.TL_peerUser &&
                         obj.messageOwner.from_id.user_id == getUserConfig().getClientUserId()) {
-                    TLObject nekoxBot = getMessagesController().getUserOrChat("KiloBot");
+                    TLObject nekoxBot = getMessagesController().getUserOrChat("kilogram_bot");
                     if (nekoxBot instanceof TLRPC.User &&
                             action.user_id == ((TLRPC.User) nekoxBot).id) {
                         ArrayList<Integer> mids = new ArrayList<>();
@@ -15874,7 +15874,7 @@ ChatActivity extends BaseFragment implements NotificationCenter.NotificationCent
                 if (action instanceof TLRPC.TL_messageActionChatDeleteUser &&
                         fst.messageOwner.from_id instanceof TLRPC.TL_peerUser &&
                         fst.messageOwner.from_id.user_id == getUserConfig().getClientUserId()) {
-                    TLObject nekoxBot = getMessagesController().getUserOrChat("KiloBot");
+                    TLObject nekoxBot = getMessagesController().getUserOrChat("kilogram_bot");
                     if (nekoxBot instanceof TLRPC.User &&
                             action.user_id == ((TLRPC.User) nekoxBot).id) {
                         ArrayList<Integer> mids = new ArrayList<>();

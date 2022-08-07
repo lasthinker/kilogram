@@ -33,19 +33,13 @@ public class NekoXConfig {
     //  public static String FAQ_URL = "https://telegra.ph/NekoX-FAQ-03-31";
     public static String FAQ_URL = "https://github.com/lasthinker/kilogram#faq";
     public static long[] officialChats = {
-//            1305127566, // NekoX Updates
-//            1151172683, // NekoX Chat
-//            1299578049, // NekoX Chat Channel
-//            1137038259, // NekoX APKs
+            5453079290, // Kilogram Bot
+            1783812205, // Kilogram Group
             1623323509, // Kilogram Metadata
             1766831998, // Kilogram Messenger
     };
 
     public static long[] developers = {
-//            896711046, // nekohasekai
-//            380570774, // Haruhi
-//            784901712, // NextAlone
-//            457896977, // Queally
             221964002, // Hiranika
             5153785715L //Lasthinker
     };

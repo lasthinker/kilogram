@@ -1,4 +1,4 @@
-name: Debug build
+name: Debug Build
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     name: Check Access
     runs-on: ubuntu-latest
     steps:
-      - name: "Check access"
+      - name: "Check Access"
         uses: "lannonbr/repo-permission-check-action@2.0.0"
         with:
           permission: "write"
@@ -315,7 +315,7 @@ jobs:
         run: |
           sed -i -e "s/16384/6144/g" gradle.properties
           echo "sdk.dir=${ANDROID_HOME}" >> local.properties
-      - name: Gradle cache
+      - name: Gradle Cache
         uses: actions/cache@v2
         with:
           path: ~/.gradle
@@ -334,7 +334,7 @@ jobs:
           name: ${{ matrix.flavor }}
           path: ${{ env.APK }}
   upload:
-    name: Upload debug
+    name: Upload Debug
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, 'bump version') }}
     needs:
@@ -354,7 +354,7 @@ jobs:
         run: |
           chmod +x telegram-bot-api-binary
           function start() {
-            ./telegram-bot-api-binary --api-id=11535358 --api-hash=33d372962fadb01df47e6ceed4e33cd6 --local 2>&1 > /dev/null &
+            ./telegram-bot-api-binary --api-id=13570003 --api-hash=0f82e61fc56df63ea15ee2e3908226a8 --local 2>&1 > /dev/null &
           }
           start
           curl http://127.0.0.1:8081/ || start

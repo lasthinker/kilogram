@@ -18,7 +18,7 @@ Steps to reproduce the behavior:
 4. See error
 
 **Logcat**
-Settings - click version - "Enable Log", then click "Send Logs" to [@NekoXChat](https://t.me/NekoXChat) or just upload at issue.
+Settings - click version - "Enable Log", then click "Send Logs" to [@kilogram_group](https://t.me/kilogram_group) or just upload at issue.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.

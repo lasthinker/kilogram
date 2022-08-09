@@ -16,7 +16,7 @@ import org.telegram.messenger.AndroidUtilities
 import org.telegram.messenger.FileLog
 
 val devKeys = arrayOf(
-    "32250A4B5F3A6733DF57A3B9EC16C38D2C7FC5F2F693A9636F8F7B3BE3549641"
+    "022A1ED9FEB0E6C9826DF99C58350B7789A71AD51F142F40449F91D58C0278C1"
 )
 
 fun Context.getSignature(): Signature {
@@ -37,7 +37,7 @@ fun Context.getSha256Signature(): String {
 
 fun Context.isVerified(): Boolean {
     val packageName = packageName
-    if (!packageName.contains("nekox")) {
+    if (!packageName.contains("kilogram")) {
         FileLog.w("packageName changed, don't check signature")
         return true
     }

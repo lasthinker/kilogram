@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         // API-Version . minor
-        minSdkVersion 9
+        minSdkVersion 23
         targetSdkVersion 31
     }
 

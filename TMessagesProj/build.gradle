@@ -78,7 +78,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         //noinspection ExpiredTargetSdkVersion,OldTargetApi
         targetSdkVersion 30
 
@@ -103,7 +103,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_STL=c++_static", "-DANDROID_PLATFORM=android-21"
+                arguments "-DANDROID_STL=c++_static", "-DANDROID_PLATFORM=android-23"
             }
         }
     }

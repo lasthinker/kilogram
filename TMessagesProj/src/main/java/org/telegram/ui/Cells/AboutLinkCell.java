@@ -62,7 +62,7 @@ import org.telegram.ui.Components.URLSpanNoUnderline;
 import java.util.concurrent.atomic.AtomicReference;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
+import net.kilogram.messenger.ui.BottomBuilder;
 
 public class AboutLinkCell extends FrameLayout {
 

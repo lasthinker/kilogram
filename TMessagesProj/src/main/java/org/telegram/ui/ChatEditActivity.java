@@ -76,7 +76,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class ChatEditActivity extends BaseFragment implements ImageUpdater.ImageUpdaterDelegate, NotificationCenter.NotificationCenterDelegate {
 

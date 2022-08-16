@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.cc
+package net.kilogram.messenger.cc
 
 import org.junit.Test
 import org.junit.runner.RunWith

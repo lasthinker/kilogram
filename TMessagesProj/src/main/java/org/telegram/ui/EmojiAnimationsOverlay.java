@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class EmojiAnimationsOverlay implements NotificationCenter.NotificationCenterDelegate {
 

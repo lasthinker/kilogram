@@ -96,8 +96,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 /**
  * A flexible view for providing a limited window into a large data set.

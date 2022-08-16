@@ -110,14 +110,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.ui.PinnedStickerHelper;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.FileUtil;
-import tw.nekomimi.nekogram.utils.ShareUtil;
-import tw.nekomimi.nekogram.utils.StickersUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.ui.PinnedStickerHelper;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.FileUtil;
+import net.kilogram.messenger.utils.ShareUtil;
+import net.kilogram.messenger.utils.StickersUtil;
+import net.kilogram.messenger.utils.UIUtil;
 
 public class StickersActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

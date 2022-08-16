@@ -86,7 +86,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class FragmentContextView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, VoIPService.StateListener {
     public final static int STYLE_NOT_SET = -1,

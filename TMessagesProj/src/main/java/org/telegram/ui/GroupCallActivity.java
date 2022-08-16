@@ -158,7 +158,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class GroupCallActivity extends BottomSheet implements NotificationCenter.NotificationCenterDelegate, VoIPService.StateListener {
 

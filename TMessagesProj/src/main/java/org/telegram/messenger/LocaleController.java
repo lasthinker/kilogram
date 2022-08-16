@@ -48,11 +48,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.parts.LocFiltersKt;
-import tw.nekomimi.nekogram.shamsicalendar.PersianDate;
-import tw.nekomimi.nekogram.utils.FileUtil;
-import tw.nekomimi.nekogram.utils.GsonUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.parts.LocFiltersKt;
+import net.kilogram.messenger.shamsicalendar.PersianDate;
+import net.kilogram.messenger.utils.FileUtil;
+import net.kilogram.messenger.utils.GsonUtil;
 
 public class LocaleController {
 

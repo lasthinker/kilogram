@@ -119,8 +119,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.ui.PinnedStickerHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.ui.PinnedStickerHelper;
 
 public class EmojiView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate {
 

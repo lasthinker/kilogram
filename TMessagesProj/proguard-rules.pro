@@ -63,11 +63,11 @@
     java.lang.Object readResolve();
 }
 
--keep class tw.nekomimi.nekogram.InternalUpdater$ReleaseMetadata { *; }
--keep class tw.nekomimi.nekogram.InternalUpdater$ApkMetadata { *; }
--keep class tw.nekomimi.nekogram.InternalUpdater$GithubApiContents { *; }
--keep class tw.nekomimi.nekogram.InternalUpdater$NekoXReleaseNote { *; }
--keep class tw.nekomimi.nekogram.InternalUpdater$NekoXAPK { *; }
+-keep class net.kilogram.messenger.InternalUpdater$ReleaseMetadata { *; }
+-keep class net.kilogram.messenger.InternalUpdater$ApkMetadata { *; }
+-keep class net.kilogram.messenger.InternalUpdater$GithubApiContents { *; }
+-keep class net.kilogram.messenger.InternalUpdater$NekoXReleaseNote { *; }
+-keep class net.kilogram.messenger.InternalUpdater$NekoXAPK { *; }
 
 ## https://developers.google.com/ml-kit/known-issues#android_issues
 #-keep class com.google.mlkit.nl.languageid.internal.LanguageIdentificationJni { *; }

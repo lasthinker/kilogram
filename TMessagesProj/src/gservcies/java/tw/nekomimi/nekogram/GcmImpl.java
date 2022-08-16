@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram;
+package net.kilogram.messenger;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,7 +31,7 @@ import org.telegram.messenger.Utilities;
 import org.telegram.tgnet.ConnectionsManager;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.utils.UIUtil;
 
 @Keep
 public class GcmImpl implements ExternalGcm.Interface {

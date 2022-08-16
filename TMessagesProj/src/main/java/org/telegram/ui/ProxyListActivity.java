@@ -97,21 +97,21 @@ import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
 import okhttp3.HttpUrl;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.proxy.ShadowsocksRSettingsActivity;
-import tw.nekomimi.nekogram.proxy.ShadowsocksSettingsActivity;
-import tw.nekomimi.nekogram.proxy.SubSettingsActivity;
-import tw.nekomimi.nekogram.proxy.TrojanSettingsActivity;
-import tw.nekomimi.nekogram.proxy.VmessSettingsActivity;
-import tw.nekomimi.nekogram.proxy.WsSettingsActivity;
-import tw.nekomimi.nekogram.parts.ProxyChecksKt;
-import tw.nekomimi.nekogram.proxy.SubInfo;
-import tw.nekomimi.nekogram.proxy.SubManager;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.FileUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.proxy.ShadowsocksRSettingsActivity;
+import net.kilogram.messenger.proxy.ShadowsocksSettingsActivity;
+import net.kilogram.messenger.proxy.SubSettingsActivity;
+import net.kilogram.messenger.proxy.TrojanSettingsActivity;
+import net.kilogram.messenger.proxy.VmessSettingsActivity;
+import net.kilogram.messenger.proxy.WsSettingsActivity;
+import net.kilogram.messenger.parts.ProxyChecksKt;
+import net.kilogram.messenger.proxy.SubInfo;
+import net.kilogram.messenger.proxy.SubManager;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.FileUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.UIUtil;
+import net.kilogram.messenger.NekoConfig;
 
 public class ProxyListActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

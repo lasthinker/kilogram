@@ -81,7 +81,7 @@ import org.telegram.ui.Components.TypingDotsDrawable;
 import java.io.File;
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class PopupNotificationActivity extends Activity implements NotificationCenter.NotificationCenterDelegate {
 

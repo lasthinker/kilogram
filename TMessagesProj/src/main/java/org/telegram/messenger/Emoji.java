@@ -45,9 +45,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 
-import tw.nekomimi.nekogram.EmojiProvider;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.EmojiProvider;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class Emoji {
 

@@ -13,7 +13,7 @@
         </intent>
     </queries>
 
-    <uses-sdk tools:overrideLibrary="io.nekohasekai.ss_rust,io.nekohasekai.ssr_libev" />
+    <uses-sdk tools:overrideLibrary="net.kilogram.ss_rust,net.kilogram.ssr_libev" />
 
     <supports-screens android:anyDensity="true"
                       android:largeScreens="true"
@@ -479,7 +479,7 @@
             </intent-filter>
         </service>
 <!--        <service-->
-<!--            android:name="tw.nekomimi.nekogram.NekoXPushService"-->
+<!--            android:name="net.kilogram.messenger.NekoXPushService"-->
 <!--            android:enabled="true"-->
 <!--            android:label="@string/NekoXPushService"-->
 <!--            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">-->
@@ -596,7 +596,7 @@
 <!--            android:permission="android.permission.BIND_REMOTEVIEWS"-->
 <!--            android:exported="false" />-->
 
-        <receiver android:name="tw.nekomimi.nekogram.SaveToDownloadReceiver" android:exported="false">
+        <receiver android:name="net.kilogram.messenger.SaveToDownloadReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="${applicationId}.CANCEL_SAVE_TO_DOWNLOAD" />
             </intent-filter>

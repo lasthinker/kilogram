@@ -80,12 +80,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 import cn.hutool.core.thread.ThreadUtil;
-import tw.nekomimi.nekogram.ExternalGcm;
-import tw.nekomimi.nekogram.ui.InternalFilters;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.ExternalGcm;
+import net.kilogram.messenger.ui.InternalFilters;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.UIUtil;
 import net.kilogram.messenger.KiloConfig;
 
 public class MessagesController extends BaseController implements NotificationCenter.NotificationCenterDelegate {

@@ -44,8 +44,8 @@ import org.telegram.ui.Components.MediaActionDrawable;
 import org.telegram.ui.Components.RadialProgress2;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
 
 public class AvatarPreviewer {
 

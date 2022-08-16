@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import cn.hutool.core.util.StrUtil;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class DownloadController extends BaseController implements NotificationCenter.NotificationCenterDelegate {
 

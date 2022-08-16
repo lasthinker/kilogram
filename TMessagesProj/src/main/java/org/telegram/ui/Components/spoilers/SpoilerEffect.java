@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicReference;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class SpoilerEffect extends Drawable {
     public final static int MAX_PARTICLES_PER_ENTITY = measureMaxParticlesCount();

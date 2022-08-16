@@ -64,7 +64,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class NewContactActivity extends BaseFragment implements AdapterView.OnItemSelectedListener {
 

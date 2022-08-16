@@ -137,8 +137,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.helpers.MonetHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helpers.MonetHelper;
 
 public class Theme {
 

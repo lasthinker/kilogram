@@ -62,7 +62,7 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class VoIPHelper {
 

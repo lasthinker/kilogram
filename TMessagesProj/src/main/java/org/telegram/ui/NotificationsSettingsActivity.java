@@ -66,7 +66,7 @@ import org.telegram.ui.Components.RecyclerListView;
 import java.util.ArrayList;
 import java.util.Map;
 
-import tw.nekomimi.nekogram.utils.AlertUtil;
+import net.kilogram.messenger.utils.AlertUtil;
 
 public class NotificationsSettingsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

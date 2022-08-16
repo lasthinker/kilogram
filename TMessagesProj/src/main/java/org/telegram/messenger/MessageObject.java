@@ -82,8 +82,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.hutool.core.util.StrUtil;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
 
 public class MessageObject {
 
@@ -3229,7 +3229,7 @@ public class MessageObject {
                 } else if (messageOwner.media instanceof TLRPC.TL_messageMediaInvoice) {
                     messageText = messageOwner.media.description;
                 } else if (messageOwner.media instanceof TLRPC.TL_messageMediaUnsupported) {
-                    messageText = LocaleController.getString("UnsupportedMedia", R.string.UnsupportedMedia).replace("https://telegram.org/update", "https://t.me/kilogram_channel");
+                    messageText = LocaleController.getString("UnsupportedMedia", R.string.UnsupportedMedia).replace("https://telegram.org/update", "https://t.me/kilogram_messenger");
                 } else if (messageOwner.media instanceof TLRPC.TL_messageMediaDocument) {
                     if (isSticker() || isAnimatedStickerDocument(getDocument(), true)) {
                         String sch = getStickerChar();

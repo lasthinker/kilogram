@@ -72,8 +72,8 @@ import org.telegram.ui.Components.RecyclerListView;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.ui.MessageHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.ui.MessageHelper;
 
 public class ContentPreviewViewer {
 

@@ -41,7 +41,7 @@ import org.telegram.ui.BlurSettingsBottomSheet;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class SizeNotifierFrameLayout extends FrameLayout {
 

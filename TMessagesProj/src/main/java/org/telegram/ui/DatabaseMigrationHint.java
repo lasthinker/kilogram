@@ -20,8 +20,8 @@ import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RLottieImageView;
 
-import tw.nekomimi.nekogram.utils.EnvUtil;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.utils.EnvUtil;
+import net.kilogram.messenger.NekoConfig;
 
 public class DatabaseMigrationHint extends FrameLayout {
 

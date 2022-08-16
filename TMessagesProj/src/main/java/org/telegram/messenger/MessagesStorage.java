@@ -51,8 +51,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.transtale.TranslateDb;
 
 public class MessagesStorage extends BaseController {
 

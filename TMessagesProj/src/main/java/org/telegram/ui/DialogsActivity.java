@@ -189,15 +189,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.InternalUpdater;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.utils.PrivacyUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
-import tw.nekomimi.nekogram.utils.UpdateUtil;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.InternalUpdater;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.utils.PrivacyUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.UIUtil;
+import net.kilogram.messenger.utils.UpdateUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
 import net.kilogram.messenger.KiloConfig;
 
 public class DialogsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {

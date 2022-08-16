@@ -78,8 +78,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 import net.kilogram.messenger.KiloConfig;
 

@@ -14,7 +14,7 @@ import android.content.pm.ApplicationInfo;
 
 import java.io.File;
 
-import tw.nekomimi.nekogram.utils.FileUtil;
+import net.kilogram.messenger.utils.FileUtil;
 
 public class NativeLoader {
 

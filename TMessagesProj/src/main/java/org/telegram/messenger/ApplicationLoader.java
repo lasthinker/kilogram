@@ -48,10 +48,10 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-import tw.nekomimi.nekogram.ExternalGcm;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.parts.SignturesKt;
-import tw.nekomimi.nekogram.utils.FileUtil;
+import net.kilogram.messenger.ExternalGcm;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.parts.SignturesKt;
+import net.kilogram.messenger.utils.FileUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
 

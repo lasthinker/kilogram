@@ -61,9 +61,9 @@ import org.telegram.ui.ActionBar.Theme;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.folder.FolderIconHelper;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.folder.FolderIconHelper;
 
 public class FilterTabsView extends FrameLayout {
 

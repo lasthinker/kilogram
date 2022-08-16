@@ -105,8 +105,8 @@ import java.util.HashMap;
 
 import androidx.core.graphics.ColorUtils;
 
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class ChatAttachAlertPhotoLayout extends ChatAttachAlert.AttachAlertLayout implements NotificationCenter.NotificationCenterDelegate {
 

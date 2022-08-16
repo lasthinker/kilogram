@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cn.hutool.core.util.ArrayUtil;
-import tw.nekomimi.nekogram.NekoXConfig;
+import net.kilogram.messenger.NekoXConfig;
 
 @SuppressWarnings("unchecked")
 public class TLRPC {

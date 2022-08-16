@@ -63,11 +63,11 @@ import org.telegram.ui.RestrictedLanguagesSelectActivity;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.transtale.Translator;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.transtale.Translator;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
 
 import static com.google.zxing.common.detector.MathUtils.distance;
 import static org.telegram.ui.ActionBar.FloatingToolbar.STYLE_THEME;

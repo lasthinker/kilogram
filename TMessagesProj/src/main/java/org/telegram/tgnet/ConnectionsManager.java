@@ -49,10 +49,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.hutool.core.util.StrUtil;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.parts.ProxySwitcher;
-import tw.nekomimi.nekogram.utils.DnsFactory;
-import tw.nekomimi.nekogram.ErrorDatabase;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.parts.ProxySwitcher;
+import net.kilogram.messenger.utils.DnsFactory;
+import net.kilogram.messenger.ErrorDatabase;
 
 import net.kilogram.messenger.KiloConfig;
 
@@ -421,6 +421,8 @@ SharedPreferences mainPreferences;
         native_init(currentAccount, version, layer, apiId, deviceModel, systemVersion, appVersion, langCode, systemLangCode, configPath, logPath, regId, cFingerprint, installer, packageId, timezoneOffset, userId, enablePushConnection, ApplicationLoader.isNetworkOnline(), ApplicationLoader.getCurrentNetworkType());
 
         Utilities.stageQueue.postRunnable(() -> {
+
+            SharedConfig.loadProxyList();
 
             if (SharedConfig.proxyEnabled && SharedConfig.currentProxy != null) {
                 if (SharedConfig.currentProxy instanceof SharedConfig.ExternalSocks5Proxy) {

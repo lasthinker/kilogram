@@ -52,9 +52,9 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.utils.EnvUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.utils.EnvUtil;
 
 public class DataSettingsActivity extends BaseFragment {
 

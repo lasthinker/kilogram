@@ -48,7 +48,7 @@ import org.telegram.ui.Components.SizeNotifierFrameLayout;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoXConfig;
+import net.kilogram.messenger.NekoXConfig;
 
 public class ExternalActionActivity extends Activity implements ActionBarLayout.ActionBarLayoutDelegate {
 

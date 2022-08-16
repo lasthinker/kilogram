@@ -160,12 +160,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
-import tw.nekomimi.nekogram.DataCenter;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.ui.EditTextAutoFill;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
+import net.kilogram.messenger.DataCenter;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.ui.EditTextAutoFill;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
 
 @SuppressLint("HardwareIds")
 public class LoginActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {

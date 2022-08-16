@@ -90,8 +90,8 @@ import org.telegram.ui.Components.spoilers.SpoilersTextView;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.ui.EditTextAutoFill;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.ui.EditTextAutoFill;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class TwoStepVerificationSetupActivity extends BaseFragment {
 

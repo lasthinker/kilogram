@@ -57,8 +57,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
-import tw.nekomimi.nekogram.utils.ProxyUtil;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class ChatEditTypeActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

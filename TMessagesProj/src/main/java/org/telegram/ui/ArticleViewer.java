@@ -178,12 +178,12 @@ import java.util.Locale;
 
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.parts.ArticleTransKt;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.parts.ArticleTransKt;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
 
 public class ArticleViewer implements NotificationCenter.NotificationCenterDelegate {
 

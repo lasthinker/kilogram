@@ -60,8 +60,8 @@ import org.telegram.ui.Components.LayoutHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class ActionBarLayout extends FrameLayout {
 

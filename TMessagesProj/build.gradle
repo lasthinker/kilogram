@@ -17,9 +17,9 @@ configurations {
     compile.exclude module: "support-v4"
 }
 
-def keystorePwd = "debugging"
-def alias = "debugging"
-def pwd = "debugging"
+def keystorePwd = null
+def alias = null
+def pwd = null
 def disableCMakeRelWithDebInfo = System.getenv("COMPILE_NATIVE") == null
 
 Properties properties

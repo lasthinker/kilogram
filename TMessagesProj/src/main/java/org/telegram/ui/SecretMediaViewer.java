@@ -72,7 +72,7 @@ import org.telegram.ui.Components.VideoPlayer;
 import java.io.File;
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoXConfig;
+import net.kilogram.messenger.NekoXConfig;
 
 public class SecretMediaViewer implements NotificationCenter.NotificationCenterDelegate, GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 

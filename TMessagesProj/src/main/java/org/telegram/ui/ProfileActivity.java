@@ -199,21 +199,21 @@ import cn.hutool.core.util.RuntimeUtil;
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
 import libv2ray.Libv2ray;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.InternalUpdater;
-import tw.nekomimi.nekogram.DatacenterActivity;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.settings.NekoXSettingActivity;
-import tw.nekomimi.nekogram.parts.DialogTransKt;
-import tw.nekomimi.nekogram.settings.NekoSettingsActivity;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.EnvUtil;
-import tw.nekomimi.nekogram.utils.FileUtil;
-import tw.nekomimi.nekogram.utils.LangsKt;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
-import tw.nekomimi.nekogram.utils.ShareUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.InternalUpdater;
+import net.kilogram.messenger.DatacenterActivity;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.settings.NekoXSettingActivity;
+import net.kilogram.messenger.parts.DialogTransKt;
+import net.kilogram.messenger.settings.NekoSettingsActivity;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.EnvUtil;
+import net.kilogram.messenger.utils.FileUtil;
+import net.kilogram.messenger.utils.LangsKt;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.ShareUtil;
+import net.kilogram.messenger.utils.UIUtil;
 import net.kilogram.messenger.helper.MessageHelper;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate, SharedMediaLayout.Delegate {
@@ -3148,7 +3148,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 try {
                     if (!BuildVars.isMini) {
                         message += "\n" + Libv2ray.checkVersionX()
-                                .replace("Lib", "AndroidLibV2rayLite")
+                                .replace("Lib", "android-lib-v2ray-lite")
                                 .replace("Core", "v2ray-core");
                     }
                 } catch (Exception ignored) {

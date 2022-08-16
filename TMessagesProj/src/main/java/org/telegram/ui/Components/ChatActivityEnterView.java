@@ -171,16 +171,16 @@ import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
 import kotlin.text.StringsKt;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.cc.CCConverter;
-import tw.nekomimi.nekogram.cc.CCTarget;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.transtale.Translator;
-import tw.nekomimi.nekogram.transtale.TranslatorKt;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.PGPUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.cc.CCConverter;
+import net.kilogram.messenger.cc.CCTarget;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.transtale.Translator;
+import net.kilogram.messenger.transtale.TranslatorKt;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.PGPUtil;
+import net.kilogram.messenger.utils.UIUtil;
 
 public class ChatActivityEnterView extends BlurredFrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
 

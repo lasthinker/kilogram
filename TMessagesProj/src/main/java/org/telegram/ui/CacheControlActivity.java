@@ -78,11 +78,11 @@ import java.util.ArrayList;
 
 import cn.hutool.core.thread.ThreadUtil;
 import kotlin.Unit;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.utils.EnvUtil;
-import tw.nekomimi.nekogram.utils.FileUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.utils.EnvUtil;
+import net.kilogram.messenger.utils.FileUtil;
+import net.kilogram.messenger.utils.UIUtil;
 
 public class CacheControlActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

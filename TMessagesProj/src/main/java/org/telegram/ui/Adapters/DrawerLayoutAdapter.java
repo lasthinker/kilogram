@@ -46,8 +46,8 @@ import java.util.Collections;
 
 import cn.hutool.core.util.StrUtil;
 import kotlin.jvm.functions.Function0;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
 
 public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter implements NotificationCenter.NotificationCenterDelegate {
 

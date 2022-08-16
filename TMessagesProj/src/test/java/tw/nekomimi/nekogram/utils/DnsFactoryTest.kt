@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.utils
+package net.kilogram.messenger.utils
 
 import junit.framework.TestCase
 import org.junit.Test

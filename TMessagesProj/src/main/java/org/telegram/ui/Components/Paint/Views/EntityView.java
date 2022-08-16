@@ -15,7 +15,7 @@ import org.telegram.ui.Components.Rect;
 
 import java.util.UUID;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class EntityView extends FrameLayout {
 

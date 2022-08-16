@@ -40,7 +40,7 @@ import org.telegram.ui.Components.CubicBezierInterpolator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public abstract class BaseChartView<T extends ChartData, L extends LineViewData> extends View implements ChartPickerDelegate.Listener {
 

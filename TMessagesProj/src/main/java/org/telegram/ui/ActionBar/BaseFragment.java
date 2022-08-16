@@ -54,9 +54,9 @@ import org.telegram.ui.Components.LayoutHelper;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
-import tw.nekomimi.nekogram.ui.MessageHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.utils.VibrateUtil;
+import net.kilogram.messenger.ui.MessageHelper;
 
 public abstract class BaseFragment {
 

@@ -100,12 +100,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import cn.hutool.core.collection.CollectionUtil;
 import kotlin.Unit;
-import tw.nekomimi.nekogram.utils.EnvUtil;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.transtale.Translator;
-import tw.nekomimi.nekogram.transtale.TranslatorKt;
-import tw.nekomimi.nekogram.utils.AlertUtil;
+import net.kilogram.messenger.utils.EnvUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.transtale.Translator;
+import net.kilogram.messenger.transtale.TranslatorKt;
+import net.kilogram.messenger.utils.AlertUtil;
 
 public class DocumentSelectActivity extends BaseFragment {
 

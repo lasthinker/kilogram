@@ -180,17 +180,17 @@ import java.util.regex.Pattern;
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
 import kotlin.text.StringsKt;
-import tw.nekomimi.nekogram.InternalUpdater;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.ExternalGcm;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.settings.NekoSettingsActivity;
-import tw.nekomimi.nekogram.proxy.SubInfo;
-import tw.nekomimi.nekogram.proxy.SubManager;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.MonetHelper;
-import tw.nekomimi.nekogram.utils.UIUtil;
+import net.kilogram.messenger.InternalUpdater;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.ExternalGcm;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.settings.NekoSettingsActivity;
+import net.kilogram.messenger.proxy.SubInfo;
+import net.kilogram.messenger.proxy.SubManager;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.MonetHelper;
+import net.kilogram.messenger.utils.UIUtil;
 
 public class LaunchActivity extends BasePermissionsActivity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
     public static boolean isResumed;

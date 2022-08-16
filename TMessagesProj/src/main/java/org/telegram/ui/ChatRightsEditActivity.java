@@ -80,7 +80,7 @@ import org.telegram.ui.Components.RecyclerListView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import tw.nekomimi.nekogram.utils.VibrateUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class ChatRightsEditActivity extends BaseFragment {
 

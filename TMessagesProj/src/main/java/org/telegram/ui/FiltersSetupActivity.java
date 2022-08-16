@@ -53,9 +53,9 @@ import org.telegram.ui.Components.RecyclerListView;
 
 import java.util.ArrayList;
 
-import tw.nekomimi.nekogram.folder.FolderIconHelper;
+import net.kilogram.messenger.folder.FolderIconHelper;
 
-import tw.nekomimi.nekogram.folder.FolderIconHelper;
+import net.kilogram.messenger.folder.FolderIconHelper;
 
 public class FiltersSetupActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

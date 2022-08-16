@@ -37,7 +37,7 @@ import org.telegram.ui.ActionBar.Theme;
 
 import java.util.Locale;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class ProximitySheet extends FrameLayout {
 

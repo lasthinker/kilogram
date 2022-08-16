@@ -6,7 +6,7 @@ import android.util.Base64
 import org.telegram.messenger.ApplicationLoader
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
-import tw.nekomimi.nekogram.config.ConfigItem
+import net.kilogram.messenger.config.ConfigItem
 import java.io.ByteArrayInputStream
 import java.io.ObjectInputStream
 

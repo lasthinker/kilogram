@@ -19,7 +19,7 @@ import org.telegram.tgnet.TLRPC;
 
 import java.util.Arrays;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class UserConfig extends BaseController {
 

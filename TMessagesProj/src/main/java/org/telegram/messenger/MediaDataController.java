@@ -86,8 +86,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.ui.PinnedStickerHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.ui.PinnedStickerHelper;
 
 @SuppressWarnings("unchecked")
 public class MediaDataController extends BaseController {

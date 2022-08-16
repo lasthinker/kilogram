@@ -82,11 +82,11 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.transtale.Translator;
-import tw.nekomimi.nekogram.transtale.TranslatorKt;
-import tw.nekomimi.nekogram.utils.AlertUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.transtale.Translator;
+import net.kilogram.messenger.transtale.TranslatorKt;
+import net.kilogram.messenger.utils.AlertUtil;
 
 public class PhotoAlbumPickerActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 

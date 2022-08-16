@@ -39,7 +39,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.helper.MessageHelper;
 
 import androidx.collection.LongSparseArray;

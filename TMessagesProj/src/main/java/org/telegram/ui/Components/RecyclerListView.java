@@ -61,7 +61,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class RecyclerListView extends RecyclerView {
     public final static int SECTIONS_TYPE_SIMPLE = 0,

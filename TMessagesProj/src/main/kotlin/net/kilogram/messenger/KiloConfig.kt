@@ -192,7 +192,7 @@ object KiloConfig {
     val showPremiumStarInChat = addConfig(
         "ShowPremiumStarInChat",
         ConfigItem.configTypeBool,
-        true
+        false
     )
     val showPremiumAvatarAnimation = addConfig(
         "ShowPremiumAvatarAnimation",
@@ -246,6 +246,11 @@ object KiloConfig {
     )
     val useExperimentalFileLoader = addConfig(
         "UseExperimentalFileLoader",
+        ConfigItem.configTypeBool,
+        false
+    )
+    val showPhotoOpenInExternalApp = addConfig(
+        "ShowPhotoOpenInExternalApp",
         ConfigItem.configTypeBool,
         false
     )

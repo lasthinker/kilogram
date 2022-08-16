@@ -254,6 +254,11 @@ object KiloConfig {
         ConfigItem.configTypeBool,
         false
     )
+    val quickToggleAnonymous = addConfig(
+        "QuickToggleAnonymous",
+        ConfigItem.configTypeBool,
+        false
+    )
 
     private fun addConfig(
         k: String,

@@ -5970,6 +5970,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     }
                     additionHeight -= AndroidUtilities.dp(17);
                 } else if (messageObject.isAnyKindOfSticker()) {
+
                     drawBackground = false;
                     boolean isWebpSticker = messageObject.type == MessageObject.TYPE_STICKER;
                     TLRPC.Document stickerDocument = messageObject.getDocument();
@@ -5990,6 +5991,10 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     }
                     if ((messageObject.isAnimatedSticker() || messageObject.isVideoSticker()) && photoWidth == 0 && photoHeight == 0) {
                         photoWidth = photoHeight = 512;
+                    }
+                    if (messageObject.isAnimatedAnimatedEmoji()) {
+                        photoWidth = Math.max(512, photoWidth);
+                        photoHeight = Math.max(512, photoHeight);
                     }
                     float maxHeight;
                     int maxWidth;

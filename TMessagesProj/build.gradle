@@ -169,7 +169,7 @@ android {
             debuggable true
             jniDebuggable true
             multiDexEnabled true
-            zipAlignEnabled true;
+            zipAlignEnabled true
             signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
             ndk.debugSymbolLevel = "FULL"
         }

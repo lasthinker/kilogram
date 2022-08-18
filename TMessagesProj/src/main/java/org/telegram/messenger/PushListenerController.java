@@ -7,10 +7,6 @@ import android.util.Base64;
 import androidx.annotation.IntDef;
 import androidx.collection.LongSparseArray;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.telegram.tgnet.ConnectionsManager;
@@ -51,7 +47,7 @@ public class PushListenerController {
             }
             SharedConfig.pushString = token;
             SharedConfig.pushType = pushType;
-            for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
+            for (int a : SharedConfig.activeAccounts) {
                 UserConfig userConfig = UserConfig.getInstance(a);
                 userConfig.registeredForPush = false;
                 userConfig.saveConfig(false);
@@ -189,7 +185,7 @@ public class PushListenerController {
                     }
                     int account = UserConfig.selectedAccount;
                     boolean foundAccount = false;
-                    for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
+                    for (int a : SharedConfig.activeAccounts) {
                         if (UserConfig.getInstance(a).getClientUserId() == accountUserId) {
                             account = a;
                             foundAccount = true;
@@ -1271,7 +1267,7 @@ public class PushListenerController {
     }
 
     private static void onDecryptError() {
-        for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
+        for (int a: SharedConfig.activeAccounts) {
             if (UserConfig.getInstance(a).isClientActivated()) {
                 ConnectionsManager.onInternalPushReceived(a);
                 ConnectionsManager.getInstance(a).resumeNetworkMaybe();
@@ -1288,72 +1284,44 @@ public class PushListenerController {
         int getPushType();
     }
 
-    public final static class GooglePushListenerServiceProvider implements IPushListenerServiceProvider {
-        public final static GooglePushListenerServiceProvider INSTANCE = new GooglePushListenerServiceProvider();
+    private static IPushListenerServiceProvider instance = null;
 
-        private Boolean hasServices;
-
-        private GooglePushListenerServiceProvider() {}
+    private static class DummyPushProvider implements IPushListenerServiceProvider {
+        @Override
+        public boolean hasServices() {
+            return false;
+        }
 
         @Override
         public String getLogTitle() {
-            return "Google Play Services";
+            return "Dummy";
+        }
+
+        @Override
+        public void onRequestPushToken() {
+
         }
 
         @Override
         public int getPushType() {
             return PUSH_TYPE_FIREBASE;
         }
-
-        @Override
-        public void onRequestPushToken() {
-            String currentPushString = SharedConfig.pushString;
-            if (!TextUtils.isEmpty(currentPushString)) {
-                if (BuildVars.DEBUG_PRIVATE_VERSION && BuildVars.LOGS_ENABLED) {
-                    FileLog.d("FCM regId = " + currentPushString);
-                }
-            } else {
-                if (BuildVars.LOGS_ENABLED) {
-                    FileLog.d("FCM Registration not found.");
-                }
-            }
-            Utilities.globalQueue.postRunnable(() -> {
-                try {
-                    SharedConfig.pushStringGetTimeStart = SystemClock.elapsedRealtime();
-                    FirebaseMessaging.getInstance().getToken()
-                            .addOnCompleteListener(task -> {
-                                SharedConfig.pushStringGetTimeEnd = SystemClock.elapsedRealtime();
-                                if (!task.isSuccessful()) {
-                                    if (BuildVars.LOGS_ENABLED) {
-                                        FileLog.d("Failed to get regid");
-                                    }
-                                    SharedConfig.pushStringStatus = "__FIREBASE_FAILED__";
-                                    PushListenerController.sendRegistrationToServer(getPushType(), null);
-                                    return;
-                                }
-                                String token = task.getResult();
-                                if (!TextUtils.isEmpty(token)) {
-                                    PushListenerController.sendRegistrationToServer(getPushType(), token);
-                                }
-                            });
-                } catch (Throwable e) {
-                    FileLog.e(e);
-                }
-            });
-        }
-
-        @Override
-        public boolean hasServices() {
-            if (hasServices == null) {
-                try {
-                    int resultCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(ApplicationLoader.applicationContext);
-                    hasServices = resultCode == ConnectionResult.SUCCESS;
-                } catch (Exception e) {
-                    FileLog.e(e);
-                    hasServices = false;
-                }
-            }
-            return hasServices;
-        }
     }
+
+    public static IPushListenerServiceProvider getProvider() {
+        if (instance != null)
+            return instance;
+        if (BuildConfig.BUILD_TYPE.equals("debug") || BuildConfig.BUILD_TYPE.equals("release")) {
+            try {
+                instance = (IPushListenerServiceProvider) Class.forName("org.telegram.messenger.GooglePushListenerServiceProvider").newInstance();
+            } catch (Exception e) {
+                FileLog.e(e);
+                instance = new DummyPushProvider();
+            }
+        } else {
+            instance = new DummyPushProvider();
+        }
+        return instance;
+    }
+
 }

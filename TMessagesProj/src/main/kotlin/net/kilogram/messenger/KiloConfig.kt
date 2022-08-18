@@ -259,6 +259,11 @@ object KiloConfig {
         ConfigItem.configTypeBool,
         false
     )
+    val onlyShowBuiltInEmoji = addConfig(
+        "OnlyShowBuiltInEmoji",
+        ConfigItem.configTypeBool,
+        false
+    )
 
     private fun addConfig(
         k: String,

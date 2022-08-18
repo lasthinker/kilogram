@@ -42,6 +42,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import net.kilogram.messenger.KiloConfig;
+
 public class EmojiTabsStrip extends ScrollableHorizontalScrollView {
 
     private int recentDrawableId = R.drawable.msg_emoji_recent;
@@ -323,7 +325,7 @@ public class EmojiTabsStrip extends ScrollableHorizontalScrollView {
         }
         first = false;
         ArrayList<EmojiView.EmojiPack> emojiPacks = parent.getEmojipacks();
-        if (emojiPacks == null) {
+        if (emojiPacks == null || KiloConfig.INSTANCE.getOnlyShowBuiltInEmoji().Bool()) {
             return;
         }
         if (emojipackTabs == null) {

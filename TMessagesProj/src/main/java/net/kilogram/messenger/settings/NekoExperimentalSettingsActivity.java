@@ -80,6 +80,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
             (input) -> input.isEmpty() ? (String) KiloConfig.INSTANCE.getCustomChannelLabel().defaultValue : input));
 
     private final AbstractConfigCell smoothKeyboardRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.smoothKeyboard));
+    private final AbstractConfigCell enhancedFileLoaderRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.enhancedFileLoader));
     private final AbstractConfigCell mediaPreviewRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.mediaPreview));
     private final AbstractConfigCell proxyAutoSwitchRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.proxyAutoSwitch));
     private final AbstractConfigCell disableFilteringRow = cellGroup.appendCell(new ConfigCellCustom(CellGroup.ITEM_TYPE_TEXT_CHECK, true));
@@ -95,7 +96,6 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
     private final AbstractConfigCell forceCopyRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getForceCopy()));
     private final AbstractConfigCell audioEnhanceRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getNoiseSuppressAndVoiceEnhance()));
     private final AbstractConfigCell showRPCErrorRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowRPCError()));
-    private final AbstractConfigCell useExperimentalFileLoaderRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getUseExperimentalFileLoader()));
     private final AbstractConfigCell divider1 = cellGroup.appendCell(new ConfigCellDivider());
 
     private UndoView tooltip;
@@ -289,7 +289,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
             } catch (Exception e) {
                 FileLog.e(e);
                 NekoConfig.useCustomEmoji.setConfigBool(false);
-                Toast.makeText(ApplicationLoader.applicationContext, "Failed: " + e, Toast.LENGTH_LONG).show();
+                Toast.makeText(ApplicationLoader.applicationContext, "Failed: " + e.toString(), Toast.LENGTH_LONG).show();
             }
             tooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);
             listAdapter.notifyItemChanged(cellGroup.rows.indexOf(useCustomEmojiRow));
@@ -399,7 +399,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
     //impl ListAdapter
     private class ListAdapter extends RecyclerListView.SelectionAdapter {
 
-        private final Context mContext;
+        private Context mContext;
 
         public ListAdapter(Context context) {
             mContext = context;
@@ -446,7 +446,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
                         TextSettingsCell textCell = (TextSettingsCell) holder.itemView;
                         textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
                         if (position == cellGroup.rows.indexOf(customAudioBitrateRow)) {
-                            String value = NekoConfig.customAudioBitrate.Int() + "kbps";
+                            String value = String.valueOf(NekoConfig.customAudioBitrate.Int()) + "kbps";
                             if (NekoConfig.customAudioBitrate.Int() == 32)
                                 value += " (" + LocaleController.getString("Default", R.string.Default) + ")";
                             textCell.setTextAndValue(LocaleController.getString("customGroupVoipAudioBitrate", R.string.customGroupVoipAudioBitrate), value, false);

@@ -26,7 +26,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipException;
 
-import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class FileLoadOperation {
 
@@ -192,7 +192,7 @@ public class FileLoadOperation {
     }
 
     private void updateParams() {
-        if (MessagesController.getInstance(currentAccount).getfileExperimentalParams || KiloConfig.INSTANCE.getUseExperimentalFileLoader().Bool()) {
+        if (MessagesController.getInstance(currentAccount).getfileExperimentalParams || NekoConfig.enhancedFileLoader.Bool()) {
             downloadChunkSizeBig = 1024 * 512;
             maxDownloadRequests = 8;
             maxDownloadRequestsBig = 8;

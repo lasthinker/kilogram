@@ -5,18 +5,6 @@ Kilogram is a third-party Telegram client based on [NekoX](https://github.com/Ne
 - Releases: <https://t.me/kilogram_messenger>
 - Issues here: <https://github.com/lasthinker/kilogram/issues>
 
-## Additional Feature
-
-1. Nice icon (thanks to MaitungTM)
-2. Combine message
-3. Editable text style 
-4. Forced copy
-5. Invert reply
-6. Quick reply in longClick menu (thanks to @blxueya)
-7. Undo and Redo
-8. Scrollable chat preview (thanks to TeleTux)
-9. Noise suppress and voice enhance (thanks to )
-
 ----
 
 ## API and Protocol Documentation
@@ -93,10 +81,6 @@ Kilogram is forked from Telegram, thus most locales follows the translations of 
 
 Is Kilogram not in your language, or the translation is incorrect or incomplete? Get involved in the translations on our [Weblate](https://hosted.weblate.org/engage/kilogram/).
 
-## Thanks
+## Credits
 
 - [NekoX](https://github.com/NekoX-Dev/NekoX)
-- [Nullgram](https://github.com/qwq233/Nullgram)
-- [TeleTux](https://github.com/TeleTux/TeleTux)
-- [OwlGram](https://github.com/OwlGramDev/OwlGram)
-- [GuGugramX](https://github.com/GuGugramX-Dev/GuGugramX)

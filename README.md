@@ -5,7 +5,7 @@ Kilogram is a third-party Telegram client based on [NekoX](https://github.com/Ne
 - Releases: <https://t.me/kilogram_messenger>
 - Issues here: <https://github.com/lasthinker/kilogram/issues>
 
-## Additional feature over NekoX
+## Additional Feature
 
 1. Nice icon (thanks to MaitungTM)
 2. Combine message
@@ -19,13 +19,13 @@ Kilogram is a third-party Telegram client based on [NekoX](https://github.com/Ne
 
 ----
 
-## API and Protocol documentation
+## API and Protocol Documentation
 
 Telegram API manuals: <https://core.telegram.org/api>
 
 MTproto protocol manuals: <https://core.telegram.org/mtproto>
 
-## Compilation Guide (By NekoX)
+## Compilation Guide
 
 **NOTE: Building on Windows is, unfortunately, not supported.
 Consider using a Linux VM or dual booting.**
@@ -95,10 +95,7 @@ Is Kilogram not in your language, or the translation is incorrect or incomplete?
 
 ## Thanks
 
-- [Nagram](https://github.com/NextAlone/Nagram)
 - [NekoX](https://github.com/NekoX-Dev/NekoX)
-- [Nekogram](https://gitlab.com/Nekogram/Nekogram)
-- [Pigeongram](https://gitlab.com/JasonKhew96/Nekogram)
 - [Nullgram](https://github.com/qwq233/Nullgram)
 - [TeleTux](https://github.com/TeleTux/TeleTux)
 - [OwlGram](https://github.com/OwlGramDev/OwlGram)

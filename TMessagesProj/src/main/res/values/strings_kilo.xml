@@ -36,7 +36,7 @@
     <string name="ShowPremiumStickersAnimation">Show premium stickers Animation</string>
     <string name="ShowPremiumStarInChat">Show Premium Star In Chat</string>
     <string name="ShowPremiumAvatarAnimation">Show Premium Avatar Animation</string>
-    <string name="AlwaysSaveChatOffset">AlwaysSaveChatOffset</string>
+    <string name="AlwaysSaveChatOffset">Always Save Chat Offset</string>
     <string name="AutoReplaceRepeat">Auto Replace Repeat to Repeat As Copy</string>
     <string name="AutoInsertGIFCaption">Auto insert caption before GIF send</string>
     <string name="DefaultMonoLanguage">Custom default code language</string>

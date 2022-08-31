@@ -83,4 +83,18 @@ Is Kilogram not in your language, or the translation is incorrect or incomplete?
 
 ## Credits
 
-- [NekoX](https://github.com/NekoX-Dev/NekoX)
+<ul>
+    <li>Telegram-FOSS: <a href="https://github.com/Telegram-FOSS-Team/Telegram-FOSS/blob/master/LICENSE">GPLv2</a></li>
+    <li>NekoX: <a href="https://github.com/NekoX-Dev/NekoX/blob/master/LICENSE">GPLv3</a></li>
+    <li>v2rayNG: <a href="https://github.com/2dust/v2rayNG/blob/master/LICENSE">GPLv3</a></li>
+    <li>android-lib-v2ray-lite: <a href="https://github.com/lasthinker/android-lib-v2ray-lite/blob/master/LICENSE">LGPLv3</a></li>
+    <li>shadowsocks-android: <a href="https://github.com/shadowsocks/shadowsocks-android/blob/master/LICENSE">GPLv3</a></li>
+    <li>shadowsocksRb-android: <a href="https://github.com/shadowsocksRb/shadowsocksRb-android/blob/master/LICENSE">GPLv3</a></li>
+    <li>HanLP: <a href="https://github.com/hankcs/HanLP/blob/1.x/LICENSE">Apache License 2.0</a></li>
+    <li>OpenCC: <a href="https://github.com/BYVoid/OpenCC/blob/master/LICENSE">Apache License 2.0</a></li>
+    <li>opencc-data: <a href="https://github.com/nk2028/opencc-data">Apache License 2.0</a></li>
+    <li>android-device-list: <a href="https://github.com/pbakondy/android-device-list/blob/master/LICENSE">MIT</a> </li>
+    <li>JetBrains: for allocating free open-source licences for IDEs</li>
+</ul>
+
+[<img src=".github/jetbrains-variant-3.png" width="200"/>](https://jb.gg/OpenSource)

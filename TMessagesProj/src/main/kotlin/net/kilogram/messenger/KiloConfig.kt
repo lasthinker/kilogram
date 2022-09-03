@@ -264,6 +264,11 @@ object KiloConfig {
         ConfigItem.configTypeBool,
         false
     )
+    val ignoreFolderCount = addConfig(
+        "IgnoreFolderCount",
+        ConfigItem.configTypeBool,
+        false
+    )
 
     private fun addConfig(
         k: String,

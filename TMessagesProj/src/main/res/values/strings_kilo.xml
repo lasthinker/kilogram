@@ -55,4 +55,7 @@
     <string name="RealHideTimeForSticker">Real hide time for stickers</string>
     <string name="HideTitle">Hide Title</string>
     <string name="IgnoreFolderCount">Ignore Folder Count</string>
+    <string name="SendWithoutMarkdown">Send without Markdown</string>
+    <string name="SaveWithoutMarkdown">Save without Markdown</string>
+    <string name="SendAsEmoji">Send as Emoji</string>
 </resources>

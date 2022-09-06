@@ -144,7 +144,7 @@ public class NekoGeneralSettingsActivity extends BaseFragment {
     private final AbstractConfigCell disableNotificationBubblesRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.disableNotificationBubbles));
     private final AbstractConfigCell divider_notification = cellGroup.appendCell(new ConfigCellDivider());
 
-    private final AbstractConfigCell header3 = cellGroup.appendCell(new ConfigCellHeader(LocaleController.getString("OpenKayChain")));
+    private final AbstractConfigCell header3 = cellGroup.appendCell(new ConfigCellHeader(LocaleController.getString("OpenKeyChain")));
     private final AbstractConfigCell pgpAppRow = cellGroup.appendCell(new ConfigCellCustom(CellGroup.ITEM_TYPE_TEXT_SETTINGS_CELL, true));
     private final AbstractConfigCell keyRow = cellGroup.appendCell(new ConfigCellTextDetail(NekoConfig.openPGPKeyId, (view, position) -> {
         requestKey(new Intent(OpenPgpApi.ACTION_GET_SIGN_KEY_ID));

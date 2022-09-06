@@ -172,7 +172,7 @@
     <string name="LoginSettings">Настройки входа</string>
     <string name="NekoXFaq">ЧаВО Kilogram (EN)</string>
     <string name="TransSite">Платформа переводов</string>
-    <string name="OpenKayChain">OpenPGP</string>
+    <string name="OpenKeyChain">OpenPGP</string>
     <string name="OpenPGPApp">Провайдер OpenPGP</string>
     <string name="OpenPGPKey">Ключ OpenPGP</string>
     <string name="None">Не выбран</string>

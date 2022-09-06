@@ -171,7 +171,7 @@
     <string name="LoginSettings">Bejelentkezés beállításai</string>
     <string name="NekoXFaq">Kilogram GYIK</string>
     <string name="TransSite">Fordítási platform</string>
-    <string name="OpenKayChain">OpenPGP kliens</string>
+    <string name="OpenKeyChain">OpenPGP kliens</string>
     <string name="OpenPGPApp">OpenPGP Szolgáltató</string>
     <string name="OpenPGPKey">OpenPGP kulcs</string>
     <string name="None">Egyik sem</string>

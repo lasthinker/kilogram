@@ -172,7 +172,7 @@
     <string name="LoginSettings">Giriş Ayarları</string>
     <string name="NekoXFaq">Kilogram ilə bağlı suallar</string>
     <string name="TransSite">Tərcümə Platforması</string>
-    <string name="OpenKayChain">OpenPGP Müştəri</string>
+    <string name="OpenKeyChain">OpenPGP Müştəri</string>
     <string name="OpenPGPApp">OpenPGP Təminatçısı</string>
     <string name="OpenPGPKey">OpenPGP açarı</string>
     <string name="None">Yoxdur</string>

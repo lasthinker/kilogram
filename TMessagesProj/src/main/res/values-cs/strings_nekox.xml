@@ -136,7 +136,7 @@
     <string name="UsePersiancalendar">Použít Perský kalendář</string>
     <string name="Win32ExecutableFiles">Win32 spustitelný soubor</string>
     <string name="FCTitle">O aktualizacích aplikace</string>
-    <string name="OpenKayChain">OpenPGP Klient</string>
+    <string name="OpenKeyChain">OpenPGP Klient</string>
     <string name="VmessAlterId">Alternativní ID</string>
     <string name="DeleteUnavailableServerConfirm">Jste si jisti že chcete **smazat nedostupné servery**\?</string>
     <string name="StorageResetInfo">Všechna data této aplikace budou permanentně smazána (a pokuste se odhlásit nejdříve ze všech účtů).</string>

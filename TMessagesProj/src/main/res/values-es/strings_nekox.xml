@@ -172,7 +172,7 @@
     <string name="LoginSettings">Configuración de inicio de sesión</string>
     <string name="NekoXFaq">Preguntas frecuentes sobre Kilogram</string>
     <string name="TransSite">Traducir plataforma</string>
-    <string name="OpenKayChain">Cliente OpenPGP</string>
+    <string name="OpenKeyChain">Cliente OpenPGP</string>
     <string name="OpenPGPApp">Proveedor OpenPGP</string>
     <string name="OpenPGPKey">Clave OpenPGP</string>
     <string name="None">Ninguna</string>

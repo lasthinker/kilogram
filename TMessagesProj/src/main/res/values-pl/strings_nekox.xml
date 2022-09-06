@@ -172,7 +172,7 @@
     <string name="LoginSettings">Ustawienia logowania</string>
     <string name="NekoXFaq">Często zadawane pytania</string>
     <string name="TransSite">Platforma tłumaczeń</string>
-    <string name="OpenKayChain">Klient OpenPGP</string>
+    <string name="OpenKeyChain">Klient OpenPGP</string>
     <string name="OpenPGPApp">Dostawca OpenPGP</string>
     <string name="OpenPGPKey">Klucz OpenPGP</string>
     <string name="None">Brak</string>

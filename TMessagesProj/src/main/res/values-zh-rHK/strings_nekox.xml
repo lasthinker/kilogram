@@ -158,7 +158,7 @@
     <string name="LoginSettings">登錄設定</string>
     <string name="NekoXFaq">Kilogram 常見問題</string>
     <string name="TransSite">翻譯平台</string>
-    <string name="OpenKayChain">OpenPGP 客戶端</string>
+    <string name="OpenKeyChain">OpenPGP 客戶端</string>
     <string name="OpenPGPApp">OpenPGP 客戶端</string>
     <string name="OpenPGPKey">PGP 密鑰</string>
     <string name="None">無</string>

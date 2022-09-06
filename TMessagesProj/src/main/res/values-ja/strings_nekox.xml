@@ -172,7 +172,7 @@
     <string name="LoginSettings">ログイン設定</string>
     <string name="NekoXFaq">Kilogram FAQ</string>
     <string name="TransSite">プラットフォームを翻訳</string>
-    <string name="OpenKayChain">OpenPGP クライアント</string>
+    <string name="OpenKeyChain">OpenPGP クライアント</string>
     <string name="OpenPGPApp">OpenPGPプロバイダー</string>
     <string name="OpenPGPKey">OpenPGP キー</string>
     <string name="None">なし</string>

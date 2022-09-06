@@ -172,7 +172,7 @@
     <string name="LoginSettings">Pengaturan Login</string>
     <string name="NekoXFaq">FAQ Kilogram</string>
     <string name="TransSite">Platform Penterjemah</string>
-    <string name="OpenKayChain">Klien OpenPGP</string>
+    <string name="OpenKeyChain">Klien OpenPGP</string>
     <string name="OpenPGPApp">Penyedia OpenPGP</string>
     <string name="OpenPGPKey">Kunci OpenPGP</string>
     <string name="None">Kosong</string>

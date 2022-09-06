@@ -172,7 +172,7 @@
     <string name="LoginSettings">Giriş Ayarları</string>
     <string name="NekoXFaq">Kilogram SSS</string>
     <string name="TransSite">Çeviri Platformu</string>
-    <string name="OpenKayChain">OpenPGP İstemcisi</string>
+    <string name="OpenKeyChain">OpenPGP İstemcisi</string>
     <string name="OpenPGPApp">OpenPGP Sağlayıcısı</string>
     <string name="OpenPGPKey">OpenPGP Anahtarı</string>
     <string name="None">Yok</string>

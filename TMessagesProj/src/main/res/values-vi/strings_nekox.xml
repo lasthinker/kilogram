@@ -172,7 +172,7 @@
     <string name="LoginSettings">Cài đặt đăng nhập</string>
     <string name="NekoXFaq">Kilogram FAQ</string>
     <string name="TransSite">Nền tảng Dịch</string>
-    <string name="OpenKayChain">Ứng dụng khách OpenPGP</string>
+    <string name="OpenKeyChain">Ứng dụng khách OpenPGP</string>
     <string name="OpenPGPApp">Nhà cung cấp OpenPGP</string>
     <string name="OpenPGPKey">Khóa OpenPGP</string>
     <string name="None">Không</string>

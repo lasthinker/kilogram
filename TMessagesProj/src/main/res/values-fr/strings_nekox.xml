@@ -157,7 +157,7 @@
     <string name="LoginSettings">Paramètres de connexion</string>
     <string name="NekoXFaq">FAQ Kilogram</string>
     <string name="TransSite">Platforme de Traduction</string>
-    <string name="OpenKayChain">Client OpenPGP</string>
+    <string name="OpenKeyChain">Client OpenPGP</string>
     <string name="OpenPGPApp">Fournisseur OpenPGP</string>
     <string name="OpenPGPKey">Clé OpenPGP</string>
     <string name="None">Aucun</string>

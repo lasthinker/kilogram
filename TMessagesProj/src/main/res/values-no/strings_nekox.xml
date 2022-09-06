@@ -30,7 +30,7 @@
     <string name="None">Ingen</string>
     <string name="OpenPGPKey">OpenPGP-nøkkel</string>
     <string name="OpenPGPApp">OpenPGP-tilbyder</string>
-    <string name="OpenKayChain">OpenPGP-klient</string>
+    <string name="OpenKeyChain">OpenPGP-klient</string>
     <string name="TransSite">Oversettelsesplattform</string>
     <string name="NekoXFaq">Kilogram-O-S-S</string>
     <string name="LoginSettings">Innloggingsinnstillinger</string>

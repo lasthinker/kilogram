@@ -172,7 +172,7 @@
     <string name="LoginSettings">登录设置</string>
     <string name="NekoXFaq">Kilogram 常见问题</string>
     <string name="TransSite">翻译平台</string>
-    <string name="OpenKayChain">OpenPGP 客户端</string>
+    <string name="OpenKeyChain">OpenPGP 客户端</string>
     <string name="OpenPGPApp">OpenPGP 提供应用</string>
     <string name="OpenPGPKey">OpenPGP 密钥</string>
     <string name="None">无</string>

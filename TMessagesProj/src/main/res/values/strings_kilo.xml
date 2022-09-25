@@ -58,4 +58,5 @@
     <string name="SendWithoutMarkdown">Send without Markdown</string>
     <string name="SaveWithoutMarkdown">Save without Markdown</string>
     <string name="SendAsEmoji">Send as Emoji</string>
+    <string name="CustomArtworkApi">Custom Artwork Api</string>
 </resources>

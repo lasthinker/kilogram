@@ -59,4 +59,9 @@
     <string name="SaveWithoutMarkdown">Save without Markdown</string>
     <string name="SendAsEmoji">Send as Emoji</string>
     <string name="CustomArtworkApi">Custom Artwork Api</string>
+    <string name="CustomGreat">Custom Reply Word</string>
+    <string name="CustomGreatHint">Default Great</string>
+    <string name="CustomPoor">Custom Long Click Reply Word</string>
+    <string name="CustomPoorHint">Default Pool</string>
+    <string name="CustomEditedMessage">Custom Edited Message Word</string>
 </resources>

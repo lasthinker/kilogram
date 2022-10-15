@@ -83,6 +83,9 @@ public class NekoChatSettingsActivity extends BaseFragment implements Notificati
     private final AbstractConfigCell hideSendAsChannelRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.hideSendAsChannel));
     private final AbstractConfigCell showSpoilersDirectlyRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.showSpoilersDirectly));
     private final AbstractConfigCell messageMenuRow = cellGroup.appendCell(new ConfigCellSelectBox(LocaleController.getString("MessageMenu"), null, null, this::showMessageMenuAlert));
+    private final AbstractConfigCell customGreatRow = cellGroup.appendCell(new ConfigCellTextInput(null, KiloConfig.INSTANCE.getCustomGreat(), LocaleController.getString(R.string.CustomGreatHint), null,(input) -> input.isEmpty() ? (String) KiloConfig.INSTANCE.getCustomGreat().defaultValue : input));
+    private final AbstractConfigCell customPoorRow = cellGroup.appendCell(new ConfigCellTextInput(null, KiloConfig.INSTANCE.getCustomPoor(), LocaleController.getString(R.string.CustomPoorHint), null,(input) -> input.isEmpty() ? (String) KiloConfig.INSTANCE.getCustomPoor().defaultValue : input));
+    private final AbstractConfigCell customEditedMessageRow = cellGroup.appendCell(new ConfigCellTextInput(null, KiloConfig.INSTANCE.getCustomEditedMessage(), "", null));
     private final AbstractConfigCell showServicesTime = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowServicesTime()));
     private final AbstractConfigCell combineMessageRow = cellGroup.appendCell(new ConfigCellSelectBox(null, KiloConfig.INSTANCE.getCombineMessage(), new String[]{
             LocaleController.getString("combineMessageEnabledWithReply", R.string.CombineMessageEnabledWithReply),

@@ -1770,11 +1770,11 @@ public class MessagesController extends BaseController implements NotificationCe
                         case "login_google_oauth_client_id": {
                             if (value.value instanceof TLRPC.TL_jsonString) {
                                 String str = ((TLRPC.TL_jsonString) value.value).value;
-                                if (!Objects.equals(BuildVars.GOOGLE_AUTH_CLIENT_ID, str)) {
-                                    BuildVars.GOOGLE_AUTH_CLIENT_ID = str;
-                                    editor.putString("googleAuthClientId", BuildVars.GOOGLE_AUTH_CLIENT_ID);
-                                    changed = true;
-                                }
+//                                if (!Objects.equals(BuildVars.GOOGLE_AUTH_CLIENT_ID, str)) {
+//                                    BuildVars.GOOGLE_AUTH_CLIENT_ID = str;
+//                                    editor.putString("googleAuthClientId", BuildVars.GOOGLE_AUTH_CLIENT_ID);
+//                                    changed = true;
+//                                }
                             }
                             break;
                         }

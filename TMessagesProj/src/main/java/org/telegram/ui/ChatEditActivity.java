@@ -72,8 +72,6 @@ import org.telegram.ui.Components.SizeNotifierFrameLayout;
 import org.telegram.ui.Components.UndoView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import net.kilogram.messenger.utils.VibrateUtil;
@@ -136,7 +134,7 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
     private boolean isChannel;
 
     private boolean historyHidden;
-    private List<String> availableReactions = Collections.emptyList();
+    private TLRPC.ChatReactions availableReactions;
 
     private boolean createAfterUpload;
     private boolean donePressed;
@@ -530,7 +528,7 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
                 }
                 TLRPC.Chat chat = getMessagesController().getChat(chatId);
                 if (chat.photo != null && chat.photo.photo_big != null) {
-                    PhotoViewer.getInstance().setParentActivity(getParentActivity());
+                    PhotoViewer.getInstance().setParentActivity(ChatEditActivity.this);
                     if (chat.photo.dc_id != 0) {
                         chat.photo.photo_big.dc_id = chat.photo.dc_id;
                     }
@@ -1142,7 +1140,10 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
 
     private int getChannelAdminCount() {
         if (info == null || info.participants == null || info.participants.participants == null) {
-            return 1;
+            if (realAdminCount != 0)
+                return realAdminCount;
+            getRealChannelAdminCount();
+            return 0;
         }
         int count = 0;
         for (int a = 0, N = info.participants.participants.size(); a < N; a++) {
@@ -1153,6 +1154,7 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
                 count++;
             }
         }
+        realAdminCount = count;
         return count;
     }
 
@@ -1502,7 +1504,7 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
                 } else {
                     membersCell.setTextAndIcon(LocaleController.getString("ChannelMembers", R.string.ChannelMembers), R.drawable.msg_groups, logCell != null && logCell.getVisibility() == View.VISIBLE);
                     if (currentChat.gigagroup) {
-                        blockCell.setTextAndIcon(LocaleController.getString("ChannelBlacklist", R.string.ChannelBlacklist), R.drawable.msg_chats_remove, logCell != null && logCell.getVisibility() == View.VISIBLE);
+                        blockCell.setText(LocaleController.getString("ChannelBlacklist", R.string.ChannelBlacklist), logCell != null && logCell.getVisibility() == View.VISIBLE);
                     } else {
                         blockCell.setTextAndIcon(LocaleController.getString("ChannelPermissions", R.string.ChannelPermissions), R.drawable.msg_permissions, true);
                     }
@@ -1523,21 +1525,34 @@ public class ChatEditActivity extends BaseFragment implements ImageUpdater.Image
         }
 
         if (stickersCell != null && info != null) {
-            stickersCell.setTextAndValueAndIcon(LocaleController.getString(R.string.GroupStickers), info.stickerset != null ? info.stickerset.title : LocaleController.getString(R.string.Add), R.drawable.msg_sticker, false);
+            stickersCell.setTextAndValue(LocaleController.getString(R.string.GroupStickers), info.stickerset != null ? info.stickerset.title : LocaleController.getString(R.string.Add), false);
         }
     }
 
     private void updateReactionsCell() {
-        int count = 0;
-        for (int i = 0; i < availableReactions.size(); i++) {
-            TLRPC.TL_availableReaction reaction = getMediaDataController().getReactionsMap().get(availableReactions.get(i));
-            if (reaction != null && !reaction.inactive) {
-                 count++;
+        String finalString;
+        if (availableReactions == null || availableReactions instanceof TLRPC.TL_chatReactionsNone) {
+            finalString = LocaleController.getString("ReactionsOff", R.string.ReactionsOff);
+        } else if (availableReactions instanceof TLRPC.TL_chatReactionsSome) {
+            TLRPC.TL_chatReactionsSome someReactions = (TLRPC.TL_chatReactionsSome) availableReactions;
+            int count = 0;
+            for (int i = 0; i < someReactions.reactions.size(); i++) {
+                TLRPC.Reaction someReaction = someReactions.reactions.get(i);
+                if (someReaction instanceof TLRPC.TL_reactionEmoji) {
+                    TLRPC.TL_reactionEmoji tl_reactionEmoji = (TLRPC.TL_reactionEmoji) someReaction;
+                    TLRPC.TL_availableReaction reaction = getMediaDataController().getReactionsMap().get(tl_reactionEmoji.emoticon);
+                    if (reaction != null && !reaction.inactive) {
+                        count++;
+                    }
+                }
             }
+            int reacts = Math.min(getMediaDataController().getEnabledReactionsList().size(), count);
+            finalString = reacts == 0 ? LocaleController.getString("ReactionsOff", R.string.ReactionsOff) :
+                    LocaleController.formatString("ReactionsCount", R.string.ReactionsCount, reacts, getMediaDataController().getEnabledReactionsList().size());
+        } else {
+            finalString = LocaleController.getString("ReactionsAll", R.string.ReactionsAll);
         }
-        int reacts = Math.min(getMediaDataController().getEnabledReactionsList().size(), count);
-        reactionsCell.setTextAndValueAndIcon(LocaleController.getString("Reactions", R.string.Reactions), reacts == 0 ? LocaleController.getString("ReactionsOff", R.string.ReactionsOff) :
-                LocaleController.formatString("ReactionsCount", R.string.ReactionsCount, reacts, getMediaDataController().getEnabledReactionsList().size()), R.drawable.msg_reactions2, true);
+        reactionsCell.setTextAndValueAndIcon(LocaleController.getString("Reactions", R.string.Reactions), finalString, R.drawable.msg_reactions2, true);
     }
 
     @Override

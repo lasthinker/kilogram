@@ -63,5 +63,6 @@
     <string name="CustomGreatHint">Default Great</string>
     <string name="CustomPoor">Custom Long Click Reply Word</string>
     <string name="CustomPoorHint">Default Pool</string>
-    <string name="CustomEditedMessage">Custom Edited Message Word</string>
+    string name="CustomEditedMessage">Custom Edited Message Word</string>
+    <string name="HidePremiumOnlyChannel">Hide Premium Only Channel</string>
 </resources>

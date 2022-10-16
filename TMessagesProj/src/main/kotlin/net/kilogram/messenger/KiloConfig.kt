@@ -202,7 +202,7 @@ object KiloConfig {
         addConfig(
             "ShowPremiumStarInChat",
             ConfigItem.configTypeBool,
-            false
+            true
         )
     val showPremiumAvatarAnimation =
         addConfig(
@@ -327,6 +327,18 @@ object KiloConfig {
             "CustomEditedMessage",
             ConfigItem.configTypeString,
             ""
+        )
+    val hidePremiumOnlyChannel =
+        addConfig(
+            "HidePremiumOnlyChannel",
+            ConfigItem.configTypeBool,
+            false
+        )
+    val disableProxyWhenVpnEnabled =
+        addConfig(
+            "DisableProxyWhenVpnEnabled",
+            ConfigItem.configTypeBool,
+            false
         )
 
     private fun addConfig(

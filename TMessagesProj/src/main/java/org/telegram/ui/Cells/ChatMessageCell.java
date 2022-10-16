@@ -11710,6 +11710,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     }
 
     private Object getAuthorStatus() {
+        if (!KiloConfig.INSTANCE.getShowPremiumStarInChat().Bool()) {
+            return null;
+        }
         if (currentUser != null) {
             if (currentUser.emoji_status instanceof TLRPC.TL_emojiStatusUntil && ((TLRPC.TL_emojiStatusUntil) currentUser.emoji_status).until > (int) (System.currentTimeMillis() / 1000)) {
                 return ((TLRPC.TL_emojiStatusUntil) currentUser.emoji_status).document_id;
@@ -12222,7 +12225,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (hasPsaHint) {
             int x;
             if (currentPosition == null || (currentPosition.flags & MessageObject.POSITION_FLAG_RIGHT) != 0) {
-                x = currentBackgroundDrawable.getBounds().right;
+                x = getCurrentBackgroundRight();
             } else {
                 x = 0;
                 int dWidth = getGroupPhotosWidth();
@@ -15120,7 +15123,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         drawable.setAlpha(255);
                     }
                     if (docTitleOffsetX < 0 || docTitleOffsetX == 0 && docTitleLayout.getLineLeft(0) == 0) {
-                        pollHintX = currentBackgroundDrawable.getBounds().right - drawable.getIntrinsicWidth() - AndroidUtilities.dp(currentMessageObject.isOutOwner() ? 17 : 11);
+                        pollHintX = getCurrentBackgroundRight() - drawable.getIntrinsicWidth() - AndroidUtilities.dp(currentMessageObject.isOutOwner() ? 17 : 11);
                     } else {
                         pollHintX = getCurrentBackgroundLeft() + AndroidUtilities.dp(11);
                     }
@@ -15182,7 +15185,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     }
                     delegate.needReloadPolls();
                 }
-                int tx = currentBackgroundDrawable.getBounds().right - closeTimeWidth - AndroidUtilities.dp(currentMessageObject.isOutOwner() ? 40 : 34);
+                int tx = getCurrentBackgroundRight() - closeTimeWidth - AndroidUtilities.dp(currentMessageObject.isOutOwner() ? 40 : 34);
                 if (time <= 5000) {
                     Theme.chat_timePaint.setColor(getThemedColor(currentMessageObject.isOutOwner() ? Theme.key_chat_outPollWrongAnswer : Theme.key_chat_inPollWrongAnswer));
                 }
@@ -16721,6 +16724,10 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         return left;
     }
 
+    public int getCurrentBackgroundRight() {
+        return currentBackgroundDrawable == null ? 0 : currentBackgroundDrawable.getBounds().right;
+    }
+
     public TransitionParams getTransitionParams() {
         return transitionParams;
     }
@@ -16972,7 +16979,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             lastForwardedNamesOffset = namesOffset;
             lastForwardNameWidth = forwardedNameWidth;
             lastBackgroundLeft = getCurrentBackgroundLeft();
-            lastBackgroundRight = currentBackgroundDrawable.getBounds().right;
+            lastBackgroundRight = getCurrentBackgroundRight();
 
             reactionsLayoutInBubble.recordDrawingState();
             if (replyNameLayout != null) {

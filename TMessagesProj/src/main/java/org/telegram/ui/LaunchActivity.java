@@ -35,6 +35,7 @@ import android.location.Location;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -192,7 +193,9 @@ import net.kilogram.messenger.proxy.SubInfo;
 import net.kilogram.messenger.proxy.SubManager;
 import net.kilogram.messenger.utils.AlertUtil;
 import net.kilogram.messenger.utils.MonetHelper;
+import net.kilogram.messenger.utils.ProxyUtil;
 import net.kilogram.messenger.utils.UIUtil;
+import net.kilogram.messenger.KiloConfig
 
 public class LaunchActivity extends BasePermissionsActivity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
     public final static Pattern PREFIX_T_ME_PATTERN = Pattern.compile("^(?:http(?:s|)://|)([A-z0-9-]+?)\\.t\\.me");
@@ -5161,6 +5164,16 @@ public class LaunchActivity extends BasePermissionsActivity implements ActionBar
             passcodeView.onResume();
         }
 
+        if (KiloConfig.INSTANCE.getDisableProxyWhenVpnEnabled().Bool()) {
+            if (SharedConfig.proxyEnabled && ProxyUtil.isVPNEnabled()) {
+                SharedConfig.setProxyEnable(false);
+            } else if (!ProxyUtil.isVPNEnabled()) {
+                SharedConfig.setProxyEnable(true);
+            }
+            ProxyUtil.registerNetworkCallback();
+            NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.proxySettingsChanged);
+        }
+
         ConnectionsManager.getInstance(currentAccount).setAppPaused(false, false);
         updateCurrentConnectionState(currentAccount);
 
@@ -5267,7 +5280,7 @@ public class LaunchActivity extends BasePermissionsActivity implements ActionBar
             editorView.onConfigurationChanged();
         }
         if (Theme.selectedAutoNightType == Theme.AUTO_NIGHT_TYPE_SYSTEM) {
-            Theme.checkAutoNightThemeConditions();
+            Theme.checkAutoNightThemeConditions(true);
         }
     }
 

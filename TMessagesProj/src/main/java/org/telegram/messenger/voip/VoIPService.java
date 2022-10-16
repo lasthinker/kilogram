@@ -80,14 +80,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
-import net.kilogram.messenger.KiloConfig;
-import com.google.android.exoplayer2.util.Log;
-
 import org.json.JSONObject;
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
-import org.telegram.messenger.BuildConfig;
 import org.telegram.messenger.BuildVars;
 import org.telegram.messenger.ChatObject;
 import org.telegram.messenger.ContactsController;
@@ -212,7 +208,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	private boolean isProximityNear;
 	private boolean isHeadsetPlugged;
 	private int previousAudioOutput = -1;
-	private final ArrayList<StateListener> stateListeners = new ArrayList<>();
+	private ArrayList<StateListener> stateListeners = new ArrayList<>();
 	private MediaPlayer ringtonePlayer;
 	private Vibrator vibrator;
 	private SoundPool soundPool;
@@ -259,11 +255,11 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	private int remoteVideoState = Instance.VIDEO_STATE_INACTIVE;
 	private TLRPC.TL_dataJSON myParams;
 
-	private final int[] mySource = new int[2];
-	private final NativeInstance[] tgVoip = new NativeInstance[2];
-	private final long[] captureDevice = new long[2];
-	private final boolean[] destroyCaptureDevice = {true, true};
-	private final int[] videoState = {Instance.VIDEO_STATE_INACTIVE, Instance.VIDEO_STATE_INACTIVE};
+	private int[] mySource = new int[2];
+	private NativeInstance[] tgVoip = new NativeInstance[2];
+	private long[] captureDevice = new long[2];
+	private boolean[] destroyCaptureDevice = {true, true};
+	private int[] videoState = {Instance.VIDEO_STATE_INACTIVE, Instance.VIDEO_STATE_INACTIVE};
 
 	private long callStartTime;
 	private boolean playingSound;
@@ -309,19 +305,19 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	private long lastTypingTimeSend;
 
 	private boolean endCallAfterRequest;
-	private final ArrayList<TLRPC.PhoneCall> pendingUpdates = new ArrayList<>();
+	private ArrayList<TLRPC.PhoneCall> pendingUpdates = new ArrayList<>();
 	private Runnable delayedStartOutgoingCall;
 
 	private boolean startedRinging;
 
 	private int classGuid;
 
-	private final HashMap<String, Integer> currentStreamRequestTimestamp = new HashMap<>();
+	private HashMap<String, Integer> currentStreamRequestTimestamp = new HashMap<>();
 	public boolean micSwitching;
 
 	private int currentStreamType;
 
-	private final Runnable afterSoundRunnable = new Runnable() {
+	private Runnable afterSoundRunnable = new Runnable() {
 		@Override
 		public void run() {
 
@@ -358,7 +354,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	};
 
 	boolean fetchingBluetoothDeviceName;
-	private final BluetoothProfile.ServiceListener serviceListener = new BluetoothProfile.ServiceListener() {
+	private BluetoothProfile.ServiceListener serviceListener = new BluetoothProfile.ServiceListener() {
 		@Override
 		public void onServiceDisconnected(int profile) {
 
@@ -384,7 +380,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 		}
 	};
 
-	private final BroadcastReceiver receiver = new BroadcastReceiver() {
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -505,7 +501,9 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 		if (call != null) {
 			long selfId = getSelfId();
 			TLRPC.TL_groupCallParticipant participant = call.participants.get(selfId);
-			return participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(chat);
+			if (participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(chat)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -656,12 +654,12 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 		}
 	}
 
-	private final ProxyVideoSink[] localSink = new ProxyVideoSink[2];
-	private final ProxyVideoSink[] remoteSink = new ProxyVideoSink[2];
-	private final ProxyVideoSink[] currentBackgroundSink = new ProxyVideoSink[2];
-	private final String[] currentBackgroundEndpointId = new String[2];
+	private ProxyVideoSink[] localSink = new ProxyVideoSink[2];
+	private ProxyVideoSink[] remoteSink = new ProxyVideoSink[2];
+	private ProxyVideoSink[] currentBackgroundSink = new ProxyVideoSink[2];
+	private String[] currentBackgroundEndpointId = new String[2];
 
-	private final HashMap<String, ProxyVideoSink> remoteSinks = new HashMap<>();
+	private HashMap<String, ProxyVideoSink> remoteSinks = new HashMap<>();
 
 	@Nullable
 	@Override
@@ -2872,11 +2870,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 			builder.setSmallIcon(isMicMute() ? R.drawable.voicechat_muted : R.drawable.voicechat_active);
 		} else {
 			builder.setContentTitle(LocaleController.getString("VoipOutgoingCall", R.string.VoipOutgoingCall));
-			if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-				builder.setSmallIcon(R.drawable.notification_inverted);
-			}else {
-				builder.setSmallIcon(R.drawable.notification);
-			}
+			builder.setSmallIcon(R.drawable.notification);
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			Intent endIntent = new Intent(this, VoIPActionsReceiver.class);
@@ -3515,11 +3509,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 			if (groupCall != null) {
 				bldr.setSmallIcon(isMicMute() ? R.drawable.voicechat_muted : R.drawable.voicechat_active);
 			} else {
-				if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-					bldr.setSmallIcon(R.drawable.notification_inverted);
-				}else {
-					bldr.setSmallIcon(R.drawable.notification);
-				}
+				bldr.setSmallIcon(R.drawable.notification);
 			}
 			startForeground(ID_ONGOING_CALL_NOTIFICATION, bldr.build());
 		}
@@ -3741,7 +3731,11 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	}
 
 	public void onAudioFocusChange(int focusChange) {
-		hasAudioFocus = focusChange == AudioManager.AUDIOFOCUS_GAIN;
+		if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+			hasAudioFocus = true;
+		} else {
+			hasAudioFocus = false;
+		}
 	}
 
 	private void updateBluetoothHeadsetState(boolean connected) {
@@ -3928,16 +3922,10 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	private void showIncomingNotification(String name, CharSequence subText, TLObject userOrChat, boolean video, int additionalMemberCount) {
 		Intent intent = new Intent(this, LaunchActivity.class);
 		intent.setAction("voip");
-		int iconid;
-		if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-			iconid = R.drawable.notification_inverted;
-		}else{
-			iconid = R.drawable.notification;
-		}
 		Notification.Builder builder = new Notification.Builder(this)
 				.setContentTitle(video ? LocaleController.getString("VoipInVideoCallBranding", R.string.VoipInVideoCallBranding) : LocaleController.getString("VoipInCallBranding", R.string.VoipInCallBranding))
 				.setContentText(name)
-				.setSmallIcon(iconid)
+				.setSmallIcon(R.drawable.notification)
 				.setSubText(subText)
 				.setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 		Uri soundProviderUri = Uri.parse("content://" + ApplicationLoader.getApplicationId() + ".call_sound_provider/start_ringing");

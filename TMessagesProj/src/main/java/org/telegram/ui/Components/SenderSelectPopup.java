@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.KiloConfig;
 
 public class SenderSelectPopup extends ActionBarPopupWindow {
@@ -145,16 +146,16 @@ public class SenderSelectPopup extends ActionBarPopupWindow {
         if (KiloConfig.INSTANCE.getQuickToggleAnonymous().Bool()) {
             var chat = messagesController.getChat(chatFull.id);
             if (chat != null && chat.creator) {
-                if (peers.stream().noneMatch(peer -> peer.channel_id == chat.id)) {
-                    peers.add(0, new TLRPC.TL_peerChannel() {{
-                        channel_id = chat.id;
+                if (peers.stream().noneMatch(peer -> peer.peer.channel_id == chat.id)) {
+                    peers.add(0, new TLRPC.TL_sendAsPeer() {{
+                        peer = new TLRPC.TL_peerChannel() {{ channel_id = chat.id; }};
                     }});
                 }
 
                 var selfId = UserConfig.getInstance(UserConfig.selectedAccount).getCurrentUser().id;
-                if (peers.stream().noneMatch(peer -> peer.user_id == selfId)) {
-                    peers.add(peers.size() >= 1 ? 1 : 0, new TLRPC.TL_peerUser() {{
-                        user_id = selfId;
+                if (peers.stream().noneMatch(peer -> peer.peer.user_id == selfId)) {
+                    peers.add(peers.size() >= 1 ? 1 : 0, new TLRPC.TL_sendAsPeer() {{
+                        peer = new TLRPC.TL_peerUser() {{ user_id = selfId; }};
                     }});
                 }
             }
@@ -243,9 +244,11 @@ public class SenderSelectPopup extends ActionBarPopupWindow {
                 return;
             }
             if (peerObj.premium_required && !UserConfig.getInstance(UserConfig.selectedAccount).isPremium()) {
-                try {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-                } catch (Exception ignored) {}
+                if (!NekoConfig.disableVibration.Bool()) {
+                    try {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    } catch (Exception ignored) {}
+                }
 
                 WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
                 if (bulletinContainer == null) {
@@ -345,7 +348,9 @@ public class SenderSelectPopup extends ActionBarPopupWindow {
             bulletinContainer.animate().alpha(0).setDuration(150).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    windowManager.removeViewImmediate(bulletinContainer);
+                    if (bulletinContainer != null && bulletinContainer.isShown()) {
+                        windowManager.removeViewImmediate(bulletinContainer);
+                    }
 
                     if (bulletinHideCallback != null) {
                         AndroidUtilities.cancelRunOnUIThread(bulletinHideCallback);

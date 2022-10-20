@@ -167,7 +167,7 @@ android {
             jniDebuggable true
             multiDexEnabled true
             zipAlignEnabled true
-            signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
+            signingConfig signingConfigs.release
             ndk.debugSymbolLevel = "FULL"
         }
 
@@ -180,7 +180,7 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             matchingFallbacks = ["release", "debug"]
-            signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
+            signingConfig signingConfigs.release
         }
 
         release {
@@ -192,7 +192,7 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             matchingFallbacks = ["release", "debug"]
-            signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
+            signingConfig signingConfigs.release
         }
 
         foss {

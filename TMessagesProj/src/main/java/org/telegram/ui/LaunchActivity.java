@@ -195,7 +195,7 @@ import net.kilogram.messenger.utils.AlertUtil;
 import net.kilogram.messenger.utils.MonetHelper;
 import net.kilogram.messenger.utils.ProxyUtil;
 import net.kilogram.messenger.utils.UIUtil;
-import net.kilogram.messenger.KiloConfig
+import net.kilogram.messenger.KiloConfig;
 
 public class LaunchActivity extends BasePermissionsActivity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
     public final static Pattern PREFIX_T_ME_PATTERN = Pattern.compile("^(?:http(?:s|)://|)([A-z0-9-]+?)\\.t\\.me");

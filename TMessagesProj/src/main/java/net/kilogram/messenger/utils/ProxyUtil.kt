@@ -50,7 +50,7 @@ import org.yaml.snakeyaml.Yaml
 import net.kilogram.messenger.proxy.ShadowsocksLoader
 import net.kilogram.messenger.proxy.ShadowsocksRLoader
 import net.kilogram.messenger.ui.BottomBuilder
-import tw.nekomimi.nekogram.utils.AlertUtil.showToast
+import net.kilogram.messenger.utils.AlertUtil.showToast
 import java.io.File
 import java.util.*
 

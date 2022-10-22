@@ -346,6 +346,12 @@ object KiloConfig {
             ConfigItem.configTypeBool,
             false
         )
+    val disableEmojiDrawLimit =
+        addConfig(
+            "DisableEmojiDrawLimit",
+            ConfigItem.configTypeBool,
+            false
+        )
 
     private fun addConfig(
         k: String,

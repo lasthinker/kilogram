@@ -98,6 +98,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
     private final AbstractConfigCell showRPCErrorRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowRPCError()));
     private final AbstractConfigCell customArtworkApiRow = cellGroup.appendCell(new ConfigCellTextInput(null, KiloConfig.INSTANCE.getCustomArtworkApi(), "", null));
     private final AbstractConfigCell fakeHighPerformanceDeviceRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getFakeHighPerformanceDevice()));
+    private final AbstractConfigCell disableEmojiDrawLimitRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getDisableEmojiDrawLimit()));
     private final AbstractConfigCell divider1 = cellGroup.appendCell(new ConfigCellDivider());
 
     private UndoView tooltip;

@@ -49,6 +49,7 @@ import org.telegram.ui.Components.AnimatedEmojiSpan;
 import net.kilogram.messenger.EmojiProvider;
 import net.kilogram.messenger.NekoXConfig;
 import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class Emoji {
 
@@ -570,9 +571,11 @@ public class Emoji {
             } catch (Exception e) {
                 FileLog.e(e);
             }
-            int limitCount = SharedConfig.getDevicePerformanceClass() >= SharedConfig.PERFORMANCE_CLASS_HIGH ? 100 : 50;
-            if ((Build.VERSION.SDK_INT < 23 || Build.VERSION.SDK_INT >= 29)/* && !BuildVars.DEBUG_PRIVATE_VERSION*/ && (i + 1) >= limitCount) {
-                break;
+            if (!KiloConfig.INSTANCE.getDisableEmojiDrawLimit().Bool()) {
+                int limitCount = SharedConfig.getDevicePerformanceClass() >= SharedConfig.PERFORMANCE_CLASS_HIGH ? 100 : 50;
+                if ((Build.VERSION.SDK_INT < 23 || Build.VERSION.SDK_INT >= 29)/* && !BuildVars.DEBUG_PRIVATE_VERSION*/ && (i + 1) >= limitCount) {
+                    break;
+                }
             }
         }
         return s;

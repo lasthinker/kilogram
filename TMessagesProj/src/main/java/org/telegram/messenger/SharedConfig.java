@@ -67,6 +67,7 @@ import net.kilogram.messenger.utils.AlertUtil;
 import net.kilogram.messenger.utils.EnvUtil;
 import net.kilogram.messenger.utils.FileUtil;
 import net.kilogram.messenger.utils.UIUtil;
+import net.kilogram.messenger.KiloConfig;
 
 import static com.v2ray.ang.V2RayConfig.SSR_PROTOCOL;
 import static com.v2ray.ang.V2RayConfig.SS_PROTOCOL;
@@ -2384,6 +2385,9 @@ public class SharedConfig {
             if (BuildVars.LOGS_ENABLED) {
                 FileLog.d("device performance info selected_class = " + devicePerformanceClass + " (cpu_count = " + cpuCount + ", freq = " + maxCpuFreq + ", memoryClass = " + memoryClass + ", android version " + androidVersion + ", manufacture " + Build.MANUFACTURER + ")");
             }
+        }
+        if (KiloConfig.INSTANCE.getFakeHighPerformanceDevice().Bool()) {
+            devicePerformanceClass = PERFORMANCE_CLASS_HIGH;
         }
 
         return devicePerformanceClass;

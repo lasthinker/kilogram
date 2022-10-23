@@ -93,6 +93,7 @@ public class NekoExperimentalSettingsActivity extends BaseFragment {
     private final AbstractConfigCell divider0 = cellGroup.appendCell(new ConfigCellDivider());
     
     private final AbstractConfigCell header2 = cellGroup.appendCell(new ConfigCellHeader(LocaleController.getString("KiloConfig")));
+    private final AbstractConfigCell invertedNotificationRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getInvertedNotification()));
     private final AbstractConfigCell forceCopyRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getForceCopy()));
     private final AbstractConfigCell audioEnhanceRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getNoiseSuppressAndVoiceEnhance()));
     private final AbstractConfigCell showRPCErrorRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowRPCError()));

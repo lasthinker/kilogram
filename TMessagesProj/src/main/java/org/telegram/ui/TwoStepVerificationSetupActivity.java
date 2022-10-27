@@ -90,6 +90,7 @@ import org.telegram.ui.Components.spoilers.SpoilersTextView;
 
 import java.util.ArrayList;
 
+import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.ui.EditTextAutoFill;
 import net.kilogram.messenger.utils.VibrateUtil;
 
@@ -1447,9 +1448,11 @@ public class TwoStepVerificationSetupActivity extends BaseFragment {
                 }
                 if (!editTextFirstRow.getText().toString().equals(firstPassword) && currentType == TYPE_CREATE_PASSWORD_STEP_2) {
                     AndroidUtilities.shakeViewSpring(outlineTextFirstRow, 5);
-                    try {
-                        outlineTextFirstRow.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-                    } catch (Exception ignored) {}
+                    if (!NekoConfig.disableVibration.Bool()) {
+                        try {
+                            outlineTextFirstRow.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                        } catch (Exception ignored) {}
+                    }
                     try {
                         Toast.makeText(getParentActivity(), LocaleController.getString("PasswordDoNotMatch", R.string.PasswordDoNotMatch), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {

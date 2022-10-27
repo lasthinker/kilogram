@@ -109,6 +109,7 @@ import androidx.dynamicanimation.animation.SpringForce;
 import androidx.recyclerview.widget.ChatListItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import net.kilogram.messenger.utils.VibrateUtil;
 import net.kilogram.messenger.KiloConfig;
 import net.kilogram.messenger.helper.Dialogs;
 import net.kilogram.messenger.ui.syntaxhighlight.SyntaxHighlight;
@@ -5672,10 +5673,7 @@ public class ChatActivityEnterView extends BlurredFrameLayout implements Notific
         }
         if (currentLimit - codePointCount < 0) {
             AndroidUtilities.shakeView(captionLimitView, 2, 0);
-            Vibrator v = (Vibrator) captionLimitView.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-            if (v != null) {
-                v.vibrate(200);
-            }
+            VibrateUtil.vibrate();
             return;
         }
         if (searchingType != 0) {

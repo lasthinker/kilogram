@@ -74,6 +74,7 @@ import java.util.ArrayList;
 
 import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.ui.MessageHelper;
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class ContentPreviewViewer {
 
@@ -714,13 +715,11 @@ public class ContentPreviewViewer {
 
     protected void runSmoothHaptic() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            final Vibrator vibrator = (Vibrator) containerView.getContext().getSystemService(Context.VIBRATOR_SERVICE);
             if (vibrationEffect == null) {
                 long[] vibrationWaveFormDurationPattern = {0, 2};
                 vibrationEffect = VibrationEffect.createWaveform(vibrationWaveFormDurationPattern, -1);
             }
-            vibrator.cancel();
-            vibrator.vibrate(vibrationEffect);
+            VibrateUtil.vibrate(200L, vibrationEffect);
         }
     }
 

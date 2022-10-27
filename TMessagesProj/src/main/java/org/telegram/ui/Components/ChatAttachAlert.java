@@ -118,6 +118,8 @@ import net.kilogram.messenger.transtale.TranslateDb;
 import net.kilogram.messenger.transtale.Translator;
 import net.kilogram.messenger.transtale.TranslatorKt;
 import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
+
 import java.util.Objects;
 
 public class ChatAttachAlert extends BottomSheet implements NotificationCenter.NotificationCenterDelegate, BottomSheet.BottomSheetDelegateInterface {
@@ -2289,10 +2291,7 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
         writeButton.setOnClickListener(v -> {
             if (currentLimit - codepointCount < 0) {
                 AndroidUtilities.shakeView(captionLimitView, 2, 0);
-                Vibrator vibrator = (Vibrator) captionLimitView.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                if (vibrator != null) {
-                    vibrator.vibrate(200);
-                }
+                VibrateUtil.vibrate();
                 return;
             }
             if (editingMessageObject == null && baseFragment instanceof ChatActivity && ((ChatActivity) baseFragment).isInScheduleMode()) {

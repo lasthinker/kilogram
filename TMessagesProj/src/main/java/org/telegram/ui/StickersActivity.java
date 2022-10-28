@@ -123,6 +123,7 @@ import net.kilogram.messenger.ui.BottomBuilder;
 import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.ui.PinnedStickerHelper;
 import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.EnvUtil;
 import net.kilogram.messenger.utils.FileUtil;
 import net.kilogram.messenger.utils.ShareUtil;
 import net.kilogram.messenger.utils.StickersUtil;
@@ -695,7 +696,7 @@ public class StickersActivity extends BaseFragment implements NotificationCenter
 
             JsonObject exportObj = StickersUtil.exportStickers(currentAccount, exportSets, exportArchived);
 
-            File cacheFile = new File(ApplicationLoader.applicationContext.getCacheDir(), new Date().toLocaleString() + ".nekox-stickers.json");
+            File cacheFile = new File(EnvUtil.getShareCachePath(), new Date().toLocaleString() + ".nekox-stickers.json");
 
             StringWriter stringWriter = new StringWriter();
             JsonWriter jsonWriter = new JsonWriter(stringWriter);
@@ -1200,7 +1201,7 @@ public class StickersActivity extends BaseFragment implements NotificationCenter
 
                         JsonObject exportObj = StickersUtil.exportStickers(stickerSetList);
 
-                        File cacheFile = new File(ApplicationLoader.applicationContext.getCacheDir(), new Date().toLocaleString() + ".nekox-stickers.json");
+                        File cacheFile = new File(EnvUtil.getShareCachePath(), new Date().toLocaleString() + ".nekox-stickers.json");
 
                         StringWriter stringWriter = new StringWriter();
                         JsonWriter jsonWriter = new JsonWriter(stringWriter);

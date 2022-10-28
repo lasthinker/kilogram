@@ -61,6 +61,7 @@ import kotlin.text.StringsKt;
 
 import net.kilogram.messenger.DatacenterActivity;
 import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.EnvUtil;
 import net.kilogram.messenger.utils.FileUtil;
 import net.kilogram.messenger.utils.GsonUtil;
 import net.kilogram.messenger.utils.ShareUtil;
@@ -194,7 +195,7 @@ public class NekoSettingsActivity extends BaseFragment {
     private void backupSettings() {
 
         try {
-            File cacheFile = new File(ApplicationLoader.applicationContext.getCacheDir(), new Date().toLocaleString() + ".nekox-settings.json");
+            File cacheFile = new File(EnvUtil.getShareCachePath(), new Date().toLocaleString() + ".nekox-settings.json");
             FileUtil.writeUtf8String(backupSettingsJson(), cacheFile);
             ShareUtil.shareFile(getParentActivity(), cacheFile);
         } catch (JSONException e) {

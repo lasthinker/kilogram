@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import net.kilogram.messenger.NekoXConfig;
 import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.EnvUtil;
 import net.kilogram.messenger.utils.FileUtil;
 import net.kilogram.messenger.utils.LocaleUtil;
 import net.kilogram.messenger.utils.ShareUtil;
@@ -165,7 +166,7 @@ public class NekoXSettingActivity extends BaseFragment {
 
             LocaleUtil.fetchAndExportLang();
 
-            File zipFile = new File(ApplicationLoader.applicationContext.getCacheDir(), "languages.zip");
+            File zipFile = new File(EnvUtil.getShareCachePath(), "languages.zip");
 
             FileUtil.delete(zipFile);
 

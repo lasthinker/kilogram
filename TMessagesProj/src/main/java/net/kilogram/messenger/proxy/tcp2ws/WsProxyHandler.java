@@ -1,11 +1,12 @@
 package net.kilogram.messenger.proxy.tcp2ws;
 
+import static okhttp3.internal._UtilJvmKt.threadFactory;
+
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.messenger.FileLog;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,8 +16,12 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -110,8 +115,21 @@ public class WsProxyHandler extends Thread {
 
     private static OkHttpClient okhttpClient = null;
     private static final Object okhttpLock = new Object();
+    private static IgnoreIllegalStateExceptionExecutor executor = null;
+    private static final Object ExecutorLock = new Object();
+
+    private static void initIgnoreIllegalStateExceptionExecutor() {
+        if (executor == null) {
+            synchronized (ExecutorLock) {
+                if (executor == null) {
+                    executor = new IgnoreIllegalStateExceptionExecutor();
+                }
+            }
+        }
+    }
 
     private static OkHttpClient getOkHttpClientInstance() {
+        initIgnoreIllegalStateExceptionExecutor();
         if (okhttpClient == null) {
             synchronized (okhttpLock) {
                 if (okhttpClient == null) {
@@ -126,6 +144,7 @@ public class WsProxyHandler extends Thread {
                                 FileLog.d("okhttpWS: resolved: " + ret.toString());
                                 return ret;
                             })
+                            .dispatcher(new Dispatcher(executor))
                             .build();
                 }
             }
@@ -149,12 +168,15 @@ public class WsProxyHandler extends Thread {
 
                     @Override
                     public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
-                        FileLog.e(t);
+                        WsProxyHandler.this.close();
                         wsStatus.set(STATUS_FAILED);
                         synchronized (wsStatus) {
                             wsStatus.notify();
                         }
-                        WsProxyHandler.this.close();
+                        if (Arrays.stream(t.getSuppressed()).anyMatch(ex -> ex instanceof IllegalStateException)) {
+                            return;
+                        }
+                        FileLog.e(t);
                     }
 
                     @Override
@@ -284,4 +306,18 @@ public class WsProxyHandler extends Thread {
         return ret;
     }
 
+    private static class IgnoreIllegalStateExceptionExecutor extends ThreadPoolExecutor {
+        public IgnoreIllegalStateExceptionExecutor() {
+            super(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
+                    new SynchronousQueue<>(), threadFactory("okhttp ws Dispatcher", false));
+        }
+
+        @Override public void execute(Runnable runnable) {
+            super.execute(() -> {
+                try {
+                    runnable.run();
+                } catch (IllegalStateException ignore) {}
+            });
+        }
+    }
 }

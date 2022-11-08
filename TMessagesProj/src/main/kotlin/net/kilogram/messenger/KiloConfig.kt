@@ -352,6 +352,12 @@ object KiloConfig {
             ConfigItem.configTypeBool,
             false
         )
+    val showOnlineStatus =
+        addConfig(
+            "ShowOnlineStatus",
+            ConfigItem.configTypeBool,
+            false
+        )
 
     private fun addConfig(
         k: String,

@@ -353,14 +353,17 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter imple
         }
 
         // TODO: NekoX: Fix icon here
+//        int newGroupIcon = R.drawable.baseline_group_24;
+//        int newSecretIcon = R.drawable.baseline_lock_24;
+//        int newChannelIcon = R.drawable.baseline_chat_bubble_24;
 //        int contactsIcon = R.drawable.baseline_perm_contact_calendar_24;
 //        int savedIcon = R.drawable.baseline_bookmark_24;
 //        int settingsIcon = R.drawable.baseline_settings_24;
 //        int callsIcon = R.drawable.baseline_call_24;
 
         items.add(new Item(2, LocaleController.getString("NewGroup", R.string.NewGroup), newGroupIcon));
-        //items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), newSecretIcon));
-        //items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), newChannelIcon));
+//        items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), newSecretIcon));
+//        items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), newChannelIcon));
         items.add(new Item(6, LocaleController.getString("Contacts", R.string.Contacts), contactsIcon));
         items.add(new Item(11, LocaleController.getString("SavedMessages", R.string.SavedMessages), savedIcon));
         items.add(new Item(8, LocaleController.getString("Settings", R.string.Settings), settingsIcon));

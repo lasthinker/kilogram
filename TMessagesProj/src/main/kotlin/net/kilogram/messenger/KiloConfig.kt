@@ -358,6 +358,12 @@ object KiloConfig {
             ConfigItem.configTypeInt,
             0
         )
+    val showSetReminder =
+        addConfig(
+            "SetReminder",
+            ConfigItem.configTypeBool,
+            false
+        )
 
     private fun addConfig(
         k: String,

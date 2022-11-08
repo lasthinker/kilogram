@@ -279,12 +279,6 @@ object KiloConfig {
             ConfigItem.configTypeBool,
             false
         )
-    val onlyShowBuiltInEmoji =
-        addConfig(
-            "OnlyShowBuiltInEmoji",
-            ConfigItem.configTypeBool,
-            false
-        )
     val realHideTimeForSticker =
         addConfig(
             "RealHideTimeForSticker",
@@ -327,12 +321,6 @@ object KiloConfig {
             "CustomEditedMessage",
             ConfigItem.configTypeString,
             ""
-        )
-    val hidePremiumOnlyChannel =
-        addConfig(
-            "HidePremiumOnlyChannel",
-            ConfigItem.configTypeBool,
-            false
         )
     val disableProxyWhenVpnEnabled =
         addConfig(

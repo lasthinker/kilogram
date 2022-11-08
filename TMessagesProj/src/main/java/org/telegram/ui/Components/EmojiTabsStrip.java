@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public class EmojiTabsStrip extends ScrollableHorizontalScrollView {
 
@@ -344,7 +344,7 @@ public class EmojiTabsStrip extends ScrollableHorizontalScrollView {
             return;
         }
         final boolean isPremium = UserConfig.getInstance(UserConfig.selectedAccount).isPremium();
-        if (KiloConfig.INSTANCE.getOnlyShowBuiltInEmoji().Bool() && !isPremium) {
+        if (NekoConfig.disableTrending.Bool() && !isPremium) {
             return;
         }
         if (emojipackTabs == null) {

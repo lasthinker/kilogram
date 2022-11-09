@@ -1206,7 +1206,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
     public void drawStatusWithImage(Canvas canvas, ImageReceiver imageReceiver, int radius) {
         String formatUserStatus = currentUser != null ? LocaleController.formatUserStatus(this.currentAccount, currentUser) : "";
-        if (!NaConfig.INSTANCE.getShowOnlineStatus().Bool() || currentUser == null || currentUser.bot || !formatUserStatus.equals(LocaleController.getString("Online", R.string.Online))) {
+        if (!KiloConfig.INSTANCE.getShowOnlineStatus().Bool() || currentUser == null || currentUser.bot || !formatUserStatus.equals(LocaleController.getString("Online", R.string.Online))) {
             imageReceiver.draw(canvas);
             return;
         }

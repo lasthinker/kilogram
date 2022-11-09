@@ -537,11 +537,11 @@ public class NekoChatSettingsActivity extends BaseFragment implements Notificati
                         break;
                     }
                     case 11 + 3 + 2: {
-                        textCell.setChecked(NaConfig.INSTANCE.getShowSetReminder().toggleConfigBool());
+                        textCell.setChecked(KiloConfig.INSTANCE.getShowSetReminder().toggleConfigBool());
                         break;
                     }
                     case 12 + 3 + 2: {
-                        textCell.setChecked(NaConfig.INSTANCE.getShowReactions().toggleConfigBool());
+                        textCell.setChecked(KiloConfig.INSTANCE.getShowReactions().toggleConfigBool());
                         break;
                     }
                 }

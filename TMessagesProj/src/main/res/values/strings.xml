@@ -2207,7 +2207,7 @@
     <string name="DebugMenuCheckAppUpdate">Check app update</string>
     <string name="DebugMenuEnablePauseMusic">Enable pause music on record</string>
     <string name="DebugMenuDisablePauseMusic">Disable pause music on record</string>
-    <string name="DebugMenuEnableSmoothKeyboard">Enable smooth keyboard</string>
+    <string name="DebugMenuEnableSmoothKeyboard">Enable Smooth Keyboard</string>
     <string name="DebugMenuDisableSmoothKeyboard">Disable smooth keyboard</string>
     <string name="DebugMenuEnableCamera">Enable in-app camera</string>
     <string name="DebugMenuDisableCamera">Disable in-app camera</string>

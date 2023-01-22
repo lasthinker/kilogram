@@ -42,7 +42,7 @@ public final class BulletinFactory {
         return new BulletinFactory(fragment);
     }
 
-    public static BulletinFactory of(ViewGroup containerLayout, Theme.ResourcesProvider resourcesProvider) {
+    public static BulletinFactory of(FrameLayout containerLayout, Theme.ResourcesProvider resourcesProvider) {
         return new BulletinFactory(containerLayout, resourcesProvider);
     }
 
@@ -135,7 +135,7 @@ public final class BulletinFactory {
         this.resourcesProvider = fragment == null ? null : fragment.getResourceProvider();
     }
 
-    private BulletinFactory(ViewGroup containerLayout, Theme.ResourcesProvider resourcesProvider) {
+    private BulletinFactory(FrameLayout containerLayout, Theme.ResourcesProvider resourcesProvider) {
         this.containerLayout = containerLayout;
         this.fragment = null;
         this.resourcesProvider = resourcesProvider;
@@ -692,7 +692,7 @@ public final class BulletinFactory {
     }
 
     @CheckResult
-    public static Bulletin createCopyLinkBulletin(ViewGroup containerView) {
+    public static Bulletin createCopyLinkBulletin(FrameLayout containerView) {
         return of(containerView, null).createCopyLinkBulletin();
     }
 

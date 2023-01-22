@@ -208,7 +208,7 @@ public class SessionsActivity extends BaseFragment implements NotificationCenter
         });
         listView.setVerticalScrollBarEnabled(false);
         listView.setEmptyView(emptyView);
-        listView.setAnimateEmptyView(true, 0);
+        listView.setAnimateEmptyView(true, RecyclerListView.EMPTY_VIEW_ANIMATION_TYPE_ALPHA);
         frameLayout.addView(listView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
         listView.setAdapter(listAdapter);
         DefaultItemAnimator itemAnimator = new DefaultItemAnimator();
@@ -574,7 +574,7 @@ public class SessionsActivity extends BaseFragment implements NotificationCenter
     }
 
     @Override
-    protected void onBecomeFullyHidden() {
+    public void onBecomeFullyHidden() {
         if (undoView != null) {
             undoView.hide(true, 0);
         }

@@ -48,6 +48,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.NekoXConfig;
 import net.kilogram.messenger.parts.SignturesKt;
 import net.kilogram.messenger.utils.FileUtil;
@@ -106,7 +107,10 @@ public class ApplicationLoader extends Application {
 
     public static IMapsProvider getMapsProvider() {
         if (mapsProvider == null) {
-            mapsProvider = new GoogleMapsProvider();
+            if (NekoConfig.useOSMDroidMap.Bool())
+                mapsProvider = new OSMDroidMapsProvider();
+            else
+                mapsProvider = new GoogleMapsProvider();
         }
         return mapsProvider;
     }

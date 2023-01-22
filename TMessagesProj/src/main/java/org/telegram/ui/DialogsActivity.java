@@ -193,6 +193,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import kotlin.Unit;
+import net.kilogram.messenger.helpers.PasscodeHelper;
 import net.kilogram.messenger.ui.BottomBuilder;
 import net.kilogram.messenger.InternalUpdater;
 import net.kilogram.messenger.NekoConfig;
@@ -2787,6 +2788,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
             int accounts = 0;
             for (int a : SharedConfig.activeAccounts) {
+                if (PasscodeHelper.isAccountHidden(a)) continue;
                 TLRPC.User u = AccountInstance.getInstance(a).getUserConfig().getCurrentUser();
                 if (u != null) {
                     AccountSelectCell cell = new AccountSelectCell(context, false);

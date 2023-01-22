@@ -185,6 +185,7 @@ import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
 import kotlin.text.StringsKt;
 import net.kilogram.messenger.InternalUpdater;
+import net.kilogram.messenger.helpers.SettingsHelper;
 import net.kilogram.messenger.ui.BottomBuilder;
 import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.NekoXConfig;
@@ -2051,6 +2052,17 @@ public class LaunchActivity extends BasePermissionsActivity implements ActionBar
                                                 sticker = path.replace("addstickers/", "");
                                             } else if (path.startsWith("addemoji/")) {
                                                 emoji = path.replace("addemoji/", "");
+                                            } else if (path.startsWith("nekosettings/")) {
+                                                SettingsHelper.processDeepLink(data, fragment -> {
+                                                    AndroidUtilities.runOnUIThread(() -> presentFragment(fragment, false, false));
+                                                    if (AndroidUtilities.isTablet()) {
+                                                        actionBarLayout.showLastFragment();
+                                                        rightActionBarLayout.showLastFragment();
+                                                        drawerLayoutContainer.setAllowOpenDrawer(false, false);
+                                                    } else {
+                                                        drawerLayoutContainer.setAllowOpenDrawer(true, false);
+                                                    }
+                                                }, () -> showBulletin(factory -> factory.createErrorBulletin(LocaleController.getString("UnknownNekoSettingsOption", R.string.UnknownNekoSettingsOption))));
                                             } else if (path.startsWith("msg/") || path.startsWith("share/")) {
                                                 message = data.getQueryParameter("url");
                                                 if (message == null) {

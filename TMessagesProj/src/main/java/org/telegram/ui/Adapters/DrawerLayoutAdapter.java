@@ -49,6 +49,7 @@ import cn.hutool.core.util.StrUtil;
 import kotlin.jvm.functions.Function0;
 import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.helpers.PasscodeHelper;
 import net.kilogram.messenger.KiloConfig;
 
 public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter implements NotificationCenter.NotificationCenterDelegate {
@@ -267,6 +268,7 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter imple
     private void resetItems() {
         accountNumbers.clear();
         for (int a : SharedConfig.activeAccounts) {
+            if (PasscodeHelper.isAccountHidden(a)) continue;
             if (UserConfig.getInstance(a).isClientActivated()) {
                 accountNumbers.add(a);
             }

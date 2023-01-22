@@ -153,4 +153,22 @@
     <string name="enhancedFileLoader">Enhance Upload And Download Speed</string>
     <string name="mapDriftingFixForGoogleMaps">Fix Google Maps Drifting</string>
     <string name="useOSMDroidMap">Use OSMDroid Map</string>
+    <string name="UnknownNekoSettingsOption">There Is No Such Kilo Settings Option.</string>
+    <string name="PasscodeNeeded">You Have To Enable Passcode Lock First</string>
+    <string name="PasscodeNeko">Passcode</string>
+    <string name="PasscodeShowInSettings">Show In Kilo Settings</string>
+    <string name="PasscodeShowInSettingsAbout">After Hiding, You Can **ONLY** Open This Page By Link:</string>
+    <string name="PasscodeSet">Set Passcode</string>
+    <string name="PasscodeEdit">Change Passcode</string>
+    <string name="PasscodeRemove">Remove Passcode</string>
+    <string name="PasscodeHideAccount">Hide Account</string>
+    <string name="PasscodeAllowPanic">Logout With Panic Code</string>
+    <string name="PasscodeAbout">Set Different Passcodes For Each Account, And Switch Between Them By Entering The Corresponding Passcode.</string>
+    <string name="PasscodePanicCode">Panic Code</string>
+    <string name="PasscodePanicCodeSet">Set Panic Code</string>
+    <string name="PasscodePanicCodeEdit">Change Panic Code</string>
+    <string name="PasscodePanicCodeRemove">Turn Off Panic Code</string>
+    <string name="PasscodePanicCodeRemoveConfirmMessage">Are You Sure You Want To Turn Off Panic Code?</string>
+    <string name="PasscodeRemoveConfirmMessage">Are You Sure You Want To Remove Passcode For This Account?</string>
+    <string name="PasscodePanicCodeAbout">Use The Panic Code To Log Out Accounts If Something Goes Wrong.</string>
 </resources>

@@ -85,6 +85,7 @@ import java.util.Locale;
 import java.util.concurrent.Executor;
 
 import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helpers.PasscodeHelper;
 import net.kilogram.messenger.utils.VibrateUtil;
 
 import net.kilogram.messenger.KiloConfig;
@@ -954,7 +955,7 @@ public class PasscodeView extends FrameLayout implements NotificationCenter.Noti
                 onPasscodeError();
                 return;
             }
-            if (!SharedConfig.checkPasscode(password)) {
+            if (!PasscodeHelper.checkPasscode((Activity) getContext(), password) && !SharedConfig.checkPasscode(password)) {
                 SharedConfig.increaseBadPasscodeTries();
                 if (SharedConfig.passcodeRetryInMs > 0) {
                     checkRetryTextView();

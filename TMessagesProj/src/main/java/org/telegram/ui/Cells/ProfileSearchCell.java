@@ -44,7 +44,7 @@ import org.telegram.ui.NotificationsSettingsActivity;
 
 import java.util.Locale;
 
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.helper.MessageHelper;
 
 public class ProfileSearchCell extends BaseCell implements NotificationCenter.NotificationCenterDelegate {
 

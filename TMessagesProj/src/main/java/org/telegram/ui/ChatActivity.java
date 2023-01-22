@@ -392,6 +392,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     public int shareAlertDebugMode = DEBUG_SHARE_ALERT_MODE_NORMAL;
     public boolean shareAlertDebugTopicsSlowMotion;
 
+    public int shareAlertDebugMode = DEBUG_SHARE_ALERT_MODE_NORMAL;
+    public boolean shareAlertDebugTopicsSlowMotion;
+
     public boolean justCreatedTopic = false;
     protected TLRPC.Chat currentChat;
     protected TLRPC.User currentUser;
@@ -426,6 +429,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private ActionBarMenuSubItem addContactItem;
     private ActionBarMenuSubItem shareKeyItem;
     private ActionBarMenuSubItem clearHistoryItem;
+    private ActionBarMenuSubItem toTheBeginning;
+    private ActionBarMenuSubItem toTheMessage;
+    private ActionBarMenuSubItem hideTitleItem;
     private ActionBarMenuSubItem viewAsTopics;
     private ActionBarMenuSubItem closeTopicItem;
     private ActionBarMenuSubItem openForumItem;
@@ -1001,6 +1007,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int OPTION_SEND_NOW = 100;
     private final static int OPTION_EDIT_SCHEDULE_TIME = 102;
     private final static int OPTION_SPEED_PROMO = 103;
+    private final static int OPTION_COPY_PHOTO = 104;
 
     private final static int[] allowedNotificationsDuringChatListAnimations = new int[]{
             NotificationCenter.messagesRead,
@@ -1310,6 +1317,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
     private final static int topic_close = 60;
     private final static int open_forum = 61;
+    private final static int combine_message = 62;
 
     private ActionBarMenuItem actionModeOtherItem; // NekoX
 
@@ -3189,6 +3197,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } /*else if (currentChat == null && !currentUser.self || ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES)) {
                 headerItem.addSubItem(auto_delete_timer, R.drawable.msg_timer, LocaleController.getString("AutoDeleteSetTimer", R.string.AutoDeleteSetTimer));
             }*/
+
             if (currentChat != null && !isTopic) {
                 viewAsTopics = headerItem.addSubItem(view_as_topics, R.drawable.msg_topics, LocaleController.getString("TopicViewAsTopics", R.string.TopicViewAsTopics), themeDelegate);
             }
@@ -3198,7 +3207,12 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (themeDelegate.isThemeChangeAvailable()) {
                 headerItem.addSubItem(change_colors, R.drawable.msg_colors, LocaleController.getString("ChangeColors", R.string.ChangeColors), themeDelegate);
             }
-            if (!isTopic) {
+            if (!isTopic) { 
+                toTheBeginning = headerItem.addSubItem(to_the_beginning, R.drawable.ic_upward, LocaleController.getString("ToTheBeginning", R.string.ToTheBeginning));
+                toTheMessage = headerItem.addSubItem(to_the_message, R.drawable.msg_go_up, LocaleController.getString("ToTheMessage", R.string.ToTheMessage));
+                clearHistoryItem = headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory), themeDelegate);
+                hideTitleItem = headerItem.addSubItem(nkheaderbtn_hide_title, R.drawable.hide_title, LocaleController.getString("HideTitle", R.string.HideTitle), themeDelegate);
+
                 if (ChatObject.isChannel(currentChat) && !currentChat.creator) {
                     if (!ChatObject.isNotInChat(currentChat)) {
                         if (currentChat.megagroup) {

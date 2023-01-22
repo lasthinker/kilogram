@@ -4178,7 +4178,7 @@ public class DialogCell extends BaseCell {
             }
         } else if (captionMessage != null && captionMessage.caption != null) {
             MessageObject message = captionMessage;
-            CharSequence mess = message.caption.toString();
+            CharSequence mess = xyz.nextalone.nagram.helper.MessageHelper.INSTANCE.zalgoFilter(message.caption.toString());
             String emoji;
             if (!needEmoji) {
                 emoji = "";

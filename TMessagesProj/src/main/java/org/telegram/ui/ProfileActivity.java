@@ -8074,8 +8074,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     }
 
     @Override
-    public void didSelectDialogs(DialogsActivity
-                                         fragment, ArrayList<MessagesStorage.TopicKey> dids, CharSequence message, boolean param) {
+    public void didSelectDialogs(DialogsActivity fragment, ArrayList<MessagesStorage.TopicKey> dids, CharSequence message, boolean param) {
         long did = dids.get(0).dialogId;
         Bundle args = new Bundle();
         args.putBoolean("scrollToTopOnResume", true);
@@ -9480,12 +9479,10 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 new SearchResult(107, LocaleController.getString("GroupsAndChannels", R.string.GroupsAndChannels), LocaleController.getString("PrivacySettings", R.string.PrivacySettings), R.drawable.msg_secret, () -> presentFragment(new PrivacyControlActivity(ContactsController.PRIVACY_RULES_TYPE_INVITE, true))),
                 new SearchResult(123, LocaleController.getString("PrivacyVoiceMessages", R.string.PrivacyVoiceMessages), LocaleController.getString("PrivacySettings", R.string.PrivacySettings), R.drawable.msg_secret, () -> {
                     if (!getUserConfig().isPremium()) {
-                        if (!NekoConfig.disableVibration.Bool()) {
-                            try {
-                                fragmentView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-                            } catch (Exception e) {
-                                FileLog.e(e);
-                            }
+                        try {
+                            fragmentView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                        } catch (Exception e) {
+                            FileLog.e(e);
                         }
                         BulletinFactory.of(ProfileActivity.this).createRestrictVoiceMessagesPremiumBulletin().show();
                         return;
@@ -10446,3 +10443,4 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         return link;
     }
 }
+

@@ -351,7 +351,6 @@ public class SenderSelectPopup extends ActionBarPopupWindow {
                     try {
                         windowManager.removeViewImmediate(bulletinContainer);
                     } catch (Exception e) {
-
                     }
 
                     if (bulletinHideCallback != null) {

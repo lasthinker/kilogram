@@ -8,7 +8,7 @@ def verCode = 1113
 
 
 def officialVer = "9.1.6"
-def officialCode = 2929
+def officialCode = 2927
 
 configurations {
     compile.exclude module: "support-v4"

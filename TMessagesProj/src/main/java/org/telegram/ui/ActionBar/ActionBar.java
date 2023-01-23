@@ -1867,4 +1867,16 @@ public class ActionBar extends FrameLayout {
         }
     }
 
+    public void unreadBadgeSetCount(int count) {
+        if (backButtonImageView != null && NekoConfig.unreadBadgeOnBackButton.Bool()) {
+            backButtonImageView.setUnread(count);
+        }
+    }
+    public void setDrawBackButton(boolean b) {
+        this.drawBackButton = b;
+        if (backButtonImageView != null) {
+            backButtonImageView.invalidate();
+        }
+    }
+
 }

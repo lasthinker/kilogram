@@ -4939,6 +4939,9 @@ public class AndroidUtilities {
     }
 
     public static boolean shouldShowUrlInAlert(String url) {
+        if (NekoConfig.skipOpenLinkConfirm.Bool()) {
+            return false;
+        }
         try {
             Uri uri = Uri.parse(url);
             url = uri.getHost();

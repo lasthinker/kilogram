@@ -408,9 +408,25 @@ public class SessionsActivity extends BaseFragment implements NotificationCenter
                         } else {
                             authorization = (TLRPC.TL_authorization) passwordSessions.get(position - passwordSessionsStartRow);
                         }
-                        final AlertDialog progressDialog = new AlertDialog(getParentActivity(), AlertDialog.ALERT_TYPE_SPINNER);
-                        progressDialog.setCanCancel(false);
-                        progressDialog.show();
+                        TLRPC.TL_account_resetAuthorization req = new TLRPC.TL_account_resetAuthorization();
+                        req.hash = authorization.hash;
+                        ConnectionsManager.getInstance(currentAccount).sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
+                            try {
+                                progressDialog.dismiss();
+                            } catch (Exception e) {
+                                FileLog.e(e);
+                            }
+                            if (error == null) {
+                                sessions.remove(authorization);
+                                passwordSessions.remove(authorization);
+                                updateRows();
+                                if (listAdapter != null) {
+                                    listAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }));
+                    } else {
+                        final TLRPC.TL_webAuthorization authorization = (TLRPC.TL_webAuthorization) sessions.get(position - otherSessionsStartRow);
                         TLRPC.TL_account_resetWebAuthorization req = new TLRPC.TL_account_resetWebAuthorization();
                         req.hash = authorization.hash;
                         ConnectionsManager.getInstance(currentAccount).sendRequest(req, (response, error) -> AndroidUtilities.runOnUIThread(() -> {

@@ -1694,7 +1694,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 firstLayout = false;
             }
             super.onMeasure(widthSpec, heightSpec);
-            if ((initialDialogsType == 3 && NekoConfig.showTabsOnForward.Bool()) || !onlySelect) {
+            if (!onlySelect) {
                 if (appliedPaddingTop != t && viewPages != null && viewPages.length > 1 && !startedTracking && (tabsAnimation == null || !tabsAnimation.isRunning()) && !tabsAnimationInProgress && (filterTabsView == null || !filterTabsView.isAnimatingIndicator())) {
                     viewPages[1].setTranslationX(viewPages[0].getMeasuredWidth());
                 }
@@ -2546,11 +2546,6 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             updatePasscodeButton();
             updateProxyButton(false, false);
         }
-
-        scanItem = menu.addItem(nekox_scanqr, R.drawable.msg_qrcode);
-        scanItem.setContentDescription(LocaleController.getString("ScanQRCode", R.string.ScanQRCode));
-        scanItem.setVisibility(View.GONE);
-
         searchItem = menu.addItem(0, R.drawable.ic_ab_search).setIsSearchField(true, false).setActionBarMenuItemSearchListener(new ActionBarMenuItem.ActionBarMenuItemSearchListener() {
             boolean isSpeedItemCreated = false;
 
@@ -4563,163 +4558,6 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     if (actionBar.getTitleTextView().getAlpha() > 0) {
                         actionBar.getTitleTextView().setVisibility(View.VISIBLE);
                     }
-                }
-                if (proxyItem != null) {
-                    proxyItem.setAlpha(1f - progress);
-                }
-                if (downloadsItem != null) {
-                    downloadsItem.setAlpha(1f - progress);
-                }
-                if (passcodeItem != null) {
-                    passcodeItem.setAlpha(1f - progress);
-                }
-                if (searchItem != null) {
-                    searchItem.setAlpha(anotherFragmentOpened ? 0 : 1f);
-                }
-                if (actionBar.getBackButton() != null) {
-                    actionBar.getBackButton().setAlpha(progress == 1f ? 0f : 1f);
-                }
-
-                if (folderId != 0) {
-                    actionBarDefaultPaint.setColor(
-                        ColorUtils.blendARGB(
-                            Theme.getColor(Theme.key_actionBarDefaultArchived),
-                            Theme.getColor(Theme.key_actionBarDefault),
-                            progress
-                        )
-                    );
-                }
-
-                if (transitionPage != null) {
-                    transitionPage.listView.setOpenRightFragmentProgress(progress);
-                }
-            }
-        };
-        rightSlidingDialogContainer.setOpenProgress(0f);
-        contentView.addView(rightSlidingDialogContainer, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
-
-        if (new Random().nextInt(100) < 50)
-            PrivacyUtil.postCheckAll(getParentActivity(), currentAccount);
-        else if (new Random().nextInt(100) < 20)
-            UpdateUtil.postCheckFollowChannel(getParentActivity(), currentAccount);
-
-            boolean anotherFragmentOpened;
-            DialogsActivity.ViewPage transitionPage;
-
-            float fromScrollYProperty;
-
-            @Override
-            boolean getOccupyStatusbar() {
-                return actionBar != null && actionBar.getOccupyStatusBar();
-            }
-
-            @Override
-            public void openAnimationStarted(boolean open) {
-                if (!isArchive()) {
-                    actionBar.setBackButtonDrawable(menuDrawable = new MenuDrawable());
-                    menuDrawable.setRoundCap();
-                }
-
-                rightFragmentTransitionInProgress = true;
-                contentView.requestLayout();
-                fromScrollYProperty = actionBar.getTranslationY();
-
-                if (canShowFilterTabsView && filterTabsView != null) {
-                    filterTabsView.setVisibility(View.VISIBLE);
-                }
-                transitionPage = viewPages[0];
-                if (transitionPage.animationSupportListView == null) {
-                    transitionPage.animationSupportListView = new BlurredRecyclerView(context) {
-
-                        @Override
-                        protected void dispatchDraw(Canvas canvas) {
-
-                        }
-
-                        @Override
-                        public boolean dispatchTouchEvent(MotionEvent ev) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onInterceptTouchEvent(MotionEvent e) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onTouchEvent(MotionEvent e) {
-                            return false;
-                        }
-                    };
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                    layoutManager.setNeedFixEndGap(false);
-                    transitionPage.animationSupportListView.setLayoutManager(layoutManager);
-                    transitionPage.animationSupportDialogsAdapter = new DialogsAdapter(DialogsActivity.this, context, transitionPage.dialogsType, folderId, onlySelect, selectedDialogs, currentAccount);
-                    transitionPage.animationSupportDialogsAdapter.setIsTransitionSupport();
-                    transitionPage.animationSupportListView.setAdapter(transitionPage.animationSupportDialogsAdapter);
-                    transitionPage.addView(transitionPage.animationSupportListView);
-                }
-
-                transitionPage.animationSupportDialogsAdapter.setDialogsType(transitionPage.dialogsType);
-                transitionPage.dialogsAdapter.setCollapsedView(false, transitionPage.listView);
-                transitionPage.dialogsAdapter.setDialogsListFrozen(true);
-                transitionPage.animationSupportDialogsAdapter.setDialogsListFrozen(true);
-                transitionPage.layoutManager.setNeedFixEndGap(false);
-                setDialogsListFrozen(true);
-                hideFloatingButton(anotherFragmentOpened);
-                transitionPage.dialogsAdapter.notifyDataSetChanged();
-                transitionPage.animationSupportDialogsAdapter.notifyDataSetChanged();
-                transitionPage.listView.setAnimationSupportView(transitionPage.animationSupportListView, -actionBar.getTranslationY(), open);
-                transitionPage.listView.setClipChildren(false);
-                actionBar.setAllowOverlayTitle(false);
-                transitionPage.listView.stopScroll();
-                updateDrawerSwipeEnabled();
-            }
-
-            @Override
-            public void openAnimationFinished() {
-                if (!canShowFilterTabsView && filterTabsView != null) {
-                    filterTabsView.setVisibility(View.GONE);
-                }
-                transitionPage.layoutManager.setNeedFixGap(true);
-                transitionPage.dialogsAdapter.setCollapsedView(hasFragment(),  transitionPage.listView);
-                transitionPage.dialogsAdapter.setDialogsListFrozen(false);
-                transitionPage.animationSupportDialogsAdapter.setDialogsListFrozen(false);
-                setDialogsListFrozen(false);
-                transitionPage.listView.setClipChildren(true);
-                transitionPage.listView.invalidate();
-                transitionPage.dialogsAdapter.notifyDataSetChanged();
-                transitionPage.animationSupportDialogsAdapter.notifyDataSetChanged();
-                transitionPage.listView.setAnimationSupportView(null, 0, hasFragment());
-                rightFragmentTransitionInProgress = false;
-                actionBar.setAllowOverlayTitle(!hasFragment());
-                contentView.requestLayout();
-                transitionPage.layoutManager.setNeedFixEndGap(!hasFragment());
-                DialogsActivity.this.setScrollY(0);
-                searchViewPager.updateTabs();
-                updateDrawerSwipeEnabled();
-            }
-
-            @Override
-            void setOpenProgress(float progress) {
-                boolean opened = progress > 0f;
-                if (anotherFragmentOpened != opened) {
-                    anotherFragmentOpened = opened;
-                }
-                filterTabsMoveFrom = AndroidUtilities.dp(44);
-                filterTabsProgress = canShowFilterTabsView ? 1f - progress : 0;
-                if (fragmentView != null) {
-                    fragmentView.invalidate();
-                }
-
-                DialogsActivity.this.setScrollY(AndroidUtilities.lerp(fromScrollYProperty, 0, progress));
-                updateDrawerSwipeEnabled();
-                if (menuDrawable != null && hasFragment()) {
-                    menuDrawable.setRotation(progress, false);
-                }
-                actionBar.getTitleTextView().setAlpha(1f - progress);
-                if (actionBar.getTitleTextView().getAlpha() > 0) {
-                    actionBar.getTitleTextView().setVisibility(View.VISIBLE);
                 }
                 if (proxyItem != null) {
                     proxyItem.setAlpha(1f - progress);

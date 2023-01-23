@@ -97,9 +97,6 @@ public class SharedLinkCell extends FrameLayout {
                 if (pressedLinkIndex >= 0) {
                     delegate.onLinkPress(links.get(pressedLinkIndex).toString(), true);
                 }
-                if (pressedLinkIndex >= 0) {
-                    delegate.onLinkPress(links.get(pressedLinkIndex).toString(), true);
-                }
                 MotionEvent event = MotionEvent.obtain(0, 0, MotionEvent.ACTION_CANCEL, 0, 0, 0);
                 onTouchEvent(event);
                 event.recycle();

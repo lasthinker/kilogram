@@ -109,6 +109,7 @@
     <string name="ProviderDeepLTranslate">DeepL Translate</string>
     <string name="ProviderMicrosoftTranslator">Microsoft Translator</string>
     <string name="ProviderYouDao">YouDao Translate</string>
+    <string name="ProviderTelegram">Telegram</string>
     <string name="pressTitleToOpenAllChats">Press Title To Open \"All Chats\" Tab</string>
     <string name="DontSendGreetingSticker">Don\'t Send Greeting Sticker</string>
     <string name="TakeGIFasVideo">Take GIF As Video</string>

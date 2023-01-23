@@ -400,6 +400,12 @@ object KiloConfig {
             ConfigItem.configTypeInt,
             0
         )
+    val doNotUnarchiveBySwipe =
+        addConfig(
+            "DoNotUnarchiveBySwipe",
+            ConfigItem.configTypeBool,
+            false
+        )
 
     private fun addConfig(
         k: String,

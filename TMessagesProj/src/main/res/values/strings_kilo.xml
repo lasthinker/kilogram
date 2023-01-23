@@ -79,4 +79,5 @@
     <string name="DecorationNone">None</string>
     <string name="ChatDecoration">Chat Decoration</string>
     <string name="NeedChangeNekoSettings">You Need To Change Kilo-Settings</string>
+    <string name="DoNotUnarchiveBySwipe">Do Not Unarchive By Swipe</string>
 </resources>

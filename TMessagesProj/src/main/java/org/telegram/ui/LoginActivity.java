@@ -41,6 +41,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
+//import android.telephony.TelephonyManager;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -2803,65 +2805,68 @@ R.string.CustomBackend))
                 }
             }
 
-            ConnectionsManager.getInstance(currentAccount).cleanup(false);
-            final TLRPC.TL_auth_sendCode req = new TLRPC.TL_auth_sendCode();
-            req.api_hash = NekoXConfig.currentAppHash();
-            req.api_id = NekoXConfig.currentAppId();
-            req.phone_number = phone;
-            req.settings = new TLRPC.TL_codeSettings();
-            req.settings.allow_flashcall = simcardAvailable && allowCall && allowCancelCall && allowReadCallLog;
-            req.settings.allow_missed_call = simcardAvailable && allowCall;
-            req.settings.allow_app_hash = PushListenerController.getProvider().hasServices();
+            TLRPC.TL_codeSettings settings = new TLRPC.TL_codeSettings();
+            settings.allow_flashcall = simcardAvailable && allowCall && allowCancelCall && allowReadCallLog;
+            settings.allow_missed_call = simcardAvailable && allowCall;
+            settings.allow_app_hash = PushListenerController.getProvider().hasServices();
+
+
             ArrayList<TLRPC.TL_auth_loggedOut> tokens = MessagesController.getSavedLogOutTokens();
             if (tokens != null) {
                 for (int i = 0; i < tokens.size(); i++) {
-                    if (req.settings.logout_tokens == null) {
-                        req.settings.logout_tokens = new ArrayList<>();
+                    if (settings.logout_tokens == null) {
+                        settings.logout_tokens = new ArrayList<>();
                     }
-                    req.settings.logout_tokens.add(tokens.get(i).future_auth_token);
+                    settings.logout_tokens.add(tokens.get(i).future_auth_token);
                 }
                 MessagesController.saveLogOutTokens(tokens);
             }
-            if (req.settings.logout_tokens != null) {
-                req.settings.flags |= 64;
+            if (settings.logout_tokens != null) {
+                settings.flags |= 64;
             }
             SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE);
-//            preferences.edit().remove("sms_hash_code").apply();
-//            if (settings.allow_app_hash) {
-//                preferences.edit().putString("sms_hash", BuildVars.SMS_HASH).apply();
-//            } else {
-//                preferences.edit().remove("sms_hash").apply();
-//            }
-            if (req.settings.allow_flashcall) {
+            preferences.edit().remove("sms_hash_code").apply();
+            if (settings.allow_app_hash) {
+                preferences.edit().putString("sms_hash", BuildVars.SMS_HASH).apply();
+            } else {
+                preferences.edit().remove("sms_hash").apply();
+            }
+            if (settings.allow_flashcall) {
                 try {
-                    String number = "";
+                    String number = tm.getLine1Number();
                     if (!TextUtils.isEmpty(number)) {
-                        req.settings.current_number = PhoneNumberUtils.compare(phone, number);
-                        if (!req.settings.current_number) {
-                            req.settings.allow_flashcall = false;
+                        settings.current_number = PhoneNumberUtils.compare(phone, number);
+                        if (!settings.current_number) {
+                            settings.allow_flashcall = false;
                         }
                     } else {
                         if (UserConfig.getActivatedAccountsCount() > 0) {
-                            req.settings.allow_flashcall = false;
+                            settings.allow_flashcall = false;
                         } else {
-                            req.settings.current_number = false;
+                            settings.current_number = false;
                         }
                     }
                 } catch (Exception e) {
-                    req.settings.allow_flashcall = false;
+                    settings.allow_flashcall = false;
                     FileLog.e(e);
                 }
             }
 
-            TLObject reqFinal;
+            TLObject req;
             if (activityMode == MODE_CHANGE_PHONE_NUMBER) {
                 TLRPC.TL_account_sendChangePhoneCode changePhoneCode = new TLRPC.TL_account_sendChangePhoneCode();
                 changePhoneCode.phone_number = phone;
-                changePhoneCode.settings = req.settings;
-                reqFinal = changePhoneCode;
+                changePhoneCode.settings = settings;
+                req = changePhoneCode;
             } else {
                 ConnectionsManager.getInstance(currentAccount).cleanup(false);
-                reqFinal = req;
+
+                TLRPC.TL_auth_sendCode sendCode = new TLRPC.TL_auth_sendCode();
+                sendCode.api_hash = NekoXConfig.currentAppHash();
+                sendCode.api_id = NekoXConfig.currentAppId();
+                sendCode.phone_number = phone;
+                sendCode.settings = settings;
+                req = sendCode;
             }
 
             Bundle params = new Bundle();
@@ -3012,7 +3017,7 @@ R.string.CustomBackend))
                 return;
             }
             try {
-//                TelephonyManager tm = (TelephonyManager) ApplicationLoader.applicationContext.getSystemService(Context.TELEPHONY_SERVICE);
+                TelephonyManager tm = (TelephonyManager) ApplicationLoader.applicationContext.getSystemService(Context.TELEPHONY_SERVICE);
                 if (AndroidUtilities.isSimAvailable()) {
                     boolean allowCall = true;
                     boolean allowReadPhoneNumbers = true;
@@ -3561,7 +3566,7 @@ R.string.CustomBackend))
                                         mailer.putExtra(Intent.EXTRA_TEXT, "Phone: " + requestPhone + "\nApp version: " + version + "\nOS version: SDK " + Build.VERSION.SDK_INT + "\nDevice Name: " + Build.MANUFACTURER + Build.MODEL + "\nLocale: " + Locale.getDefault() + "\nError: " + lastError);
                                         getContext().startActivity(Intent.createChooser(mailer, "Send email..."));
                                     } catch (Exception e) {
-                                    needShowAlert(LocaleController.getString(R.string.NekoX), LocaleController.getString("NoMailInstalled", R.string.NoMailInstalled));
+                                        needShowAlert(LocaleController.getString(R.string.NekoX), LocaleController.getString("NoMailInstalled", R.string.NoMailInstalled));
                                     }
                                 })
                                 .setPositiveButton(LocaleController.getString(R.string.Close), null)

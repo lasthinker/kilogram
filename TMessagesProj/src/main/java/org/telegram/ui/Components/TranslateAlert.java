@@ -1,3 +1,4 @@
+package org.telegram.ui.Components;
 
 import static org.telegram.messenger.AndroidUtilities.displayMetrics;
 import static org.telegram.messenger.AndroidUtilities.dp;

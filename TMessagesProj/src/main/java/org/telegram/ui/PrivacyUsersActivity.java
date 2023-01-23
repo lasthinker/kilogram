@@ -539,7 +539,7 @@ public class PrivacyUsersActivity extends BaseFragment implements NotificationCe
                     if (currentType == TYPE_BLOCKED) {
                         actionCell.setText(LocaleController.getString("BlockUser", R.string.BlockUser), null, R.drawable.actions_addmember2, false);
                     } else {
-                        actionCell.setText(LocaleController.getString("PrivacyAddAnException", R.string.PrivacyAddAnException), null, R.drawable.actions_addmember2, uidArray.size() > 0);
+                        actionCell.setText(LocaleController.getString("PrivacyAddAnException", R.string.PrivacyAddAnException), null, R.drawable.baseline_person_add_24, uidArray.size() > 0);
                     }
                     break;
                 case 3:

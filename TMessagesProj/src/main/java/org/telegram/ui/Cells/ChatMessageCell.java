@@ -12646,6 +12646,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     } else if (messageObject.customReplyName != null) {
                         name = messageObject.customReplyName;
                     } else {
+                        // NekoX: never draw forwardede name
+                        drawForwardedName = false;
                         if (drawForwardedName) {
                             name = messageObject.replyMessageObject.getForwardedName();
                         }
@@ -18886,8 +18888,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 }
             }
             if (edited && !lastDrawingEdited && timeLayout != null) {
-                String customStr = KiloConfig.INSTANCE.getCustomEditedMessage().String();
-                String editedStr = customStr.equals("") ? LocaleController.getString("EditedMessage", R.string.EditedMessage) : customStr;
+                String editedStr = LocaleController.getString("EditedMessage", R.string.EditedMessage);
                 CharSequence text = timeLayout.getText();
                 int i = text.toString().indexOf(editedStr);
                 if (i >= 0) {

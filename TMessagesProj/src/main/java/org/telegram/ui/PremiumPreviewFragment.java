@@ -508,10 +508,10 @@ public class PremiumPreviewFragment extends BaseFragment implements Notification
 //                    bottomSheet.setParentFragment(PremiumPreviewFragment.this);
 //                    showDialog(bottomSheet);
 //                } else {
-//                if (subscriptionTiers.isEmpty()) {
-//                    return;
-//                }
-//                    showDialog(new PremiumFeatureBottomSheet(PremiumPreviewFragment.this, cell.data.type, false, subscriptionTiers.get(selectedTierIndex)));
+                if (subscriptionTiers.isEmpty()) {
+                    return;
+                }
+                    showDialog(new PremiumFeatureBottomSheet(PremiumPreviewFragment.this, cell.data.type, false, subscriptionTiers.get(selectedTierIndex)));
                // }
             }
         });
@@ -1265,8 +1265,11 @@ public class PremiumPreviewFragment extends BaseFragment implements Notification
             premiumButtonView.setButton(getPremiumButtonText(currentAccount), v -> buyPremium(this, subscriptionTiers.get(selectedTierIndex), "settings"), animated);
             return;
         }
+        if (!subscriptionTiers.isEmpty()) {
+            premiumButtonView.setButton(getPremiumButtonText(currentAccount, subscriptionTiers.get(selectedTierIndex)), v -> buyPremium(this, subscriptionTiers.get(selectedTierIndex), "settings"), animated);
             premiumButtonView.setFlickerDisabled(false);
         }
+    }
 
     @Override
     public boolean isLightStatusBar() {

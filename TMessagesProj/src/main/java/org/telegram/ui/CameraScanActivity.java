@@ -161,11 +161,13 @@ public class CameraScanActivity extends BaseFragment {
         default void onDismiss() {}
     }
 
+    // Official Signature
     public static BottomSheet showAsSheet(BaseFragment parentFragment, boolean gallery, int type, CameraScanActivityDelegate cameraDelegate) {
-        return showAsSheet(parentFragment.getParentActivity(), gallery, type, cameraDelegate);
+        return showAsSheet(parentFragment.getParentActivity(), gallery, type, cameraDelegate, false);
     }
 
-    public static BottomSheet showAsSheet(Activity parentActivity, boolean gallery, int type, CameraScanActivityDelegate cameraDelegate) {
+    // Add the any parameter
+    public static BottomSheet showAsSheet(Activity parentActivity, boolean gallery, int type, CameraScanActivityDelegate cameraDelegate, boolean any) {
         if (parentActivity == null) {
             return null;
         }
@@ -764,7 +766,6 @@ public class CameraScanActivity extends BaseFragment {
             if (currentType == TYPE_QR_WEB_BOT) {
                 descriptionText.setAlpha(1f - recognizedT);
             }
-            if (galleryButton != null) galleryButton.setAlpha(1f - recognizedT);
             flashButton.setAlpha(1f - recognizedT);
             backShadowAlpha = .5f + recognizedT * .25f;
             fragmentView.invalidate();

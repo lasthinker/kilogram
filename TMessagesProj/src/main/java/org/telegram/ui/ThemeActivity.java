@@ -631,7 +631,7 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
             distanceRow = rowCount++;
             settings2Row = rowCount++;
 
-            if (true || SharedConfig.getDevicePerformanceClass() == SharedConfig.PERFORMANCE_CLASS_LOW || BuildVars.DEBUG_VERSION) {
+            if (SharedConfig.getDevicePerformanceClass() == SharedConfig.PERFORMANCE_CLASS_LOW || BuildVars.DEBUG_VERSION) {
                 lightModeRow = rowCount++;
                 lightModeTopInfoRow = rowCount++;
             }
@@ -1162,6 +1162,11 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
                     if (view instanceof TextCheckCell) {
                         ((TextCheckCell) view).setChecked(SharedConfig.chatBlurEnabled());
                     }
+                }
+            } else if (position == lightModeRow) {
+                SharedConfig.getLiteMode().toggleMode();
+                if (view instanceof TextCheckCell) {
+                    ((TextCheckCell) view).setChecked(SharedConfig.getLiteMode().enabled());
                 }
             } else if (position == lightModeRow) {
                 SharedConfig.getLiteMode().toggleMode();

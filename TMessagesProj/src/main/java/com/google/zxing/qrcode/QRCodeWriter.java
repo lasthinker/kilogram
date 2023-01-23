@@ -37,6 +37,7 @@ import com.google.zxing.qrcode.encoder.QRCode;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
+import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.R;
 import org.telegram.messenger.SvgHelper;
 import org.telegram.ui.Components.RLottieDrawable;
@@ -391,11 +392,13 @@ public final class QRCodeWriter {
         imageBlockX = (inputWidth - imageBloks) / 2;
         imageSize = imageBloks * multiple - 24;
         int imageX = (size - imageSize) / 2;
-    if (includeSideQuads) {
-      blackPaint.setColor(color);
-      drawSideQuadsGradient(canvas, blackPaint, rect, sideQuadSize, multiple, padding, size, radiusFactor, radii, backgroundColor, color);
-    }
-        boolean isTransparentBackground = Color.alpha(backgroundColor) == 0;
+
+
+            if (includeSideQuads) {
+                blackPaint.setColor(color);
+            drawSideQuadsGradient(canvas, blackPaint, rect, sideQuadSize, multiple, padding, size, radiusFactor, radii, backgroundColor,color);
+            }
+            boolean isTransparentBackground = Color.alpha(backgroundColor) == 0;
         float r = multiple / 2.0f * radiusFactor;
 
         for (int y = 0, outputY = padding; y < inputHeight; y++, outputY += multiple) {

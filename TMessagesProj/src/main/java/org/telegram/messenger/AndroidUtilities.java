@@ -2648,7 +2648,7 @@ public class AndroidUtilities {
 //    }
 
     public static boolean shouldShowClipboardToast() {
-        return (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || !OneUIUtilities.hasBuiltInClipboardToasts()) && (Build.VERSION.SDK_INT < 32 || XiaomiUtilities.isMIUI()); /* TODO: Update to TIRAMISU when compileSdkVersion would be 32 */
+        return (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || !OneUIUtilities.hasBuiltInClipboardToasts()) && Build.VERSION.SDK_INT < 32 /* TODO: Update to TIRAMISU when compileSdkVersion would be 32 */;
     }
 
     public static boolean addToClipboard(CharSequence str) {
@@ -4292,7 +4292,17 @@ public class AndroidUtilities {
             SharedConfig.addProxy(info);
 
             NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.proxySettingsChanged);
-
+            if (activity instanceof LaunchActivity) {
+                INavigationLayout layout = ((LaunchActivity) activity).getActionBarLayout();
+                BaseFragment fragment = layout.getLastFragment();
+                if (fragment instanceof ChatActivity) {
+                    ((ChatActivity) fragment).getUndoView().showWithAction(0, UndoView.ACTION_PROXY_ADDED, null);
+                } else {
+                    NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.showBulletin, Bulletin.TYPE_SUCCESS, LocaleController.getString(R.string.ProxyAddedSuccess));
+                }
+            } else {
+                NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.showBulletin, Bulletin.TYPE_SUCCESS, LocaleController.getString(R.string.ProxyAddedSuccess));
+            }
             dismissRunnable.run();
 
         });

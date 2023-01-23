@@ -29,6 +29,7 @@ import android.os.StatFs;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.util.LongSparseArray;
@@ -40,9 +41,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +56,9 @@ import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.BotWebViewVibrationEffect;
+import org.telegram.messenger.CacheByChatsController;
+import org.telegram.messenger.Emoji;
 import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.BotWebViewVibrationEffect;
 import org.telegram.messenger.CacheByChatsController;
@@ -70,6 +77,7 @@ import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.Utilities;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLRPC;
+import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.ActionBarMenu;
 import org.telegram.ui.ActionBar.ActionBarMenuItem;
@@ -83,13 +91,13 @@ import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.ActionBar.ThemeDescription;
 import org.telegram.ui.Cells.CheckBoxCell;
 import org.telegram.ui.Cells.HeaderCell;
+import org.telegram.ui.Cells.ShadowSectionCell;
 import org.telegram.ui.Cells.TextCell;
 import org.telegram.ui.Cells.TextCheckBoxCell;
 import org.telegram.ui.Cells.TextInfoPrivacyCell;
 import org.telegram.ui.Cells.TextSettingsCell;
 import org.telegram.ui.Components.AlertsCreator;
 import org.telegram.ui.Components.AnimatedFloat;
-import org.telegram.ui.Components.AnimatedTextView;
 import org.telegram.ui.Components.BackupImageView;
 import org.telegram.ui.Components.CacheChart;
 import org.telegram.ui.Components.CheckBox2;
@@ -154,9 +162,21 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
     private LinearLayoutManager layoutManager;
     AlertDialog progressDialog;
 
+    private int databaseRow;
+    private int databaseInfoRow;
+    private int keepMediaHeaderRow;
+    private int keepMediaInfoRow;
+    private int cacheInfoRow;
+    private int deviseStorageHeaderRow;
+    private int storageUsageRow;
+    private int keepMediaChooserRow;
+    private int rowCount;
+
+    private int resetDataRow;
+
     private boolean[] selected = new boolean[] { true, true, true, true, true, true, true, true, true };
     private long databaseSize = -1;
-    private long cacheSize = -1, cacheEmojiSize = -1, cacheTempSize = -1, cacheCustomEmojiSize = -1;
+    private long cacheSize = -1, cacheEmojiSize = -1, cacheTempSize = -1;
     private long documentsSize = -1;
     private long audioSize = -1;
     private long musicSize = -1;
@@ -166,8 +186,6 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
     private long totalSize = -1;
     private long totalDeviceSize = -1;
     private long totalDeviceFreeSize = -1;
-//    private long migrateOldFolderRow = -1;
-    private StorageDiagramView.ClearViewData[] clearViewData = new StorageDiagramView.ClearViewData[7];
     private long migrateOldFolderRow = -1;
     private boolean calculating = true;
     private boolean collapsed = true;
@@ -230,14 +248,14 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
 
         Utilities.globalQueue.postRunnable(() -> {
             cacheSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), 5);
-
-            cacheSize += getDirectorySize(new File(ApplicationLoader.getDataDirFixed(), "cache"), 0);
-            cacheSize += getDirectorySize(ApplicationLoader.applicationContext.getExternalFilesDir("logs"), 0);
             if (canceled) {
                 return;
             }
 
             cacheTempSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), 4);
+
+            cacheSize += getDirectorySize(new File(ApplicationLoader.getDataDirFixed(), "cache"), 0);
+            cacheSize += getDirectorySize(ApplicationLoader.applicationContext.getExternalFilesDir("logs"), 0);
             if (canceled) {
                 return;
             }
@@ -271,11 +289,6 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                 return;
             }
             stickersCacheSize += cacheEmojiSize;
-            cacheCustomEmojiSize = EmojiHelper.getInstance().getEmojiSize();
-            if (canceled) {
-                return;
-            }
-            stickersCacheSize += cacheCustomEmojiSize;
             audioSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_AUDIO), 0);
             totalSize = cacheSize + cacheTempSize + videoSize + audioSize + photoSize + documentsSize + musicSize + stickersCacheSize;
 
@@ -653,6 +666,11 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
             sectionsEndRow = itemInners.size();
             itemInners.add(new ItemInner(VIEW_TYPE_CLEAR_CACHE_BUTTON, null, null));
             itemInners.add(ItemInner.asInfo(LocaleController.getString("StorageUsageInfo", R.string.StorageUsageInfo)));
+
+            resetDataRow = rowCount++;
+//        if (hasOldFolder) {
+//            migrateOldFolderRow = rowCount++;
+//        }
         } else {
             sectionsEndRow = -1;
         }
@@ -770,7 +788,7 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                 clearedSize += audioSize;
             } else if (a == 5) {
                 type = 100;
-                clearedSize += stickersCacheSize + cacheEmojiSize + cacheCustomEmojiSize;
+                clearedSize += stickersCacheSize + cacheEmojiSize;
             } else if (a == 6) {
                 clearedSize += cacheSize;
                 documentsMusicType = 5;
@@ -790,14 +808,13 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                 file = FileLoader.checkDirectory(type);
             }
             if (file != null) {
-                    Utilities.clearDir(file.getAbsolutePath(), documentsMusicType, Long.MAX_VALUE, true);
+                Utilities.clearDir(file.getAbsolutePath(), documentsMusicType, Long.MAX_VALUE, true);
             }
             if (type == 100) {
                 file = FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE);
                 if (file != null) {
                     Utilities.clearDir(file.getAbsolutePath(), 3, Long.MAX_VALUE, false);
                 }
-                EmojiHelper.getInstance().deleteAll();
             }
             if (type == FileLoader.MEDIA_DIR_IMAGE || type == FileLoader.MEDIA_DIR_VIDEO) {
                 int publicDirectoryType;
@@ -822,7 +839,7 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
             if (type == FileLoader.MEDIA_DIR_CACHE) {
                 cacheSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), 5);
                 cacheTempSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), 4);
-                imagesCleared = true;
+                    imagesCleared = true;
 
         totalDeviceSize = blocksTotal * blockSize;
         totalDeviceFreeSize = availableBlocks * blockSize;
@@ -832,30 +849,28 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                         FileUtil.delete(new File(EnvUtil.getTelegramPath(), "logs"));
                     } catch (Exception ignored) {
                     }
-            } else if (type == FileLoader.MEDIA_DIR_AUDIO) {
-                audioSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_AUDIO), documentsMusicType);
-            } else if (type == FileLoader.MEDIA_DIR_DOCUMENT) {
-                if (documentsMusicType == 1) {
-                    documentsSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_DOCUMENT), documentsMusicType);
-                    documentsSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_FILES), documentsMusicType);
-                } else {
-                    musicSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_DOCUMENT), documentsMusicType);
-                    musicSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_FILES), documentsMusicType);
-                }
-            } else if (type == FileLoader.MEDIA_DIR_IMAGE) {
-                imagesCleared = true;
-                photoSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_IMAGE), documentsMusicType);
-                photoSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_IMAGE_PUBLIC), documentsMusicType);
-            } else if (type == FileLoader.MEDIA_DIR_VIDEO) {
-                videoSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_VIDEO), documentsMusicType);
-                videoSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_VIDEO_PUBLIC), documentsMusicType);
-            } else if (type == 100) {
-                imagesCleared = true;
-                stickersCacheSize = getDirectorySize(new File(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), "acache"), documentsMusicType);
+                } else if (type == FileLoader.MEDIA_DIR_AUDIO) {
+                    audioSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_AUDIO), documentsMusicType);
+                } else if (type == FileLoader.MEDIA_DIR_DOCUMENT) {
+                    if (documentsMusicType == 1) {
+                        documentsSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_DOCUMENT), documentsMusicType);
+                        documentsSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_FILES), documentsMusicType);
+                    } else {
+                        musicSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_DOCUMENT), documentsMusicType);
+                        musicSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_FILES), documentsMusicType);
+                    }
+                } else if (type == FileLoader.MEDIA_DIR_IMAGE) {
+                    imagesCleared = true;
+                    photoSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_IMAGE), documentsMusicType);
+                    photoSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_IMAGE_PUBLIC), documentsMusicType);
+                } else if (type == FileLoader.MEDIA_DIR_VIDEO) {
+                    videoSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_VIDEO), documentsMusicType);
+                    videoSize += getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_VIDEO_PUBLIC), documentsMusicType);
+                } else if (type == 100) {
+                    imagesCleared = true;
+                    stickersCacheSize = getDirectorySize(new File(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), "acache"), documentsMusicType);
                 cacheEmojiSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), 3);
                 stickersCacheSize += cacheEmojiSize;
-                cacheCustomEmojiSize = EmojiHelper.getInstance().getEmojiSize();
-                stickersCacheSize += cacheCustomEmojiSize;
             }
         }
         final boolean imagesClearedFinal = imagesCleared;
@@ -1894,8 +1909,8 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int position = holder.getAdapterPosition();
-            // NekoX: Remove migrateOldFolderRow
-            return (holder.getItemViewType() == VIEW_TYPE_STORAGE && (totalSize > 0) && !calculating) || holder.getItemViewType() == VIEW_TYPE_CHAT || holder.getItemViewType() == VIEW_TYPE_KEEP_MEDIA_CELL || holder.getItemViewType() == VIEW_TYPE_SECTION;
+            //
+            return position == migrateOldFolderRow || (holder.getItemViewType() == VIEW_TYPE_STORAGE && (totalSize > 0) && !calculating) || holder.getItemViewType() == VIEW_TYPE_CHAT || holder.getItemViewType() == VIEW_TYPE_KEEP_MEDIA_CELL || holder.getItemViewType() == VIEW_TYPE_SECTION;
         }
 
         @Override
@@ -1951,6 +1966,11 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
 //                case 5:
 //                    view = new ShadowSectionCell(mContext);
 //                    break;
+                case VIEW_TYPE_CHAT:
+                    UserCell userCell = new UserCell(getContext(), getResourceProvider());
+                    userCell.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+                    view = userCell;
+                    break;
                 case VIEW_TYPE_CHAT:
                     UserCell userCell = new UserCell(getContext(), getResourceProvider());
                     userCell.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
@@ -2212,9 +2232,10 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
 //                        textCell.setTextAndValue(LocaleController.getString("ClearLocalDatabase", R.string.ClearLocalDatabase), AndroidUtilities.formatFileSize(databaseSize), updateDatabaseSize, false);
 //                        updateDatabaseSize = false;
 //                    } else
-//                    if (position == migrateOldFolderRow) {
-//                        textCell.setTextAndValue(LocaleController.getString("MigrateOldFolder", R.string.MigrateOldFolder), null, false);
-//                    }
+                    if (position == resetDataRow) {
+                        textCell.setText(LocaleController.getString("StorageReset", R.string.StorageReset), false);
+                        textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteRedText));
+                    }
                     break;
                 case VIEW_TYPE_INFO:
                     TextInfoPrivacyCell privacyCell = (TextInfoPrivacyCell) holder.itemView;

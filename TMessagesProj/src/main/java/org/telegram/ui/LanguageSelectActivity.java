@@ -36,6 +36,12 @@ import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.Utilities;
+import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.ActionBar.ThemeDescription;
+import org.telegram.ui.Cells.HeaderCell;
+import org.telegram.ui.Cells.LanguageCell;
+import org.telegram.tgnet.ConnectionsManager;
+import org.telegram.tgnet.TLRPC;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.ActionBarMenu;
@@ -252,6 +258,42 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
             }
         });
 
+                    final AlertDialog progressDialog = new AlertDialog(getContext(), AlertDialog.ALERT_TYPE_SPINNER);
+                    int reqId = LocaleController.getInstance().applyLanguage(localeInfo, true, false, false, true, currentAccount, () -> {
+                        progressDialog.dismiss();
+                        if (!sameLang) {
+                            actionBar.closeSearchField();
+                            updateLanguage();
+                        }
+                    });
+                    if (reqId != 0) {
+                        progressDialog.setOnCancelListener(di -> {
+                            ConnectionsManager.getInstance(currentAccount).cancelRequest(reqId, true);
+                        });
+                    }
+
+                    String langCode = localeInfo.pluralLangCode,
+                            prevLangCode = prevLocale.pluralLangCode;
+                    SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+                    HashSet<String> selectedLanguages = RestrictedLanguagesSelectActivity.getRestrictedLanguages();
+                    HashSet<String> newSelectedLanguages = new HashSet<String>(selectedLanguages);
+
+                    if (selectedLanguages.contains(langCode)) {
+                        newSelectedLanguages.removeIf(s -> s != null && s.equals(langCode));
+                        if (!selectedLanguages.contains(prevLangCode))
+                            newSelectedLanguages.add(prevLangCode);
+                    }
+                    preferences.edit().putStringSet("translate_button_restricted_languages", newSelectedLanguages).apply();
+
+                    if (!sameLang) {
+                        progressDialog.showDelayed(500);
+                    }
+                }
+            } catch (Exception e) {
+                FileLog.e(e);
+            }
+        });
+
         listView.setOnItemLongClickListener((view, position) -> {
             try {
                 if (getParentActivity() == null || parentLayout == null || !(view instanceof TextRadioCell)) {
@@ -409,7 +451,7 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
         if (listView != null) {
             for (int i = 0; i < listView.getChildCount(); ++i) {
                 View child = listView.getChildAt(i);
-                if (child instanceof HeaderCell) {
+                if (child instanceof TranslateSettings || child instanceof HeaderCell) {
                     listAdapter.notifyItemChanged(listView.getChildAdapterPosition(child));
                 } else {
                     listAdapter.onBindViewHolder(listView.getChildViewHolder(child), listView.getChildAdapterPosition(child));
@@ -726,11 +768,11 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
 //                    TranslateSettings translateSettings = new TranslateSettings(mContext);
 //                    view = translateSettings;
 //                    break;
-                case 3:
-                    HeaderCell header = new HeaderCell(mContext);
-                    header.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
-                    view = header;
-                    break;
+//                case 3:
+//                    HeaderCell header = new HeaderCell(mContext);
+//                    header.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+//                    view = header;
+//                    break;
                 case 1:
                 default: {
                     view = new ShadowSectionCell(mContext);
@@ -747,7 +789,7 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                     if (!search) {
                         position -= 2;
                     }
-                    TextRadioCell textSettingsCell = (TextRadioCell) holder.itemView;
+                    LanguageCell textSettingsCell = (LanguageCell) holder.itemView;
                     LocaleController.LocaleInfo localeInfo = null;
                     boolean last;
                     if (search) {
@@ -769,9 +811,9 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                     }
                     if (localeInfo != null) {
                         if (localeInfo.isLocal()) {
-                            textSettingsCell.setTextAndValueAndCheck(String.format("%1$s (%2$s)", localeInfo.name, LocaleController.getString("LanguageCustom", R.string.LanguageCustom)), localeInfo.nameEnglish, false, false, !last);
+                            textSettingsCell.setLanguage(LanguageSelectActivity.this, localeInfo, String.format("%1$s (%2$s)", localeInfo.name, LocaleController.getString("LanguageCustom", R.string.LanguageCustom)), !last);
                         } else {
-                            textSettingsCell.setTextAndValueAndCheck(localeInfo.name, localeInfo.nameEnglish, false, false, !last);
+                            textSettingsCell.setLanguage(LanguageSelectActivity.this, localeInfo, null, !last);
                         }
                     }
                     textSettingsCell.setChecked(localeInfo == LocaleController.getInstance().getCurrentLocaleInfo());
@@ -788,12 +830,12 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                     }
                     break;
                 }
-//                case 2: {
+                case 2: {
 //                    TranslateSettings translateSettings = (TranslateSettings) holder.itemView;
 //                    translateSettings.setVisibility(searching ? View.GONE : View.VISIBLE);
-//                    translateSettings.updateTranslations();
-//                    break;
-//                }
+//                    translateSettings.updateHeight();
+                    break;
+                }
                 case 3: {
                     HeaderCell header = (HeaderCell) holder.itemView;
                     header.setText(LocaleController.getString("Language", R.string.Language));

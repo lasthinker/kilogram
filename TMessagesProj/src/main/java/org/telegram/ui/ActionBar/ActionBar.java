@@ -145,7 +145,7 @@ public class ActionBar extends FrameLayout {
     private View.OnTouchListener interceptTouchEventListener;
     private final Theme.ResourcesProvider resourcesProvider;
 
-    private PorterDuff.Mode colorFilterMode = PorterDuff.Mode.SRC_IN;
+    private PorterDuff.Mode colorFilterMode = PorterDuff.Mode.MULTIPLY;
 
     SizeNotifierFrameLayout contentView;
     boolean blurredBackground;

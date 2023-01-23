@@ -3807,6 +3807,11 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
             currentAccount.getNotificationCenter().addObserver(this, NotificationCenter.fileLoaded);
             currentAccount.getNotificationCenter().addObserver(this, NotificationCenter.fileLoadProgressChanged);
             currentAccount.getNotificationCenter().addObserver(this, NotificationCenter.fileLoadFailed);
+            progressDialog = new AlertDialog(context, AlertDialog.ALERT_TYPE_LOADING);
+            progressDialog.setMessage(LocaleController.getString("Loading", R.string.Loading));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setCancelable(true);
+            progressDialog.setOnCancelListener(d -> cancelled = true);
             notificationId = SaveToDownloadReceiver.createNotificationId();
             progressDialog = new AlertDialog(context, AlertDialog.ALERT_TYPE_LOADING);
             progressDialog.setMessage(LocaleController.getString("Loading", R.string.Loading));

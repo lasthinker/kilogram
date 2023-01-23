@@ -8,6 +8,8 @@
 
 package org.telegram.ui;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
@@ -16,6 +18,8 @@ import android.content.Context;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +46,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.v2ray.ang.V2RayConfig;
@@ -96,6 +101,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -160,10 +166,17 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
     private List<SharedConfig.ProxyInfo> proxyList = new ArrayList<>();
     private boolean wasCheckedAllList;
 
+    private ActionBarMenuItem otherItem;
+
+    private List<SharedConfig.ProxyInfo> selectedItems = new ArrayList<>();
+    private List<SharedConfig.ProxyInfo> proxyList = new ArrayList<>();
+    private boolean wasCheckedAllList;
+
     public class TextDetailProxyCell extends FrameLayout {
 
         private TextView textView;
         private TextView valueTextView;
+        private ImageView checkImageView;
         private SharedConfig.ProxyInfo currentInfo;
         private Drawable checkDrawable;
 
@@ -416,8 +429,6 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
     public ProxyListActivity(String alert) {
         this.alert = alert;
     }
-
-    private LinkedList<SharedConfig.ProxyInfo> proxyList = SharedConfig.getProxyList();
 
     @Override
     public boolean onFragmentCreate() {
@@ -1004,6 +1015,11 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
         return true;
     }
 
+    @SuppressLint("NewApi")
+    private void addProxy() {
+        BottomBuilder builder = new BottomBuilder(getParentActivity());
+        builder.addItems(new String[]{
+
     private void updateRows(boolean notify) {
         proxyList = SharedConfig.getProxyList();
         rowCount = 0;
@@ -1030,6 +1046,65 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
 
                 CameraScanActivity.showAsSheet(this, false, CameraScanActivity.TYPE_QR, new CameraScanActivity.CameraScanActivityDelegate() {
 
+                    @Override
+                    public void didFindQr(String text) {
+
+                        try {
+                            HttpUrl.parse(text);
+                            Browser.openUrl(getParentActivity(), text);
+                            return;
+                        } catch (Exception ignored) {
+                        }
+
+                        AlertUtil.showCopyAlert(getParentActivity(), text);
+
+                    }
+
+                });
+            }
+            return Unit.INSTANCE;
+        });
+        builder.show();
+    }
+
+    private void updateRows(boolean notify) {
+        proxyList = SharedConfig.getProxyList();
+        rowCount = 0;
+        useProxyRow = rowCount++;
+
+        if (notify) {
+            proxyList.clear();
+            proxyList.addAll(SharedConfig.proxyList);
+
+            boolean checking = false;
+            if (!wasCheckedAllList) {
+                for (SharedConfig.ProxyInfo info : proxyList) {
+                    if (info.checking || info.availableCheckTime == 0) {
+                        checking = true;
+                        break;
+                    }
+                }
+                if (!checking) {
+                    wasCheckedAllList = true;
+                }
+            }
+
+            boolean isChecking = checking;
+            Collections.sort(proxyList, (o1, o2) -> {
+                long bias1 = SharedConfig.currentProxy == o1 ? -200000 : 0;
+                if (!o1.available) {
+                    bias1 += 100000;
+                }
+                long bias2 = SharedConfig.currentProxy == o2 ? -200000 : 0;
+                if (!o2.available) {
+                    bias2 += 100000;
+                }
+                return Long.compare(isChecking && o1 != SharedConfig.currentProxy ? SharedConfig.proxyList.indexOf(o1) * 10000L : o1.ping + bias1,
+                        isChecking && o2 != SharedConfig.currentProxy ? SharedConfig.proxyList.indexOf(o2) * 10000L : o2.ping + bias2);
+            });
+        }
+
+        enablePublicProxyRow = rowCount++;
         if (!proxyList.isEmpty()) {
             proxyStartRow = rowCount;
             rowCount += proxyList.size();
@@ -1067,7 +1142,7 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
         } else {
             deleteAllRow = -1;
         }
-        checkProxyList();
+        checkProxyList(false);
         if (notify && listAdapter != null) {
             UIUtil.runOnUIThread(() -> {
                 try {
@@ -1260,6 +1335,19 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
                         wasCheckedAllList = true;
                     }
                 }
+
+                boolean checking = false;
+                if (!wasCheckedAllList) {
+                    for (SharedConfig.ProxyInfo info : proxyList) {
+                        if (info.checking || info.availableCheckTime == 0) {
+                            checking = true;
+                            break;
+                        }
+                    }
+                    if (!checking) {
+                        wasCheckedAllList = true;
+                    }
+                }
                 if (!checking) {
                     updateRows(true);
                 }
@@ -1425,7 +1513,7 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int position = holder.getAdapterPosition();
-            return position == useProxyRow || position == callsRow || position == proxyAddRow || position == deleteAllRow || position >= proxyStartRow && position < proxyEndRow;
+            return position == useProxyRow || position == callsRow || position == enablePublicProxyRow || position == deleteAllRow || position >= proxyStartRow && position < proxyEndRow;
         }
 
         @Override
@@ -1468,8 +1556,8 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
                 return -1;
             } else if (position == proxyDetailRow) {
                 return -2;
-            } else if (position == proxyAddRow) {
-                return -3;
+//            } else if (position == proxyAddRow) {
+//                return -3;
             } else if (position == useProxyRow) {
                 return -4;
             } else if (position == callsRow) {

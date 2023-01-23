@@ -221,14 +221,13 @@ public class ImageUpdater implements NotificationCenter.NotificationCenterDelega
         if (parentFragment == null || parentFragment.getParentActivity() == null) {
             return;
         }
-
         canceled = false;
         this.type = type;
         if (useAttachMenu) {
             openAttachMenu(onDismiss);
             return;
         }
-        BottomSheet.Builder builder = new BottomSheet.Builder(parentFragment.getParentActivity());
+        BottomBuilder builder = new BottomBuilder(parentFragment.getParentActivity());
 
         if (type == TYPE_SET_PHOTO_FOR_USER) {
             builder.setTitle(LocaleController.formatString("SetPhotoFor", R.string.SetPhotoFor, user.first_name), true);
@@ -237,10 +236,6 @@ public class ImageUpdater implements NotificationCenter.NotificationCenterDelega
         } else {
             builder.setTitle(LocaleController.getString("ChoosePhoto", R.string.ChoosePhoto), true);
         }
-
-        ArrayList<CharSequence> items = new ArrayList<>();
-        ArrayList<Integer> icons = new ArrayList<>();
-        ArrayList<Integer> ids = new ArrayList<>();
 
         if (hasAvatar && parentFragment instanceof ProfileActivity) {
 

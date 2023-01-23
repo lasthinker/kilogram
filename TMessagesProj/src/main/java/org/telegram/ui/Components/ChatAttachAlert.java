@@ -132,7 +132,6 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
 
     public boolean canOpenPreview = false;
     private boolean isSoundPicker = false;
-    private boolean isEmojiPicker = false;
     private ImageUpdater.AvatarFor setAvatarFor;
 
     public void setCanOpenPreview(boolean canOpenPreview) {

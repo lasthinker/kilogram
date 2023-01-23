@@ -358,7 +358,6 @@ public class MessageObject {
     }
 
     public boolean hasMediaSpoilers() {
-        if (NekoConfig.showSpoilersDirectly.Bool()) return false;
         return messageOwner.media != null && messageOwner.media.spoiler;
     }
 

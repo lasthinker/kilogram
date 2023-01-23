@@ -2147,7 +2147,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
         default void onPreOpen() {}
         default void onPreClose() {}
-
     }
 
     private class FrameLayoutDrawer extends SizeNotifierFrameLayoutPhoto {
@@ -5830,13 +5829,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         sendPressed(true, 0, false, true, false);
                     } else if (a == 5) {
                         translateComment(TranslateDb.getChatLanguage(chatId, TranslatorKt.getCode2Locale(NekoConfig.translateInputLang.String())));
-                    } else if (a == 6) {
-                        if (placeProvider != null && !placeProvider.isPhotoChecked(currentIndex)) {
-                            setPhotoChecked();
-                        }
-                        MediaController.PhotoEntry entry = (MediaController.PhotoEntry) currentObject;
-                        entry.hasSpoiler = !entry.hasSpoiler;
-                        if (placeProvider != null) placeProvider.spoilerPressed();
+                    } else if (a == 5) {
+                        sendPressed(true, 0, false, true, false);
                     }
                 });
                 cell.setOnLongClickListener(v -> {
@@ -11663,7 +11657,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 MessagesController.getInstance(currentAccount).loadDialogPhotos(avatarsDialogId, 80, 0, true, classGuid);
             }
         }
-        if (currentMessageObject != null && (currentMessageObject.isVideo() || currentMessageObject.isGif()) || currentBotInlineResult != null && (currentBotInlineResult.type.equals("video") || MessageObject.isVideoDocument(currentBotInlineResult.document)) || (pageBlocksAdapter != null && pageBlocksAdapter.isVideo(index)) || (sendPhotoType == SELECT_TYPE_NO_SELECT && ((MediaController.PhotoEntry)imagesArrLocals.get(index)).isVideo)) {
+        if (currentMessageObject != null && currentMessageObject.isVideo() || (NekoConfig.takeGIFasVideo.Bool() && currentMessageObject != null && currentMessageObject.isGif()) || currentBotInlineResult != null && (currentBotInlineResult.type.equals("video") || MessageObject.isVideoDocument(currentBotInlineResult.document)) || (pageBlocksAdapter != null && pageBlocksAdapter.isVideo(index)) || (sendPhotoType == SELECT_TYPE_NO_SELECT && ((MediaController.PhotoEntry)imagesArrLocals.get(index)).isVideo)) {
             playerAutoStarted = true;
             onActionClick(false);
         } else if (!imagesArrLocals.isEmpty()) {
@@ -13639,7 +13633,9 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         return openPhoto(null, null, null, null, null, null, null, index, provider, null, 0, 0, 0, true, pageBlocksAdapter, null);
     }
 
-    public boolean openPhotoForSelect(final ArrayList<Object> photos, final int index, int type, boolean documentsPicker, final PhotoViewerProvider provider, ChatActivity chatActivity) {
+    public boolean openPhotoForSelect(final ArrayList<Object> photos, final int index,
+                                      int type, boolean documentsPicker, final PhotoViewerProvider provider, ChatActivity
+                                              chatActivity) {
         return openPhotoForSelect(null, null, photos, index, type, documentsPicker, provider, chatActivity);
     }
 
@@ -15604,6 +15600,10 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         animateTo(1f, 0, 0, false);
     }
 
+    public void zoomOut() {
+        animateTo(1f, 0, 0, false);
+    }
+
     private void animateTo(float newScale, float newTx, float newTy, boolean isZoom) {
         animateTo(newScale, newTx, newTy, isZoom, 250);
     }
@@ -17475,7 +17475,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         return new ByteArrayInputStream(output, 0, outPos);
     }
 
-    private void processOpenVideo(final String videoPath, boolean muted, float start, float end, int compressQality) {
+    private void processOpenVideo(final String videoPath, boolean muted, float start,
+                                  float end, int compressQality) {
         if (currentLoadingVideoRunnable != null) {
             Utilities.globalQueue.cancelRunnable(currentLoadingVideoRunnable);
             currentLoadingVideoRunnable = null;

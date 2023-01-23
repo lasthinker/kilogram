@@ -1023,7 +1023,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int OPTION_EDIT_SCHEDULE_TIME = 102;
     private final static int OPTION_SPEED_PROMO = 103;
     private final static int OPTION_OPEN_PROFILE = 104;
-    private final static int OPTION_COPY_PHOTO = 150;
 
     private final static int[] allowedNotificationsDuringChatListAnimations = new int[]{
             NotificationCenter.messagesRead,
@@ -9644,7 +9643,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 returnToMessageId = returnToMessageIdsStack.pop();
             scrollToMessageId(returnToMessageId, 0, true, returnToLoadIndex, true, 0, inCaseLoading);
         } else {
-            scrollToLastMessage(false, true, inCaseLoading);
+            scrollToLastMessage(true, true, inCaseLoading);
             if (!pinnedMessageIds.isEmpty()) {
                 forceScrollToFirst = true;
                 forceNextPinnedMessageId = pinnedMessageIds.get(0);
@@ -11448,7 +11447,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void showVoiceHint(boolean hide, boolean video) {
-        if (getParentActivity() == null || fragmentView == null || hide && voiceHintTextView == null || chatMode != 0 || chatActivityEnterView == null  || chatActivityEnterView.getAudioVideoButtonContainer() == null || chatActivityEnterView.getAudioVideoButtonContainer().getVisibility() != View.VISIBLE || isInPreviewMode()) {
+        if (getParentActivity() == null || fragmentView == null || hide && voiceHintTextView == null || chatMode != 0 || chatActivityEnterView == null || chatActivityEnterView.getAudioVideoButtonContainer() == null || chatActivityEnterView.getAudioVideoButtonContainer().getVisibility() != View.VISIBLE || isInPreviewMode()) {
             return;
         }
         if (NekoConfig.useChatAttachMediaMenu.Bool()) return;
@@ -12332,7 +12331,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 SendMessagesHelper.getInstance(currentAccount).sendMessage(caption, dialog_id, null, null, null, true, null, null, null, true, 0, null, false);
                 caption = null;
             }
-        getSendMessagesHelper().sendMessage(fmessages, dialog_id, noForwardQuote, false, true, 0);
+            getSendMessagesHelper().sendMessage(fmessages, dialog_id, noForwardQuote, false, true, 0);
             SendMessagesHelper.prepareSendingDocuments(getAccountInstance(), files, files, null, caption, null, dialog_id, replyingMessageObject, getThreadMessage(), null, editingMessageObject, notify, scheduleDate);
             afterMessageSend();
         }
@@ -18905,10 +18904,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (avatarContainer != null) {
                     avatarContainer.updateSubtitle();
                 }
-            } else if (id == NotificationCenter.dialogsUnreadCounterChanged) {
-                if (actionBar != null) { // NekoX
-                    actionBar.unreadBadgeSetCount(getMessagesStorage().getMainUnreadCount());
-                }
+            }
+        } else if (id == NotificationCenter.dialogsUnreadCounterChanged) {
+            if (actionBar != null) { // NekoX
+                actionBar.unreadBadgeSetCount(getMessagesStorage().getMainUnreadCount());
             }
         }
     }
@@ -24637,7 +24636,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                             int totalHeight = contentView.getHeightWithKeyboard();
 
-                            if (!KiloConfig.INSTANCE.getHideMessageSeenTooltip().Bool() && SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
+                            if (SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
                                 messageSeenPrivacyBulletin = BulletinFactory.of(Bulletin.BulletinWindow.make(getContext()), themeDelegate).createErrorBulletin(AndroidUtilities.replaceTags(LocaleController.getString("MessageSeenTooltipMessage", R.string.MessageSeenTooltipMessage)));
                                 messageSeenPrivacyBulletin.setDuration(4000);
                                 messageSeenPrivacyBulletin.show();
@@ -26378,6 +26377,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             case OPTION_OPEN_PROFILE: {
                 TLRPC.Peer from = selectedObject.messageOwner.from_id;
                 openUserProfile(from.user_id != 0 ? from.user_id : from.channel_id != 0 ? from.channel_id : from.chat_id);
+                break;
             }
             default: {
                 nkbtn_onclick(option);
@@ -27511,7 +27511,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (username != null) {
                 username = username.toLowerCase();
                 if (ChatObject.hasPublicLink(currentChat, username) || UserObject.hasPublicUsername(currentUser, username)) {
-                    if (avatarContainer != null) {
+                        if (avatarContainer != null) {
                         avatarContainer.openProfile(false);
                     } else {
                         shakeContent();
@@ -27810,7 +27810,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         },
                         (which, text, __) -> {
                             if (which == 0) {
-                                processExternalUrl(1, urlFinal, url, null, false);
+                                processExternalUrl(1, urlFinal, url, finalCell, false);
                             } else if (which == 1) {
                                 String url1 = urlFinal;
                                 boolean tel = false;

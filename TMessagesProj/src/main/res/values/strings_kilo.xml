@@ -48,7 +48,6 @@
     <string name="ZalgoFilterNotice">All \"Z̷͍͌ā̸̜l̸̞̂g̷̝͘o̶̩̓\" Symbols In Nicknames Or Messages Will Be Removed.</string>
     <string name="CustomChannelLabel">Custom Default Channel Label</string>
     <string name="AlwaysShowDownloadIcon">Always Show Download Icon</string>
-    <string name="ShowPhotoOpenInExternalApp">Show Open In External App When Open Photo</string>
     <string name="QuickToggleAnonymous">Quick Toggle Anonymous</string>
     <string name="QuickToggleAnonymousNotice">If You\'re Owner Of The Group</string>
     <string name="RealHideTimeForSticker">Real Hide Time For Stickers</string>
@@ -77,4 +76,7 @@
     <string name="ShowSendAsUnderMessageHint">Show Send As Under Message Hint</string>
     <string name="CheckAllForum">Add Forum</string>
     <string name="ShowForumAsNormalChat">Show Forum As Normal Chat</string>
+    <string name="DecorationNone">None</string>
+    <string name="ChatDecoration">Chat Decoration</string>
+    <string name="NeedChangeNekoSettings">You Need To Change Kilo-Settings</string>
 </resources>

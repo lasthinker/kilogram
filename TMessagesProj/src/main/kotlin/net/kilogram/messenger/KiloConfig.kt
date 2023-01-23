@@ -151,7 +151,7 @@ object KiloConfig {
         addConfig(
             "Reactions",
             ConfigItem.configTypeBool,
-            false
+            true
         )
     val showServicesTime =
         addConfig(
@@ -264,12 +264,6 @@ object KiloConfig {
     val alwaysShowDownloadIcon =
         addConfig(
             "AlwaysShowDownloadIcon",
-            ConfigItem.configTypeBool,
-            false
-        )
-    val showPhotoOpenInExternalApp =
-        addConfig(
-            "ShowPhotoOpenInExternalApp",
             ConfigItem.configTypeBool,
             false
         )
@@ -399,6 +393,12 @@ object KiloConfig {
             "ShowForumAsNormalChat",
             ConfigItem.configTypeBool,
             false
+        )
+    val chatDecoration =
+        addConfig(
+            "ChatDecoration",
+            ConfigItem.configTypeInt,
+            0
         )
 
     private fun addConfig(

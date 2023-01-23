@@ -13,6 +13,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,6 +50,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -88,6 +92,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -716,7 +724,7 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
                 }
             }
 
-            CameraScanActivity.showAsSheet(this, new CameraScanActivity.CameraScanActivityDelegate() {
+            CameraScanActivity.showAsSheet(this, false, CameraScanActivity.TYPE_QR, new CameraScanActivity.CameraScanActivityDelegate() {
 
                 @Override
                 public void didFindQr(String text) {
@@ -989,20 +997,7 @@ public class ProxyListActivity extends BaseFragment implements NotificationCente
                 }
             }
 
-            boolean isChecking = checking;
-            Collections.sort(proxyList, (o1, o2) -> {
-                long bias1 = SharedConfig.currentProxy == o1 ? -200000 : 0;
-                if (!o1.available) {
-                    bias1 += 100000;
-                }
-                long bias2 = SharedConfig.currentProxy == o2 ? -200000 : 0;
-                if (!o2.available) {
-                    bias2 += 100000;
-                }
-                return Long.compare(isChecking && o1 != SharedConfig.currentProxy ? SharedConfig.proxyList.indexOf(o1) * 10000L : o1.ping + bias1,
-                        isChecking && o2 != SharedConfig.currentProxy ? SharedConfig.proxyList.indexOf(o2) * 10000L : o2.ping + bias2);
-            });
-        }
+                CameraScanActivity.showAsSheet(this, false, CameraScanActivity.TYPE_QR, new CameraScanActivity.CameraScanActivityDelegate() {
 
         if (!proxyList.isEmpty()) {
             proxyStartRow = rowCount;

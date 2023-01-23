@@ -2341,7 +2341,7 @@ R.string.CustomBackend))
                         countryWithCode.shortname = "YL";
 
                         countriesArray.add(countryWithCode);
-                        codesMap.put(test_code, countryWithCode);
+                        codesMap.put(test_code, Collections.singletonList(countryWithCode));
                         List<String> testCodeStr = new ArrayList<>();
                         testCodeStr.add("XX X XXXX");
                         phoneFormatMap.put(test_code, testCodeStr);
@@ -2815,13 +2815,13 @@ R.string.CustomBackend))
                 req.settings.flags |= 64;
             }
             SharedPreferences preferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE);
-            preferences.edit().remove("sms_hash_code").apply();
-            if (settings.allow_app_hash) {
-                preferences.edit().putString("sms_hash", BuildVars.SMS_HASH).apply();
-            } else {
-                preferences.edit().remove("sms_hash").apply();
-            }
-            if (settings.allow_flashcall) {
+//            preferences.edit().remove("sms_hash_code").apply();
+//            if (settings.allow_app_hash) {
+//                preferences.edit().putString("sms_hash", BuildVars.SMS_HASH).apply();
+//            } else {
+//                preferences.edit().remove("sms_hash").apply();
+//            }
+            if (req.settings.allow_flashcall) {
                 try {
                     String number = "";
                     if (!TextUtils.isEmpty(number)) {
@@ -2918,7 +2918,8 @@ R.string.CustomBackend))
                                             bundle.putString("phoneFormated", phone);
                                             bundle.putString("phoneHash", phoneHash);
                                             bundle.putString("code", reqI.phone_code);
-                                            setPage(6, true, bundle, false);
+
+                                            setPage(VIEW_PASSWORD, true, bundle, false);
                                         } else {
                                             needShowAlert(LocaleController.getString("NekoX", R.string.NekoX), error1.text);
                                         }

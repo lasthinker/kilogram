@@ -1246,7 +1246,7 @@ public class MessagesController extends BaseController implements NotificationCe
         telegramAntispamUserId = mainPreferences.getLong("telegramAntispamUserId", -1);
         telegramAntispamGroupSizeMin = mainPreferences.getInt("telegramAntispamGroupSizeMin", 100);
         hiddenMembersGroupSizeMin = mainPreferences.getInt("hiddenMembersGroupSizeMin", 100);
-        BuildVars.GOOGLE_AUTH_CLIENT_ID = mainPreferences.getString("googleAuthClientId", BuildVars.GOOGLE_AUTH_CLIENT_ID);
+//        BuildVars.GOOGLE_AUTH_CLIENT_ID = mainPreferences.getString("googleAuthClientId", BuildVars.GOOGLE_AUTH_CLIENT_ID);
 
         Set<String> currencySet = mainPreferences.getStringSet("directPaymentsCurrency", null);
         if (currencySet != null) {

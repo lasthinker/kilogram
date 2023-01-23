@@ -1426,7 +1426,8 @@ public class DialogCell extends BaseCell {
                                     } else {
                                         SpannableStringBuilder msgBuilder = new SpannableStringBuilder(message.caption);
                                         if (message != null && message.messageOwner != null) {
-                                            MediaDataController.addTextStyleRuns(message.messageOwner.entities, message.caption, msgBuilder, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
+                                            if (!NekoConfig.showSpoilersDirectly.Bool())
+                                                MediaDataController.addTextStyleRuns(message.messageOwner.entities, message.caption, msgBuilder, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
                                             MediaDataController.addAnimatedEmojiSpans(message.messageOwner.entities, msgBuilder, currentMessagePaint == null ? null : currentMessagePaint.getFontMetricsInt());
                                         }
                                         messageString = new SpannableStringBuilder(emoji).append(msgBuilder);
@@ -1458,7 +1459,8 @@ public class DialogCell extends BaseCell {
                                             messageString = AndroidUtilities.ellipsizeCenterEnd(messageString, message.highlightedWords.get(0), w, currentMessagePaint, 130).toString();
                                         } else {
                                             SpannableStringBuilder stringBuilder = new SpannableStringBuilder(msgText);
-                                            MediaDataController.addTextStyleRuns(message, stringBuilder, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
+                                            if (!NekoConfig.showSpoilersDirectly.Bool())
+                                                MediaDataController.addTextStyleRuns(message, stringBuilder, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
                                             if (message != null && message.messageOwner != null) {
                                                 MediaDataController.addAnimatedEmojiSpans(message.messageOwner.entities, stringBuilder, currentMessagePaint == null ? null : currentMessagePaint.getFontMetricsInt());
                                             }
@@ -4629,7 +4631,8 @@ public class DialogCell extends BaseCell {
                     mess = mess.subSequence(0, 150);
                 }
                 SpannableStringBuilder msgBuilder = new SpannableStringBuilder(mess);
-                MediaDataController.addTextStyleRuns(message.messageOwner.entities, mess, msgBuilder, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
+                if (!NekoConfig.showSpoilersDirectly.Bool())
+                    MediaDataController.addTextStyleRuns(message.messageOwner.entities, mess, msgBuilder, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
                 if (message != null && message.messageOwner != null) {
                     MediaDataController.addAnimatedEmojiSpans(message.messageOwner.entities, msgBuilder, currentMessagePaint == null ? null : currentMessagePaint.getFontMetricsInt());
                 }
@@ -4711,7 +4714,8 @@ public class DialogCell extends BaseCell {
                 mess = AndroidUtilities.replaceNewLines(mess);
             }
             mess = new SpannableStringBuilder(mess);
-            MediaDataController.addTextStyleRuns(message, (Spannable) mess, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
+            if (!NekoConfig.showSpoilersDirectly.Bool())
+                MediaDataController.addTextStyleRuns(message, (Spannable) mess, TextStyleSpan.FLAG_STYLE_SPOILER | TextStyleSpan.FLAG_STYLE_STRIKE);
             if (message != null && message.messageOwner != null) {
                 MediaDataController.addAnimatedEmojiSpans(message.messageOwner.entities, mess, currentMessagePaint == null ? null : currentMessagePaint.getFontMetricsInt());
             }

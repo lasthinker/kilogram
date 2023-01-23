@@ -12642,18 +12642,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                                     name = chat.title;
                                 }
                             }
-                        } else if (fromId < 0) {
-                            TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(-fromId);
-                            if (chat != null) {
-                                name = chat.title;
-                            }
-                        } else {
-                            TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(messageObject.replyMessageObject.messageOwner.peer_id.channel_id);
-                            if (chat != null) {
-                                name = chat.title;
-                            }
                         }
-//                        }
                     }
 
                     if (name == null) {

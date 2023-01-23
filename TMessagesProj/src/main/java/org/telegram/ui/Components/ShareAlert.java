@@ -1965,6 +1965,10 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                 long key = selectedDialogs.keyAt(a);
                 TLRPC.TL_forumTopic topic = selectedDialogTopics.get(selectedDialogs.get(key));
                 MessageObject replyTopMsg = topic != null ? new MessageObject(currentAccount, topic.topicStartMessage, false, false) : null;
+                int result = 0;
+                if (NekoConfig.sendCommentAfterForward.Bool()) {
+                    result = SendMessagesHelper.getInstance(currentAccount).sendMessage(sendingMessageObjects, key, !showSendersName, false, withSound, 0);
+                }
                 if (replyTopMsg != null) {
                     replyTopMsg.isTopicMainMessage = true;
                 }
@@ -1985,9 +1989,9 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                     }
                 }
             }
-            for (long key : removeKeys) {
-                TLRPC.Dialog dialog = selectedDialogs.get(key);
-                selectedDialogs.remove(key);
+            for (long key_ : removeKeys) {
+                TLRPC.Dialog dialog = selectedDialogs.get(key_);
+                selectedDialogs.remove(key_);
                 if (dialog != null) {
                     selectedDialogTopics.remove(dialog);
                 }

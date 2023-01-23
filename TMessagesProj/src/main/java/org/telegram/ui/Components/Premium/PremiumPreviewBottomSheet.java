@@ -111,7 +111,7 @@ public class PremiumPreviewBottomSheet extends BottomSheetWithRecyclerListView i
         this(fragment, currentAccount, user, null, resourcesProvider);
     }
 
-    public PremiumPreviewBottomSheet(BaseFragment fragment, int currentAccount, TLRPC.User user, GiftPremiumBottomSheet.GiftTier gift, Theme.ResourcesProvider resourcesProvider) {
+    public PremiumPreviewBottomSheet(BaseFragment fragment, int currentAccount, TLRPC.User user, Void gift, Theme.ResourcesProvider resourcesProvider) {
         super(fragment, false, false, false, resourcesProvider);
         fixNavigationBar();
         this.fragment = fragment;

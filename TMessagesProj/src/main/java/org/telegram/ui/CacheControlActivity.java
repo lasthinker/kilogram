@@ -14,7 +14,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -44,7 +43,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,9 +50,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.processphoenix.ProcessPhoenix;
 
-import org.telegram.SQLite.SQLiteCursor;
-import org.telegram.SQLite.SQLiteDatabase;
-import org.telegram.SQLite.SQLitePreparedStatement;
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
@@ -64,7 +59,6 @@ import org.telegram.messenger.Emoji;
 import org.telegram.messenger.FileLoader;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.FilePathDatabase;
-import org.telegram.messenger.FilesMigrationService;
 import org.telegram.messenger.ImageLoader;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MediaDataController;
@@ -74,6 +68,7 @@ import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.Utilities;
+import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.ActionBarMenu;
@@ -119,13 +114,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
-import cn.hutool.core.thread.ThreadUtil;
 import kotlin.Unit;
-import net.kilogram.messenger.ui.BottomBuilder;
-import net.kilogram.messenger.transtale.TranslateDb;
-import net.kilogram.messenger.utils.EnvUtil;
-import net.kilogram.messenger.utils.FileUtil;
-import net.kilogram.messenger.utils.UIUtil;
+import tw.nekomimi.nekogram.ui.BottomBuilder;
+import tw.nekomimi.nekogram.utils.EnvUtil;
+import tw.nekomimi.nekogram.utils.FileUtil;
+import tw.nekomimi.nekogram.utils.UIUtil;
 
 public class CacheControlActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
@@ -171,6 +164,8 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
     private long totalSize = -1;
     private long totalDeviceSize = -1;
     private long totalDeviceFreeSize = -1;
+//    private long migrateOldFolderRow = -1;
+    private StorageDiagramView.ClearViewData[] clearViewData = new StorageDiagramView.ClearViewData[7];
     private long migrateOldFolderRow = -1;
     private boolean calculating = true;
     private boolean collapsed = true;
@@ -233,6 +228,9 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
 
         Utilities.globalQueue.postRunnable(() -> {
             cacheSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), 5);
+
+            cacheSize += getDirectorySize(new File(ApplicationLoader.getDataDirFixed(), "cache"), 0);
+            cacheSize += getDirectorySize(ApplicationLoader.applicationContext.getExternalFilesDir("logs"), 0);
             if (canceled) {
                 return;
             }
@@ -1346,17 +1344,20 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
         builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
         builder.setPositiveButton(LocaleController.getString("CacheClear", R.string.CacheClear), (dialogInterface, i) -> {
             if (getParentActivity() == null) {
-                return Unit.INSTANCE;
+                return;
             }
             progressDialog = new AlertDialog(getParentActivity(), AlertDialog.ALERT_TYPE_SPINNER);
             progressDialog.setCanCancel(false);
-            progressDialog.showDelayed(233);
+            progressDialog.showDelayed(500);
             MessagesController.getInstance(currentAccount).clearQueryTime();
             getMessagesStorage().clearLocalDatabase();
-            return Unit.INSTANCE;
         });
-        builder.addCancelItem();
-        builder.show();
+        AlertDialog alertDialog = builder.create();
+        showDialog(alertDialog);
+        TextView button = (TextView) alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (button != null) {
+            button.setTextColor(Theme.getColor(Theme.key_dialogTextRed2));
+        }
     }
 
     @Override
@@ -1855,7 +1856,8 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int position = holder.getAdapterPosition();
-            return position == migrateOldFolderRow || (holder.getItemViewType() == VIEW_TYPE_STORAGE && (totalSize > 0) && !calculating) || holder.getItemViewType() == VIEW_TYPE_CHAT || holder.getItemViewType() == VIEW_TYPE_KEEP_MEDIA_CELL || holder.getItemViewType() == VIEW_TYPE_SECTION;
+            // NekoX: Remove migrateOldFolderRow
+            return (holder.getItemViewType() == VIEW_TYPE_STORAGE && (totalSize > 0) && !calculating) || holder.getItemViewType() == VIEW_TYPE_CHAT || holder.getItemViewType() == VIEW_TYPE_KEEP_MEDIA_CELL || holder.getItemViewType() == VIEW_TYPE_SECTION;
         }
 
         @Override
@@ -2172,9 +2174,9 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
 //                        textCell.setTextAndValue(LocaleController.getString("ClearLocalDatabase", R.string.ClearLocalDatabase), AndroidUtilities.formatFileSize(databaseSize), updateDatabaseSize, false);
 //                        updateDatabaseSize = false;
 //                    } else
-                    if (position == migrateOldFolderRow) {
-                        textCell.setTextAndValue(LocaleController.getString("MigrateOldFolder", R.string.MigrateOldFolder), null, false);
-                    }
+//                    if (position == migrateOldFolderRow) {
+//                        textCell.setTextAndValue(LocaleController.getString("MigrateOldFolder", R.string.MigrateOldFolder), null, false);
+//                    }
                     break;
                 case VIEW_TYPE_INFO:
                     TextInfoPrivacyCell privacyCell = (TextInfoPrivacyCell) holder.itemView;

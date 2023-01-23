@@ -174,7 +174,7 @@ public class MessageObject {
     public boolean isRestrictedMessage;
     public long loadedFileSize;
 
-    public boolean isSpoilersRevealed;
+    public boolean isSpoilersRevealed = NekoConfig.showSpoilersDirectly.Bool();
     public boolean isMediaSpoilersRevealed;
     public boolean isMediaSpoilersRevealedInSharedMedia;
     public boolean revealingMediaSpoilers;

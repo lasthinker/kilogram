@@ -406,20 +406,27 @@ public class AboutLinkCell extends FrameLayout {
                 final float yOffset = pressedLinkYOffset;
 
                 ClickableSpan pressedLinkFinal = (ClickableSpan) pressedLink.getSpan();
-                BottomSheet.Builder builder = new BottomSheet.Builder(parentFragment.getParentActivity());
-                builder.setTitle(url);
-                builder.setItems(new CharSequence[]{LocaleController.getString("Open", R.string.Open), LocaleController.getString("Copy", R.string.Copy)}, (dialog, which) -> {
-                    if (which == 0) {
-                        onLinkClick(pressedLinkFinal, layout, yOffset);
-                    } else if (which == 1) {
-                        AndroidUtilities.addToClipboard(url);
-                        if (AndroidUtilities.shouldShowClipboardToast()) {
-                            if (url.startsWith("@")) {
-                                BulletinFactory.of(parentFragment).createSimpleBulletin(R.raw.copy, LocaleController.getString("UsernameCopied", R.string.UsernameCopied)).show();
-                            } else if (url.startsWith("#") || url.startsWith("$")) {
-                                BulletinFactory.of(parentFragment).createSimpleBulletin(R.raw.copy, LocaleController.getString("HashtagCopied", R.string.HashtagCopied)).show();
-                            } else {
-                                BulletinFactory.of(parentFragment).createSimpleBulletin(R.raw.copy, LocaleController.getString("LinkCopied", R.string.LinkCopied)).show();
+                BottomBuilder builder = new BottomBuilder(parentFragment.getParentActivity());
+                builder.addTitle(url);
+                builder.addItems(new String[]{LocaleController.getString("Open", R.string.Open), LocaleController.getString("Copy", R.string.Copy)},
+                        new int[]{R.drawable.msg_openin, R.drawable.msg_copy},
+                        (which, __, ___) -> {
+                            if (which == 0) {
+                                onLinkClick(pressedLinkFinal, layout, yOffset);
+                            } else if (which == 1) {
+                                AndroidUtilities.addToClipboard(url);
+                                if (AndroidUtilities.shouldShowClipboardToast()) {
+                                    if (url.startsWith("@")) {
+                                        BulletinFactory.of(parentFragment).createSimpleBulletin(R.raw.copy,
+                                                LocaleController.getString("UsernameCopied", R.string.UsernameCopied)).show();
+                                    } else if (url.startsWith("#") || url.startsWith("$")) {
+                                        BulletinFactory.of(parentFragment).createSimpleBulletin(R.raw.copy,
+                                                LocaleController.getString("HashtagCopied", R.string.HashtagCopied)).show();
+                                    } else {
+                                        BulletinFactory.of(parentFragment).createSimpleBulletin(R.raw.copy,
+                                                LocaleController.getString("LinkCopied", R.string.LinkCopied)).show();
+                                    }
+                                }
                             }
                             return Unit.INSTANCE;
                         });

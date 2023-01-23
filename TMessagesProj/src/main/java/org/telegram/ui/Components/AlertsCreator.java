@@ -1110,7 +1110,7 @@ public class AlertsCreator {
     }
 
     public static void showOpenUrlAlert(BaseFragment fragment, String url, boolean punycode, boolean tryTelegraph, boolean ask) {
-        showOpenUrlAlert(fragment, url, punycode, tryTelegraph, ask, null);
+        showOpenUrlAlert(fragment, url, punycode, tryTelegraph, ask, null, null);
     }
 
     public static void showOpenUrlAlert(BaseFragment fragment, String url, boolean punycode, boolean ask, Theme.ResourcesProvider resourcesProvider) {
@@ -1122,7 +1122,7 @@ public class AlertsCreator {
             return;
         }
         long inlineReturn = (fragment instanceof ChatActivity) ? ((ChatActivity) fragment).getInlineReturn() : 0;
-        if (Browser.isInternalUrl(url, null) || !ask) {
+        if (Browser.isInternalUrl(url, null) || !ask || NekoConfig.skipOpenLinkConfirm.Bool()) {
             Browser.openUrl(fragment.getParentActivity(), Uri.parse(url), inlineReturn == 0, tryTelegraph, progress);
         } else {
             String urlFinal = url;

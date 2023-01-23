@@ -37,13 +37,15 @@ import androidx.annotation.IntDef;
 import org.json.JSONObject;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.SerializedData;
-import org.telegram.ui.Components.SwipeGestureSettingsView;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.Components.AnimatedEmojiDrawable;
 import org.telegram.ui.Components.SwipeGestureSettingsView;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.util.Arrays;
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -286,6 +288,123 @@ public class SharedConfig {
             if (secret == null) {
                 secret = "";
             }
+        }
+
+        public String getLink() {
+            StringBuilder url = new StringBuilder(!TextUtils.isEmpty(secret) ? "https://t.me/proxy?" : "https://t.me/socks?");
+            try {
+                url.append("server=").append(URLEncoder.encode(address, "UTF-8")).append("&").append("port=").append(port);
+                if (!TextUtils.isEmpty(username)) {
+                    url.append("&user=").append(URLEncoder.encode(username, "UTF-8"));
+                }
+                if (!TextUtils.isEmpty(password)) {
+                    url.append("&pass=").append(URLEncoder.encode(password, "UTF-8"));
+                }
+                if (!TextUtils.isEmpty(secret)) {
+                    url.append("&secret=").append(URLEncoder.encode(secret, "UTF-8"));
+                }
+            } catch (UnsupportedEncodingException ignored) {}
+            return url.toString();
+        }
+
+        public static ProxyInfo fromJson(JSONObject obj) {
+
+            ProxyInfo info;
+
+            switch (obj.optString("type", "null")) {
+
+                case "socks5": {
+
+                    info = new ProxyInfo();
+
+                    info.group = obj.optInt("group", 0);
+                    info.address = obj.optString("address", "");
+                    info.port = obj.optInt("port", 443);
+                    info.username = obj.optString("username", "");
+                    info.password = obj.optString("password", "");
+
+                    info.remarks = obj.optString("remarks");
+
+                    if (StrUtil.isBlank(info.remarks)) info.remarks = null;
+
+                    info.group = obj.optInt("group", 0);
+
+                    break;
+
+                }
+
+                case "mtproto": {
+
+                    info = new ProxyInfo();
+
+                    info.address = obj.optString("address", "");
+                    info.port = obj.optInt("port", 443);
+                    info.secret = obj.optString("secret", "");
+
+                    info.remarks = obj.optString("remarks");
+
+                    if (StrUtil.isBlank(info.remarks)) info.remarks = null;
+
+                    info.group = obj.optInt("group", 0);
+
+                    break;
+
+                }
+
+                case "vmess": {
+
+                    info = new VmessProxy(obj.optString("link"));
+
+                    break;
+
+                }
+
+                case "shadowsocks": {
+
+                    info = new ShadowsocksProxy(obj.optString("link"));
+
+                    break;
+
+                }
+
+                case "shadowsocksr": {
+
+                    info = new ShadowsocksRProxy(obj.optString("link"));
+
+                    break;
+
+                }
+
+                case "ws": {
+
+                    info = new WsProxy(obj.optString("link"));
+
+                    break;
+
+                }
+
+                default: {
+
+                    throw new IllegalStateException("invalid proxy type " + obj.optString("type", "null"));
+
+                }
+
+            }
+
+            return info;
+
+        }
+
+        @Override
+        public int hashCode() {
+
+            return (address + port + username + password + secret).hashCode();
+
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            return super.equals(obj) || (obj instanceof ProxyInfo && hashCode() == obj.hashCode());
         }
 
         public String getLink() {
@@ -1054,7 +1173,7 @@ public class SharedConfig {
             devicePerformanceClass = preferences.getInt("devicePerformanceClass", -1);
             loopStickers = preferences.getBoolean("loopStickers", true);
             keepMedia = preferences.getInt("keep_media", CacheByChatsController.KEEP_MEDIA_ONE_MONTH);
-            noStatusBar = preferences.getBoolean("noStatusBar", true);
+            noStatusBar = NekoConfig.transparentStatusBar.Bool();
             forceRtmpStream = preferences.getBoolean("forceRtmpStream", false);
             debugWebView = preferences.getBoolean("debugWebView", false);
             lastKeepMediaCheckTime = preferences.getInt("lastKeepMediaCheckTime", 0);
@@ -1397,7 +1516,7 @@ public class SharedConfig {
         Utilities.cacheClearQueue.postRunnable(() -> {
             boolean hasExceptions = false;
             ArrayList<CacheByChatsController> cacheByChatsControllers = new ArrayList<>();
-            for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
+            for (int account : SharedConfig.activeAccounts) {
                 if (UserConfig.getInstance(account).isClientActivated()) {
                     CacheByChatsController cacheByChatsController = UserConfig.getInstance(account).getMessagesController().getCacheByChatsController();
                     cacheByChatsControllers.add(cacheByChatsController);

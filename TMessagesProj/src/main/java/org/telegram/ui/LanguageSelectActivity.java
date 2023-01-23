@@ -176,8 +176,22 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
             if (getParentActivity() == null || parentLayout == null || !(view instanceof LanguageCell)) {
                 return;
             }
+            boolean search = listView.getAdapter() == searchListViewAdapter;
+            if (!search) {
+                position -= 2;
+            }
             LanguageCell cell = (LanguageCell) view;
-            LocaleController.LocaleInfo localeInfo = cell.getCurrentLocale();
+            LocaleController.LocaleInfo localeInfo;
+            if (search) {
+                localeInfo = searchResult.get(position);
+            } else if (!unofficialLanguages.isEmpty() && position >= 0 && position < unofficialLanguages.size()) {
+                localeInfo = unofficialLanguages.get(position);
+            } else {
+                if (!unofficialLanguages.isEmpty()) {
+                    position -= unofficialLanguages.size() + 1;
+                }
+                localeInfo = sortedLanguages.get(position);
+            }
             if (localeInfo != null) {
                 if (localeInfo.toInstall) {
                     AlertsCreator.createLanguageAlert((LaunchActivity) getParentActivity(),localeInfo.pack,() -> {
@@ -722,7 +736,8 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                     if (!search) {
                         position -= 2;
                     }
-                    TextRadioCell textSettingsCell = (TextRadioCell) holder.itemView;
+                    LanguageCell textSettingsCell = (LanguageCell) holder.itemView;
+//                    TextRadioCell textSettingsCell = (TextRadioCell) holder.itemView;
                     LocaleController.LocaleInfo localeInfo = null;
                     boolean last;
                     if (search) {
@@ -744,9 +759,9 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                     }
                     if (localeInfo != null) {
                         if (localeInfo.isLocal()) {
-                            textSettingsCell.setTextAndValueAndCheck(String.format("%1$s (%2$s)", localeInfo.name, LocaleController.getString("LanguageCustom", R.string.LanguageCustom)), localeInfo.nameEnglish, false, false, !last);
+                            textSettingsCell.setLanguage(LanguageSelectActivity.this, localeInfo, String.format("%1$s (%2$s)", localeInfo.name, LocaleController.getString("LanguageCustom", R.string.LanguageCustom)), !last);
                         } else {
-                            textSettingsCell.setTextAndValueAndCheck(localeInfo.name, localeInfo.nameEnglish, false, false, !last);
+                            textSettingsCell.setLanguage(LanguageSelectActivity.this, localeInfo, null, !last);
                         }
                     }
                     textSettingsCell.setLanguageSelected(localeInfo == LocaleController.getInstance().getCurrentLocaleInfo(), true);

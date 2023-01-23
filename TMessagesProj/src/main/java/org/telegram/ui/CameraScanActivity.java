@@ -188,7 +188,6 @@ public class CameraScanActivity extends BaseFragment {
                 };
                 fragment.shownAsBottomSheet = true;
                 fragment.needGalleryButton = gallery;
-                fragment.any = any;
                 actionBarLayout[0].addFragmentToStack(fragment);
                 actionBarLayout[0].showLastFragment();
                 actionBarLayout[0].getView().setPadding(backgroundPaddingLeft, 0, backgroundPaddingLeft, 0);
@@ -230,10 +229,6 @@ public class CameraScanActivity extends BaseFragment {
         bottomSheet.getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         bottomSheet.show();
         return bottomSheet;
-    }
-
-    public static INavigationLayout[] showAsSheet(BaseFragment parentFragment, CameraScanActivityDelegate cameraDelegate) {
-        return showAsSheet(parentFragment, true, TYPE_QR, cameraDelegate, true);
     }
 
     public CameraScanActivity(int type) {

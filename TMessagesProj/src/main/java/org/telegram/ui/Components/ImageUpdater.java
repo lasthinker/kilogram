@@ -221,6 +221,7 @@ public class ImageUpdater implements NotificationCenter.NotificationCenterDelega
         if (parentFragment == null || parentFragment.getParentActivity() == null) {
             return;
         }
+
         canceled = false;
         this.type = type;
         if (useAttachMenu) {

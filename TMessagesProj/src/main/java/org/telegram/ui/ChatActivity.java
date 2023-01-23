@@ -282,6 +282,7 @@ import org.telegram.ui.Components.TextSelectionHint;
 import org.telegram.ui.Components.TextStyleSpan;
 import org.telegram.ui.Components.ThemeEditorView;
 import org.telegram.ui.Components.TranscribeButton;
+import org.telegram.ui.Components.TranslateAlert;
 import org.telegram.ui.Components.TrendingStickersAlert;
 import org.telegram.ui.Components.TypefaceSpan;
 import org.telegram.ui.Components.URLSpanBotCommand;
@@ -24837,66 +24838,11 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         processSelectedOption(options.get(i));
                     });
                     if (option == OPTION_TRANSLATE) {
-                        String toLang = LocaleController.getInstance().getCurrentLocale().getLanguage();
-                        final CharSequence finalMessageText = messageTextToTranslate;
-                        TranslateAlert.OnLinkPress onLinkPress = (link) -> {
-                            didPressMessageUrl(link, false, selectedObject, v instanceof ChatMessageCell ? (ChatMessageCell) v : null);
-                            return true;
-                        };
-                        TLRPC.InputPeer inputPeer = selectedObject != null && (selectedObject.isPoll() || selectedObject.isVoiceTranscriptionOpen() || selectedObject.isSponsored()) ? null : getMessagesController().getInputPeer(dialog_id);
-                        if (LanguageDetector.hasSupport()) {
-                            final String[] fromLang = {null};
-                            cell.setVisibility(View.GONE);
-                            waitForLangDetection.set(true);
-                            LanguageDetector.detectLanguage(
-                                finalMessageText.toString(),
-                                (String lang) -> {
-                                    fromLang[0] = lang;
-                                    if (fromLang[0] != null && (!fromLang[0].equals(toLang) || fromLang[0].equals("und")) && (
-                                            translateButtonEnabled && !RestrictedLanguagesSelectActivity.getRestrictedLanguages().contains(fromLang[0]) ||
-                                            (currentChat != null && (currentChat.has_link || ChatObject.isPublic(currentChat)) || selectedObject.messageOwner.fwd_from != null) && ("uk".equals(fromLang[0]) || "ru".equals(fromLang[0]))
-                                        )) {
-                                        cell.setVisibility(View.VISIBLE);
-                                    }
-                                    waitForLangDetection.set(false);
-                                    if (onLangDetectionDone.get() != null) {
-                                        onLangDetectionDone.get().run();
-                                        onLangDetectionDone.set(null);
-                                    }
-                                },
-                                (Exception e) -> {
-                                    FileLog.e("mlkit: failed to detect language in message");
-                                    waitForLangDetection.set(false);
-                                    if (onLangDetectionDone.get() != null) {
-                                        onLangDetectionDone.get().run();
-                                        onLangDetectionDone.set(null);
-                                    }
-                                }
-                            );
-                            cell.setOnClickListener(e -> {
-                                if (selectedObject == null || i >= options.size() || getParentActivity() == null) {
-                                    return;
-                                }
-                                TranslateAlert alert = TranslateAlert.showAlert(getParentActivity(), this, currentAccount, inputPeer, messageIdToTranslate[0], fromLang[0], toLang, finalMessageText, noforwards, onLinkPress, () -> dimBehindView(false));
-                                alert.showDim(false);
-                                closeMenu(false);
-                            });
-                            cell.postDelayed(() -> {
-                                if (onLangDetectionDone.get() != null) {
-                                    onLangDetectionDone.getAndSet(null).run();
-                                }
-                            }, 250);
-                        } else if (translateButtonEnabled) {
-                            cell.setOnClickListener(e -> {
-                                if (selectedObject == null || i >= options.size() || getParentActivity() == null) {
-                                    return;
-                                }
-                                TranslateAlert alert = TranslateAlert.showAlert(getParentActivity(), this, currentAccount, inputPeer, messageIdToTranslate[0], "und", toLang, finalMessageText, noforwards, onLinkPress, () -> dimBehindView(false));
-                                alert.showDim(false);
-                                closeMenu(false);
-                            });
-                        } else {
-                            cell.setVisibility(View.GONE);
+                        // NekoX: Official Translation Move to neko_btn_translate
+                    }
+                    cell.setOnLongClickListener(v1 -> {
+                        if (selectedObject == null || i < 0 || i >= options.size()) {
+                            return false;
                         }
 
                         int r = processSelectedOptionLongClick(cell, options.get(i));
@@ -26387,7 +26333,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private int processSelectedOptionLongClick(ActionBarMenuSubItem cell, int option) {
         switch (option) {
             case nkbtn_translate: {
-
                 ChatMessageCell messageCell = null;
                 int count = chatListView.getChildCount();
                 for (int a = 0; a < count; a++) {
@@ -26402,27 +26347,19 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
 
                 if (selectedObject.messageOwner.translated) {
-
                     return 0;
-
                 }
 
                 Translator.showTargetLangSelect(cell, (locale) -> {
-
                     if (scrimPopupWindow != null) {
                         scrimPopupWindow.dismiss();
                         scrimPopupWindow = null;
                         scrimPopupWindowItems = null;
                     }
-
                     MessageTransKt.translateMessages(this, locale);
-
                     return Unit.INSTANCE;
-
                 });
-
                 return 1;
-
             }
             case nkbtn_repeat: {
                 repeatMessage(true, false);
@@ -32514,7 +32451,21 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 break;
             }
             case nkbtn_translate: {
-                MessageTransKt.translateMessages(this);
+                if (NekoConfig.useTelegramTranslateInChat.Bool()) {
+                    String toLang = LocaleController.getInstance().getCurrentLocale().getLanguage();
+                    int[] messageIdToTranslate = new int[] { selectedObject.getId() };
+                    final CharSequence finalMessageText = getMessageCaption(selectedObject, selectedObjectGroup, messageIdToTranslate);
+                    TranslateAlert.OnLinkPress onLinkPress = (link) -> {
+                        didPressMessageUrl(link, false, selectedObject, null);
+                        return true;
+                    };
+                    TLRPC.InputPeer inputPeer = selectedObject != null && (selectedObject.isPoll() || selectedObject.isVoiceTranscriptionOpen() || selectedObject.isSponsored()) ? null : getMessagesController().getInputPeer(dialog_id);
+                    TranslateAlert alert = TranslateAlert.showAlert(getParentActivity(), this, currentAccount, inputPeer, messageIdToTranslate[0], "und", toLang, finalMessageText, false, onLinkPress, () -> dimBehindView(false));
+                    alert.showDim(false);
+                    closeMenu(false);
+                } else {
+                    MessageTransKt.translateMessages(this);
+                }
                 break;
             }
             case nkbtn_detail: {

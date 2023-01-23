@@ -35,9 +35,23 @@ if (properties != null) {
     pwd = properties.getProperty("ALIAS_PASS")
 }
 
-keystorePwd = keystorePwd ?: System.getenv("KEYSTORE_PASS")
-alias = alias ?: System.getenv("ALIAS_NAME")
-pwd = pwd ?: System.getenv("ALIAS_PASS")
+    compileOnly 'org.checkerframework:checker-qual:2.5.2'
+    compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.firebase:firebase-config:21.0.1'
+    implementation 'com.google.firebase:firebase-datatransport:18.1.0'
+    implementation 'com.google.firebase:firebase-appindexing:20.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-wallet:19.1.0'
+    implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
+    implementation 'com.stripe:stripe-android:2.0.2'
+    implementation 'com.google.mlkit:language-id:16.1.1'
+    implementation 'com.android.billingclient:billing:5.1.0'
+    implementation 'com.google.code.gson:gson:2.10'
 
 def targetTask = ""
 if (!gradle.startParameter.taskNames.isEmpty()) {

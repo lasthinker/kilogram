@@ -413,6 +413,218 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
 
     // NekoX: Merge 8.4.1, remove TranslateSettings
 
+        private HeaderCell header;
+        private TextCheckCell showButtonCheck;
+        private TextSettingsCell doNotTranslateCell;
+        private TextInfoPrivacyCell info;
+        private TextInfoPrivacyCell info2;
+        private ValueAnimator doNotTranslateCellAnimation = null;
+//        private HeaderCell header2;
+
+        private SharedPreferences.OnSharedPreferenceChangeListener listener;
+
+//        private float HEIGHT_OPEN = 243;
+//        private float HEIGHT_CLOSED = HEIGHT_OPEN - 50;
+
+        public TranslateSettings(Context context) {
+            super(context);
+            setFocusable(false);
+
+            setOrientation(VERTICAL);
+
+            preferences = MessagesController.getGlobalMainSettings();
+
+            header = new HeaderCell(context);
+            header.setFocusable(true);
+            header.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+            header.setText(LocaleController.getString("TranslateMessages", R.string.TranslateMessages));
+            header.setContentDescription(LocaleController.getString("TranslateMessages", R.string.TranslateMessages));
+            addView(header, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            boolean value = getValue();
+            showButtonCheck = new TextCheckCell(context);
+            showButtonCheck.setBackground(Theme.createSelectorWithBackgroundDrawable(Theme.getColor(Theme.key_windowBackgroundWhite), Theme.getColor(Theme.key_listSelector)));
+            showButtonCheck.setTextAndCheck(
+                LocaleController.getString("ShowTranslateButton", R.string.ShowTranslateButton),
+                value,
+                value
+            );
+            showButtonCheck.setOnClickListener(e -> {
+                preferences.edit().putBoolean("translate_button", !getValue()).apply();
+                NotificationCenter.getInstance(currentAccount).postNotificationName(NotificationCenter.updateSearchSettings);
+            });
+            addView(showButtonCheck, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            doNotTranslateCell = new TextSettingsCell(context);
+            doNotTranslateCell.setBackground(Theme.createSelectorWithBackgroundDrawable(Theme.getColor(Theme.key_windowBackgroundWhite), Theme.getColor(Theme.key_listSelector)));
+            doNotTranslateCell.setOnClickListener(e -> {
+                presentFragment(new RestrictedLanguagesSelectActivity());
+                update();
+            });
+            doNotTranslateCell.setClickable(value && LanguageDetector.hasSupport());
+            doNotTranslateCell.setAlpha(value && LanguageDetector.hasSupport() ? 1f : 0f);
+            addView(doNotTranslateCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            info = new TextInfoPrivacyCell(context);
+            info.setTopPadding(11);
+            info.setBottomPadding(16);
+            info.setFocusable(true);
+            info.setText(LocaleController.getString("TranslateMessagesInfo1", R.string.TranslateMessagesInfo1));
+            info.setContentDescription(LocaleController.getString("TranslateMessagesInfo1", R.string.TranslateMessagesInfo1));
+            addView(info, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+            info2 = new TextInfoPrivacyCell(context);
+            info2.setTopPadding(0);
+            info2.setBottomPadding(16);
+            info2.setFocusable(true);
+            info2.setText(LocaleController.getString("TranslateMessagesInfo2", R.string.TranslateMessagesInfo2));
+            info2.setContentDescription(LocaleController.getString("TranslateMessagesInfo2", R.string.TranslateMessagesInfo2));
+            info2.setAlpha(value ? 0f : 1f);
+            addView(info2, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+//            header2 = new HeaderCell(context);
+//            header2.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+//            header2.setText(LocaleController.getString("Language", R.string.Language));
+//            header2.setTranslationY(-Math.max(doNotTranslateCell.getHeight(), info2.getHeight()));
+//            addView(header2, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM));
+
+//            setLayoutParams(new RecyclerView.LayoutParams(LayoutHelper.MATCH_PARENT, height()));
+            updateHeight();
+            update();
+        }
+
+        private boolean getValue() {
+            return preferences.getBoolean("translate_button", false);
+        }
+        private ArrayList<String> getRestrictedLanguages() {
+            String currentLang = LocaleController.getInstance().getCurrentLocaleInfo().pluralLangCode;
+            ArrayList<String> langCodes = new ArrayList<>(RestrictedLanguagesSelectActivity.getRestrictedLanguages());
+            if (!langCodes.contains(currentLang))
+                langCodes.add(currentLang);
+            return langCodes;
+        }
+
+        public void update() {
+            boolean value = getValue() && LanguageDetector.hasSupport();
+
+            showButtonCheck.setChecked(getValue());
+
+            if (doNotTranslateCellAnimation != null) {
+                doNotTranslateCellAnimation.cancel();
+            }
+
+            showButtonCheck.setDivider(value);
+            ArrayList<String> langCodes = getRestrictedLanguages();
+            String doNotTranslateCellValue = null;
+            if (langCodes.size() == 1) {
+                try {
+                    doNotTranslateCellValue = LocaleController.getInstance().getLanguageFromDict(langCodes.get(0)).name;
+                } catch (Exception e) {}
+            }
+            if (doNotTranslateCellValue == null)
+                doNotTranslateCellValue = String.format(LocaleController.getPluralString("Languages", getRestrictedLanguages().size()), getRestrictedLanguages().size());
+            doNotTranslateCell.setTextAndValue(LocaleController.getString("DoNotTranslate", R.string.DoNotTranslate), doNotTranslateCellValue, false);
+            doNotTranslateCell.setClickable(value);
+
+            info2.setVisibility(View.VISIBLE);
+            doNotTranslateCellAnimation = ValueAnimator.ofFloat(doNotTranslateCell.getAlpha(), value ? 1f : 0f);
+            doNotTranslateCellAnimation.setInterpolator(CubicBezierInterpolator.DEFAULT);
+            doNotTranslateCellAnimation.addUpdateListener(a -> {
+                float t = (float) a.getAnimatedValue();
+                doNotTranslateCell.setAlpha(t);
+                doNotTranslateCell.setTranslationY(-AndroidUtilities.dp(8) * (1f - t));
+                info.setTranslationY(-doNotTranslateCell.getHeight() * (1f - t));
+                info2.setAlpha(1f - t);
+                info2.setTranslationY(-doNotTranslateCell.getHeight() * (1f - t));
+//                header2.setTranslationY(-Math.max(doNotTranslateCell.getHeight(), info2.getHeight()));
+
+//                updateHeight();
+//                header2.setTranslationY(-doNotTranslateCell.getHeight());
+//                header2.setTranslationY(-doNotTranslateCell.getHeight() * (1f - t));
+
+//                ViewGroup.LayoutParams layoutParams = getLayoutParams();
+//                layoutParams.height = AndroidUtilities.dp(HEIGHT_CLOSED + (HEIGHT_OPEN - HEIGHT_CLOSED) * t);
+//                setLayoutParams(layoutParams);
+            });
+            doNotTranslateCellAnimation.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    if (doNotTranslateCell.getAlpha() > .5) {
+                        info2.setVisibility(View.GONE);
+                    } else {
+                        info2.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+            doNotTranslateCellAnimation.setDuration((long) (Math.abs(doNotTranslateCell.getAlpha() - (value ? 1f : 0f)) * 200));
+            doNotTranslateCellAnimation.start();
+
+//            updateHeight();
+        }
+
+        @Override
+        protected void onConfigurationChanged(Configuration newConfig) {
+            super.onConfigurationChanged(newConfig);
+            updateHeight();
+        }
+
+        @Override
+        protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            updateHeight();
+            super.onLayout(changed, l, t, r, b);
+        }
+
+        void updateHeight() {
+            header.measure(MeasureSpec.makeMeasureSpec(AndroidUtilities.displaySize.x, MeasureSpec.EXACTLY), MeasureSpec.UNSPECIFIED);
+            showButtonCheck.measure(MeasureSpec.makeMeasureSpec(AndroidUtilities.displaySize.x, MeasureSpec.EXACTLY), MeasureSpec.UNSPECIFIED);
+            doNotTranslateCell.measure(MeasureSpec.makeMeasureSpec(AndroidUtilities.displaySize.x, MeasureSpec.EXACTLY), MeasureSpec.UNSPECIFIED);
+            info.measure(MeasureSpec.makeMeasureSpec(AndroidUtilities.displaySize.x, MeasureSpec.EXACTLY), MeasureSpec.UNSPECIFIED);
+            info2.measure(MeasureSpec.makeMeasureSpec(AndroidUtilities.displaySize.x, MeasureSpec.EXACTLY), MeasureSpec.UNSPECIFIED);
+
+            int newHeight = searching ? 0 : height();
+            if (getLayoutParams() == null) {
+                setLayoutParams(new RecyclerView.LayoutParams(LayoutHelper.MATCH_PARENT, newHeight));
+            } else if (getLayoutParams().height != newHeight) {
+                RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) getLayoutParams();
+                lp.height = newHeight;
+                setLayoutParams(lp);
+            }
+        }
+        int height() {
+            return Math.max(AndroidUtilities.dp(40), header.getMeasuredHeight()) +
+                   Math.max(AndroidUtilities.dp(50), showButtonCheck.getMeasuredHeight()) +
+                   Math.max(Math.max(AndroidUtilities.dp(50), doNotTranslateCell.getMeasuredHeight()), (info2.getMeasuredHeight() <= 0 ? AndroidUtilities.dp(51) : info2.getMeasuredHeight())) +
+                   (info.getMeasuredHeight() <= 0 ? AndroidUtilities.dp(62) : info.getMeasuredHeight());/* + header2.getHeight()*/
+        }
+
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            updateHeight();
+        }
+
+        @Override
+        protected void onAttachedToWindow() {
+            super.onAttachedToWindow();
+            update();
+            preferences.registerOnSharedPreferenceChangeListener(listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                    preferences = sharedPreferences;
+                    update();
+                }
+            });
+            updateHeight();
+        }
+
+        @Override
+        protected void onDetachedFromWindow() {
+            super.onDetachedFromWindow();
+            preferences.unregisterOnSharedPreferenceChangeListener(listener);
+        }
+    }
+
     private class ListAdapter extends RecyclerListView.SelectionAdapter {
 
         private Context mContext;

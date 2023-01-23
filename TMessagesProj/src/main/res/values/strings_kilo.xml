@@ -72,4 +72,5 @@
     <string name="DoActionsInCommonGroups">Applied In Common Groups</string>
     <string name="ShowFullAbout">Show Full About Info</string>
     <string name="HideMessageSeenTooltip">Hide Message Seen Tooltip</string>
+    <string name="TypeMessageHintUseGroupName">Use Group Name As Type Message Hint</string>
 </resources>

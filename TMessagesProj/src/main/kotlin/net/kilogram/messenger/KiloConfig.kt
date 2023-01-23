@@ -376,6 +376,12 @@ object KiloConfig {
             ConfigItem.configTypeBool,
             false
         )
+    val typeMessageHintUseGroupName =
+        addConfig(
+            "TypeMessageHintUseGroupName",
+            ConfigItem.configTypeBool,
+            false
+        )
 
     private fun addConfig(
         k: String,

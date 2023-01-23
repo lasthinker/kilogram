@@ -135,6 +135,7 @@ public class NekoChatSettingsActivity extends BaseFragment implements Notificati
 //                    LocaleController.getString("ReactionsDisabled", R.string.ReactionsDisabled),
 //            }, null));
     private final AbstractConfigCell showFullAboutRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowFullAbout()));
+    private final AbstractConfigCell hideMessageSeenTooltipcRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getHideMessageSeenTooltip()));
     private final AbstractConfigCell dividerInteractions = cellGroup.appendCell(new ConfigCellDivider());
 
     // Sticker

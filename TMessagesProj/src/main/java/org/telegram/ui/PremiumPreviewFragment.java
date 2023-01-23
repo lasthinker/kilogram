@@ -508,10 +508,10 @@ public class PremiumPreviewFragment extends BaseFragment implements Notification
 //                    bottomSheet.setParentFragment(PremiumPreviewFragment.this);
 //                    showDialog(bottomSheet);
 //                } else {
-                if (subscriptionTiers.isEmpty()) {
-                    return;
-                }
-                    showDialog(new PremiumFeatureBottomSheet(PremiumPreviewFragment.this, cell.data.type, false, subscriptionTiers.get(selectedTierIndex)));
+//                if (subscriptionTiers.isEmpty()) {
+//                    return;
+//                }
+//                    showDialog(new PremiumFeatureBottomSheet(PremiumPreviewFragment.this, cell.data.type, false, subscriptionTiers.get(selectedTierIndex)));
                // }
             }
         });

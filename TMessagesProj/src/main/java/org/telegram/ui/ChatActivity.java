@@ -1021,6 +1021,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int OPTION_EDIT_SCHEDULE_TIME = 102;
     private final static int OPTION_SPEED_PROMO = 103;
     private final static int OPTION_OPEN_PROFILE = 104;
+    private final static int OPTION_COPY_PHOTO = 150;
 
     private final static int[] allowedNotificationsDuringChatListAnimations = new int[]{
             NotificationCenter.messagesRead,
@@ -26328,6 +26329,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             case OPTION_OPEN_PROFILE: {
                 TLRPC.Peer from = selectedObject.messageOwner.from_id;
                 openUserProfile(from.user_id != 0 ? from.user_id : from.channel_id != 0 ? from.channel_id : from.chat_id);
+            }
+            default: {
+                nkbtn_onclick(option);
                 break;
             }
         }

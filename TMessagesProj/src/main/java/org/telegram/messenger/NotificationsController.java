@@ -146,6 +146,8 @@ public class NotificationsController extends BaseController {
 
     private SpoilerEffect mediaSpoilerEffect = new SpoilerEffect();
 
+    private SpoilerEffect mediaSpoilerEffect = new SpoilerEffect();
+
     public static final int SETTING_SOUND_ON = 0;
     public static final int SETTING_SOUND_OFF = 1;
 

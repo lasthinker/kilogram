@@ -768,15 +768,15 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                     view.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
                     break;
                 }
-                case 2:
-                    TranslateSettings translateSettings = new TranslateSettings(mContext);
-                    view = translateSettings;
-                    break;
-                case 3:
-                    HeaderCell header = new HeaderCell(mContext);
-                    header.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
-                    view = header;
-                    break;
+//                case 2:
+//                    TranslateSettings translateSettings = new TranslateSettings(mContext);
+//                    view = translateSettings;
+//                    break;
+//                case 3:
+//                    HeaderCell header = new HeaderCell(mContext);
+//                    header.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+//                    view = header;
+//                    break;
                 case 1:
                 default: {
                     view = new ShadowSectionCell(mContext);
@@ -792,7 +792,7 @@ public class LanguageSelectActivity extends BaseFragment implements Notification
                 case 0: {
                     if (!search)
                         position -= 2;
-                    TextRadioCell textSettingsCell = (TextRadioCell) holder.itemView;
+//                    TextRadioCell textSettingsCell = (TextRadioCell) holder.itemView;
                     LocaleController.LocaleInfo localeInfo;
                     boolean last;
                     if (search) {

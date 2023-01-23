@@ -583,8 +583,10 @@ public class Emoji {
             } catch (Exception e) {
                 FileLog.e(e);
             }
-            if ((Build.VERSION.SDK_INT < 23 || Build.VERSION.SDK_INT >= 29)/* && !BuildVars.DEBUG_PRIVATE_VERSION*/ && (i + 1) >= limitCount) {
-                break;
+            if (!NaConfig.INSTANCE.getDisableEmojiDrawLimit().Bool()) {
+                if ((Build.VERSION.SDK_INT < 23 || Build.VERSION.SDK_INT >= 29)/* && !BuildVars.DEBUG_PRIVATE_VERSION*/ && (i + 1) >= limitCount) {
+                    break;
+                }
             }
         }
         return s;

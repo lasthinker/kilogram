@@ -209,7 +209,7 @@ public class FileLoadOperation {
     }
 
     private void updateParams() {
-        if (MessagesController.getInstance(currentAccount).getfileExperimentalParams && !forceSmallChunk) {
+        if (MessagesController.getInstance(currentAccount).getfileExperimentalParams && !forceSmallChunk || NekoConfig.enhancedFileLoader.Bool()) {
             downloadChunkSizeBig = 1024 * 512;
             maxDownloadRequests = 8;
             maxDownloadRequestsBig = 8;

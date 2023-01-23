@@ -227,6 +227,8 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
     private final static int open_in = 1;
     private final static int share_live_location = 5;
     private final static int get_directions = 6;
+
+    // Official: Google Maps
     private final static int map_list_menu_map = 2;
     private final static int map_list_menu_satellite = 3;
     private final static int map_list_menu_hybrid = 4;

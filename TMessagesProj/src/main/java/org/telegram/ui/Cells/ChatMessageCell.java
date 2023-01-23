@@ -18179,7 +18179,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 }
             }
             if (edited && !lastDrawingEdited && timeLayout != null) {
-                String editedStr = LocaleController.getString("EditedMessage", R.string.EditedMessage);
+                String customStr = NaConfig.INSTANCE.getCustomEditedMessage().String();
+                String editedStr = customStr.equals("") ? LocaleController.getString("EditedMessage", R.string.EditedMessage) : customStr;
                 CharSequence text = timeLayout.getText();
                 int i = text.toString().indexOf(editedStr);
                 if (i >= 0) {

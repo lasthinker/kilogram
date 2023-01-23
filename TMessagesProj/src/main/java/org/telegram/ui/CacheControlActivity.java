@@ -12,6 +12,8 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -47,6 +49,7 @@ import org.telegram.SQLite.SQLiteDatabase;
 import org.telegram.SQLite.SQLitePreparedStatement;
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.BotWebViewVibrationEffect;
 import org.telegram.messenger.DialogObject;
 import org.telegram.messenger.Emoji;
@@ -61,6 +64,8 @@ import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.Utilities;
+import org.telegram.tgnet.ConnectionsManager;
+import org.telegram.tgnet.NativeByteBuffer;
 import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.ActionBar;
@@ -418,7 +423,9 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
         itemInners.add(new ItemInner(VIEW_TYPE_TEXT_SETTINGS, null, null));
         databaseInfoRow = itemInners.size();
         itemInners.add(new ItemInner(VIEW_TYPE_INFO, "database", null));
-
+//        resetDateRow = itemInners.size();
+//        itemInners.add(new ItemInner());
+        // fixme merge 9.2.2
         if (loadingDialogs) {
             itemInners.add(new ItemInner(VIEW_TYPE_HEADER, LocaleController.getString("DataUsageByChats", R.string.DataUsageByChats), 15, 4, null));
             itemInners.add(new ItemInner(VIEW_FLICKER_LOADING_DIALOG, null, null));
@@ -565,7 +572,7 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                 file = FileLoader.checkDirectory(type);
             }
             if (file != null) {
-                Utilities.clearDir(file.getAbsolutePath(), documentsMusicType, Long.MAX_VALUE, false);
+                    Utilities.clearDir(file.getAbsolutePath(), documentsMusicType, Long.MAX_VALUE, true);
             }
             if (type == FileLoader.MEDIA_DIR_IMAGE || type == FileLoader.MEDIA_DIR_VIDEO) {
                 int publicDirectoryType;
@@ -577,7 +584,7 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                 file = FileLoader.checkDirectory(publicDirectoryType);
 
                 if (file != null) {
-                    Utilities.clearDir(file.getAbsolutePath(), documentsMusicType, Long.MAX_VALUE, true);
+                    Utilities.clearDir(file.getAbsolutePath(), documentsMusicType, Long.MAX_VALUE, false);
                 }
             }
             if (type == FileLoader.MEDIA_DIR_DOCUMENT) {
@@ -590,6 +597,15 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
             if (type == FileLoader.MEDIA_DIR_CACHE) {
                 cacheSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_CACHE), documentsMusicType);
                 imagesCleared = true;
+
+        totalDeviceSize = blocksTotal * blockSize;
+        totalDeviceFreeSize = availableBlocks * blockSize;
+        long finalClearedSize = clearedSize;
+
+                    try {
+                        FileUtil.delete(new File(EnvUtil.getTelegramPath(), "logs"));
+                    } catch (Exception ignored) {
+                    }
             } else if (type == FileLoader.MEDIA_DIR_AUDIO) {
                 audioSize = getDirectorySize(FileLoader.checkDirectory(FileLoader.MEDIA_DIR_AUDIO), documentsMusicType);
             } else if (type == FileLoader.MEDIA_DIR_DOCUMENT) {
@@ -1094,7 +1110,8 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int position = holder.getAdapterPosition();
-            return position == migrateOldFolderRow || position == databaseRow || (holder.getItemViewType() == VIEW_TYPE_STORAGE && (totalSize > 0) && !calculating) || holder.getItemViewType() == VIEW_TYPE_CHAT;
+            // NekoX: Remove migrateOldFolderRow
+            return position == databaseRow || position == resetDataRow || (holder.getItemViewType() == VIEW_TYPE_STORAGE && (totalSize > 0) && !calculating) || holder.getItemViewType() == VIEW_TYPE_CHAT;
         }
 
         @Override
@@ -1145,6 +1162,11 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                         index = keepMedia + 2;
                     }
                     slideChooseView.setOptions(index, LocaleController.formatPluralString("Days", 1), LocaleController.formatPluralString("Days", 3), LocaleController.formatPluralString("Weeks", 1), LocaleController.formatPluralString("Months", 1), LocaleController.getString("KeepMediaForever", R.string.KeepMediaForever));
+                    break;
+                case VIEW_TYPE_CHAT:
+                    UserCell userCell = new UserCell(getContext(), getResourceProvider());
+                    userCell.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+                    view = userCell;
                     break;
                 case VIEW_TYPE_CHAT:
                     UserCell userCell = new UserCell(getContext(), getResourceProvider());

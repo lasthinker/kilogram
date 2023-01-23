@@ -1696,6 +1696,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         scrollToTopOnResume = arguments.getBoolean("scrollToTopOnResume", false);
         needRemovePreviousSameChatActivity = arguments.getBoolean("need_remove_previous_same_chat_activity", true);
         justCreatedChat = arguments.getBoolean("just_created_chat", false);
+        noForwardQuote = arguments.getBoolean("forward_noquote", false);
 
         if (chatId != 0) {
             currentChat = getMessagesController().getChat(chatId);
@@ -3209,7 +3210,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (themeDelegate.isThemeChangeAvailable()) {
                 headerItem.addSubItem(change_colors, R.drawable.msg_colors, LocaleController.getString("ChangeColors", R.string.ChangeColors), themeDelegate);
             }
-            if (!isTopic) { 
+            if (!isTopic) {
                 toTheBeginning = headerItem.addSubItem(to_the_beginning, R.drawable.ic_upward, LocaleController.getString("ToTheBeginning", R.string.ToTheBeginning));
                 toTheMessage = headerItem.addSubItem(to_the_message, R.drawable.msg_go_up, LocaleController.getString("ToTheMessage", R.string.ToTheMessage));
                 clearHistoryItem = headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory), themeDelegate);
@@ -12172,7 +12173,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 SendMessagesHelper.getInstance(currentAccount).sendMessage(caption, dialog_id, null, null, null, true, null, null, null, true, 0, null, false);
                 caption = null;
             }
-            getSendMessagesHelper().sendMessage(fmessages, dialog_id, false, false, true, 0);
+        getSendMessagesHelper().sendMessage(fmessages, dialog_id, noForwardQuote, false, true, 0);
             SendMessagesHelper.prepareSendingDocuments(getAccountInstance(), files, files, null, caption, null, dialog_id, replyingMessageObject, getThreadMessage(), null, editingMessageObject, notify, scheduleDate);
             afterMessageSend();
         }
@@ -18675,6 +18676,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (avatarContainer != null) {
                     avatarContainer.updateSubtitle();
                 }
+            } else if (id == NotificationCenter.dialogsUnreadCounterChanged) {
+                if (actionBar != null) { // NekoX
+                    actionBar.unreadBadgeSetCount(getMessagesStorage().getMainUnreadCount());
             }
         }
     }
@@ -24326,7 +24330,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                             int totalHeight = contentView.getHeightWithKeyboard();
 
-                            if (SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
+                            if (!NaConfig.INSTANCE.getHideMessageSeenTooltip().Bool() && SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
                                 messageSeenPrivacyBulletin = BulletinFactory.of(Bulletin.BulletinWindow.make(getContext()), themeDelegate).createErrorBulletin(AndroidUtilities.replaceTags(LocaleController.getString("MessageSeenTooltipMessage", R.string.MessageSeenTooltipMessage)));
                                 messageSeenPrivacyBulletin.setDuration(4000);
                                 messageSeenPrivacyBulletin.show();
@@ -27158,7 +27162,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (username != null) {
                 username = username.toLowerCase();
                 if (ChatObject.hasPublicLink(currentChat, username) ||
-                    currentUser != null && !TextUtils.isEmpty(currentUser.username) && username.equals(currentUser.username.toLowerCase())) {
+                        currentUser != null && !TextUtils.isEmpty(currentUser.username) && username.equals(currentUser.username.toLowerCase())) {
                     if (avatarContainer != null) {
                         avatarContainer.openProfile(false);
                     } else {

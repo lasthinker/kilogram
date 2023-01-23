@@ -534,7 +534,7 @@ public class DataSettingsActivity extends BaseFragment {
                         textCell.setCanDisable(true);
                         textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteRedText));
                         textCell.setText(LocaleController.getString("ResetAutomaticMediaDownload", R.string.ResetAutomaticMediaDownload), false);
-                    } else if (position == quickRepliesRow){
+                    } else if (position == quickRepliesRow) {
                         textCell.setIcon(0);
                         textCell.setText(LocaleController.getString("VoipQuickReplies", R.string.VoipQuickReplies), false);
                     } else if (position == clearDraftsRow) {

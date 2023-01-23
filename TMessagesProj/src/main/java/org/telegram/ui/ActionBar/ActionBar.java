@@ -78,7 +78,7 @@ public class ActionBar extends FrameLayout {
     }
 
     private INavigationLayout.BackButtonState backButtonState = INavigationLayout.BackButtonState.BACK;
-    private ImageView backButtonImageView;
+    private UnreadImageView backButtonImageView;
     private BackupImageView avatarSearchImageView;
     private Drawable backButtonDrawable;
     private SimpleTextView[] titleTextView = new SimpleTextView[2];
@@ -145,7 +145,7 @@ public class ActionBar extends FrameLayout {
     private View.OnTouchListener interceptTouchEventListener;
     private final Theme.ResourcesProvider resourcesProvider;
 
-    private PorterDuff.Mode colorFilterMode = PorterDuff.Mode.MULTIPLY;
+    private PorterDuff.Mode colorFilterMode = PorterDuff.Mode.SRC_IN;
 
     SizeNotifierFrameLayout contentView;
     boolean blurredBackground;
@@ -1846,6 +1846,17 @@ public class ActionBar extends FrameLayout {
         this.drawBackButton = b;
         if (backButtonImageView != null) {
             backButtonImageView.invalidate();
+        }
+    }
+
+
+    // NekoX Changes
+
+    private StaticLayout countLayout;
+
+    private class UnreadImageView extends ImageView {
+        public UnreadImageView(Context context) {
+            super(context);
         }
     }
 

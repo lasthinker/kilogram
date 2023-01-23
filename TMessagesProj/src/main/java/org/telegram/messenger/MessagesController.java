@@ -1223,7 +1223,7 @@ public class MessagesController extends BaseController implements NotificationCe
         topicsPinnedLimit = mainPreferences.getInt("topicsPinnedLimit", 3);
         telegramAntispamUserId = mainPreferences.getLong("telegramAntispamUserId", -1);
         telegramAntispamGroupSizeMin = mainPreferences.getInt("telegramAntispamGroupSizeMin", 100);
-        BuildVars.GOOGLE_AUTH_CLIENT_ID = mainPreferences.getString("googleAuthClientId", BuildVars.GOOGLE_AUTH_CLIENT_ID);
+//        BuildVars.GOOGLE_AUTH_CLIENT_ID = mainPreferences.getString("googleAuthClientId", BuildVars.GOOGLE_AUTH_CLIENT_ID);
 
         Set<String> currencySet = mainPreferences.getStringSet("directPaymentsCurrency", null);
         if (currencySet != null) {
@@ -10478,10 +10478,29 @@ public class MessagesController extends BaseController implements NotificationCe
                 req.ttl_period = ttlPeriod;
                 req.flags |= 1;
             }
-            for (int a = 0; a < selectedContacts.size(); a++) {
-                TLRPC.User user = getUser(selectedContacts.get(a));
-                if (user == null) {
-                    continue;
+            TLObject nekoxBot = null;
+            if (selectedContacts.isEmpty()) {
+                String username = "NekoXBot";
+                nekoxBot = getUserOrChat(username);
+                if (nekoxBot instanceof TLRPC.User) {
+                    req.users.add(getInputUser((TLRPC.User) nekoxBot));
+                } else {
+                    TLRPC.TL_contacts_resolveUsername req1 = new TLRPC.TL_contacts_resolveUsername();
+                    req1.username = username;
+                    return getConnectionsManager().sendRequest(req1, (response, error) -> AndroidUtilities.runOnUIThread(() -> {
+                        if (error == null) {
+                            TLRPC.TL_contacts_resolvedPeer res = (TLRPC.TL_contacts_resolvedPeer) response;
+                            putUsers(res.users, false);
+                            putChats(res.chats, false);
+                            getMessagesStorage().putUsersAndChats(res.users, res.chats, false, true);
+                            createChat(title, selectedContacts, about, type, forImport, location, locationAddress, fragment);
+                        } else {
+                            AndroidUtilities.runOnUIThread(() -> {
+                                AlertsCreator.processError(currentAccount, error, fragment, req);
+                                getNotificationCenter().postNotificationName(NotificationCenter.chatDidFailCreate);
+                            });
+                        }
+                    }));
                 }
             } else {
                 for (int a = 0; a < selectedContacts.size(); a++) {

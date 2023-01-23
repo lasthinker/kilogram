@@ -322,24 +322,26 @@ import java.util.regex.Pattern;
 
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
-import net.kilogram.messenger.NekoConfig;
-import net.kilogram.messenger.NekoXConfig;
-import net.kilogram.messenger.parts.MessageTransKt;
-import net.kilogram.messenger.parts.PollTransUpdatesKt;
-import net.kilogram.messenger.settings.NekoSettingsActivity;
-import net.kilogram.messenger.transtale.Translator;
-import net.kilogram.messenger.transtale.popupwrapper.LanguageDetector;
-import net.kilogram.messenger.ui.BottomBuilder;
-import net.kilogram.messenger.ui.MessageDetailsActivity;
-import net.kilogram.messenger.utils.AlertUtil;
-import net.kilogram.messenger.utils.EnvUtil;
-import net.kilogram.messenger.utils.PGPUtil;
-import net.kilogram.messenger.utils.ProxyUtil;
-import net.kilogram.messenger.utils.TelegramUtil;
-import net.kilogram.messenger.utils.VibrateUtil;
-import net.kilogram.messenger.KiloConfig;
-import net.kilogram.messenger.helper.DoubleTap;
-import net.kilogram.messenger.helper.MessageHelper;
+import tw.nekomimi.nekogram.DialogConfig;
+import tw.nekomimi.nekogram.NekoConfig;
+import tw.nekomimi.nekogram.NekoXConfig;
+import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
+import tw.nekomimi.nekogram.parts.MessageTransKt;
+import tw.nekomimi.nekogram.parts.PollTransUpdatesKt;
+import tw.nekomimi.nekogram.settings.NekoSettingsActivity;
+import tw.nekomimi.nekogram.transtale.Translator;
+import tw.nekomimi.nekogram.transtale.popupwrapper.LanguageDetector;
+import tw.nekomimi.nekogram.ui.BottomBuilder;
+import tw.nekomimi.nekogram.ui.MessageDetailsActivity;
+import tw.nekomimi.nekogram.utils.AlertUtil;
+import tw.nekomimi.nekogram.utils.EnvUtil;
+import tw.nekomimi.nekogram.utils.PGPUtil;
+import tw.nekomimi.nekogram.utils.ProxyUtil;
+import tw.nekomimi.nekogram.utils.TelegramUtil;
+import tw.nekomimi.nekogram.utils.VibrateUtil;
+import xyz.nextalone.nagram.NaConfig;
+import xyz.nextalone.nagram.helper.DoubleTap;
+import xyz.nextalone.nagram.helper.MessageHelper;
 
 @SuppressWarnings("unchecked")
 public class ChatActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, LocationActivity.LocationActivityDelegate, ChatAttachAlertDocumentLayout.DocumentSelectActivityDelegate, ChatActivityInterface, FloatingDebugProvider {
@@ -14616,6 +14618,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                         return 23;
                                     } else if (!messageObject.isNewGif() && mime.endsWith("/mp4") || mime.endsWith("/png") || mime.endsWith("/jpg") || mime.endsWith("/jpeg")) {
                                         return 6;
+                                    } else if (mime.startsWith("font/")) {
+                                        return 100;
                                     }
                                 }
                             }
@@ -23828,7 +23832,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             items.add(LocaleController.getString("ShareFile", R.string.ShareFile));
                             options.add(6);
                             icons.add(R.drawable.msg_shareout);
-                        } else if (type == 21 || type == 22 || type == 23) {
+                        } else if (type == 21 || type == 22 || type == 23 || type == 100) {
                             options.add(5);
                             if (type == 21) {
                                 items.add(LocaleController.getString("ImportProxyList", R.string.ImportProxyList));
@@ -23836,9 +23840,12 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             } else if (type == 22) {
                                 items.add(LocaleController.getString("ImportStickersList", R.string.ImportStickersList));
                                 icons.add(R.drawable.msg_sticker);
-                            } else {
+                            } else if (type == 23) {
                                 items.add(LocaleController.getString("ImportSettings", R.string.ImportSettings));
                                 icons.add(R.drawable.baseline_security_24);
+                            } else {
+                                items.add(LocaleController.getString("ApplyEmojiSet", R.string.ApplyEmojiSet));
+                                icons.add(R.drawable.smiles_tab_smiles);
                             }
                             if (!noforwardsOverride) {
                                 items.add(LocaleController.getString("SaveToDownloads", R.string.SaveToDownloads));
@@ -25829,6 +25836,44 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                         NekoSettingsActivity.importSettings(getParentActivity(), finalLocFile);
 
+                    } else if (getMessageType(selectedObject) == 100) {
+                        AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
+                        File finalLocFile = locFile;
+                        Utilities.globalQueue.postRunnable(() -> {
+                            boolean success = true;
+                            EmojiHelper.EmojiPackBase emojiPackBase = null;
+                            try {
+                                emojiPackBase = EmojiHelper.getInstance().installEmoji(finalLocFile, false);
+                            } catch (Exception e) {
+                                FileLog.e("Emoji Font install failed", e);
+                                success = false;
+                            }
+                            boolean finalSuccess = success;
+                            EmojiHelper.EmojiPackBase finalEmojiPackBase = emojiPackBase;
+                            AndroidUtilities.runOnUIThread(() -> {
+                                progressDialog.dismiss();
+                                if (finalSuccess && finalEmojiPackBase != null) {
+                                    if (finalEmojiPackBase.getPackId().equals(EmojiHelper.getInstance().getEmojiPack())) {
+                                        BulletinFactory.of(ChatActivity.this).createErrorBulletin(LocaleController.getString("EmojiSetAlreadyApplied", R.string.EmojiSetAlreadyApplied), themeDelegate).show();
+                                    } else {
+                                        EmojiHelper.EmojiSetBulletinLayout bulletinLayout = new EmojiHelper.EmojiSetBulletinLayout(
+                                                getParentActivity(),
+                                                LocaleController.getString("EmojiSetApplied", R.string.EmojiSetApplied),
+                                                LocaleController.formatString("EmojiSetAppliedInfo", R.string.EmojiSetAppliedInfo, finalEmojiPackBase.getPackName()),
+                                                finalEmojiPackBase,
+                                                themeDelegate
+                                        );
+                                        Bulletin.make(ChatActivity.this, bulletinLayout, Bulletin.DURATION_LONG).show();
+                                        EmojiHelper.getInstance().setEmojiPack(finalEmojiPackBase.getPackId());
+                                        EmojiHelper.reloadEmoji();
+                                    }
+                                } else {
+                                    BulletinFactory.of(ChatActivity.this).createErrorBulletin(LocaleController.getString("InvalidCustomEmojiTypeface", R.string.InvalidCustomEmojiTypeface), themeDelegate).show();
+                                }
+                            });
+                        });
+                        progressDialog.setCanCancel(false);
+                        progressDialog.showDelayed(300);
                     }
                 }
                 break;

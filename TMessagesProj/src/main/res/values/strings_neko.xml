@@ -177,4 +177,22 @@
     <string name="BrokenMLKit">Option Unavailable</string>
     <string name="BrokenMLKitDetail">Google MLKit Language Identifier Is Somehow Broken On This Device.</string>
     <string name="RestrictionReason">Restriction Reason</string>
+    <string name="InvalidCustomEmojiTypeface">Invalid Font File.</string>
+    <string name="DownloadEmojiSet">Download %s</string>
+    <string name="EmojiSets">Emoji Sets</string>
+    <string name="MyEmojiSets">My Emoji Sets</string>
+    <string name="InstalledEmojiSet">Installed</string>
+    <string name="InstallingEmojiSet">Installing…</string>
+    <string name="UpdateEmojiSet">Update %s</string>
+    <string name="EmojiSetHint">This Affects Emoji Appearance Only For You. Others See Them Based On Their Preferences.</string>
+    <string name="CustomEmojiSetHint">Import And Choose Emoji Sets From Your Internal Storage.</string>
+    <string name="AddEmojiSet">Add Emoji Set</string>
+    <string name="EmojiSetRemoved">Emoji Set Removed.</string>
+    <string name="EmojiSetRemovedInfo">%1$s Is No Longer In Your Emoji Sets.</string>
+    <string name="DeleteEmojiSets">%1$s Emoji Sets</string>
+    <string name="DeleteEmojiSetsMessage">Are You Sure You Want To Delete The Selected Emoji Sets?</string>
+    <string name="ApplyEmojiSet">Apply Emoji Set</string>
+    <string name="EmojiSetApplied">Emoji Set Applied.</string>
+    <string name="EmojiSetAppliedInfo">%1$s Is Now Your Emoji Set.</string>
+    <string name="EmojiSetAlreadyApplied">Emoji Set Already Applied.</string>
 </resources>

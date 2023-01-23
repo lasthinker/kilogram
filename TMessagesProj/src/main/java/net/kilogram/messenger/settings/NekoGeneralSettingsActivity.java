@@ -829,6 +829,9 @@ public class NekoGeneralSettingsActivity extends BaseNekoXSettingsActivity {
             NekoConfig.useOSMDroidMap.setConfigBool(true);
             ((ConfigCellTextCheck) useOSMDroidMapRow).setEnabled(false);
             cellGroup.rows.remove(mapDriftingFixForGoogleMapsRow);
+        } else {
+            if (NekoConfig.useOSMDroidMap.Bool())
+                ((ConfigCellTextCheck) mapDriftingFixForGoogleMapsRow).setEnabled(false);
         }
 
         boolean enabled;

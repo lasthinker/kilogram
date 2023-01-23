@@ -275,5 +275,9 @@
     <string name="labelChannelUser">Etiquetar al usuario del canal</string>
     <string name="setChannelAliasName">Establecer alias</string>
     <string name="channelAliasDetails">Requerir usuario habilitado con etiqueta del canal.</string>
-    <string name="labelChannelUserDetails">Si el remitente del mensaje es el Canal, se etiquetará como \"Canal\"</string>
+    <string name="labelChannelUserDetails">Si el remitente del mensaje es \"Canal\", se etiquetará como \"Canal\".</string>
+    <string name="ConfirmSettings">Confirmación</string>
+    <string name="InteractionSettings">Interacción</string>
+    <string name="StickerSettings">Sticker</string>
+    <string name="nekoxPremiumGiftRemoved">Regalar Premium está deshabilitado en NekoX.</string>
 </resources>

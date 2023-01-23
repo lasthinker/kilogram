@@ -244,13 +244,13 @@
     <string name="SetPinnedSuffix">(Fixado)</string>
     <string name="UnpinSticker">Desfixar</string>
     <string name="PinSticker">Fixar</string>
-    <string name="EnableStickerPinTip">Esta função ainda está em desenvolvimento, a sincronização com a nuvem pode não funcionar como se pensava.</string>
-    <string name="EnableStickerPinAbout">Fixe os stickers e sincronize com a nuvem, mesmo ao adicionar novos stickers..
-\nEmparelhado com Desativar Favorito e Recente.</string>
-    <string name="EnableStickerPin">Ativar Fixação de Sticker</string>
-    <string name="ArchiveFiles">Arquivos de arquivo</string>
-    <string name="Win32ExecutableFiles">Arquivos executáveis Win32</string>
-    <string name="AutoDownload">DownloadAuto</string>
+    <string name="EnableStickerPinTip">Esta função ainda está em desenvolvimento. A sincronização com a nuvem pode não funcionar.</string>
+    <string name="EnableStickerPinAbout">Fixa os stickers e os sincroniza com a nuvem, mesmo que novos deles sejam adicionados.
+\nEmparelhado com Desativar Favoritos e Recentes.</string>
+    <string name="EnableStickerPin">Ativar fixação de sticker</string>
+    <string name="ArchiveFiles">Arquivos mortos</string>
+    <string name="Win32ExecutableFiles">Arquivos executáveis do Windows</string>
+    <string name="AutoDownload">Download Automático</string>
     <string name="DeleteDownloadedFileSucceed">Excluído</string>
     <string name="DeleteDownloadedFileConfirm">Excluir este arquivo do cache local\?</string>
     <string name="repeatConfirm">Pergunte antes de repetir</string>
@@ -278,5 +278,9 @@
     <string name="labelChannelUserDetails">Se o remetente da mensagem for o Canal, ele será rotulado como \"Canal\".</string>
     <string name="channelAliasDetails">Exigir usuário do canal de rótulo ativado.</string>
     <string name="Name">Nome</string>
-    <string name="channelAlias">Alias do Canal</string>
+    <string name="channelAlias">Apelidar canal</string>
+    <string name="StickerSettings">Sticker</string>
+    <string name="InteractionSettings">Interação</string>
+    <string name="ConfirmSettings">Confirmação</string>
+    <string name="nekoxPremiumGiftRemoved">Presentear assinatura premium não está disponível no NekoX.</string>
 </resources>

@@ -49,8 +49,6 @@ import java.util.Arrays;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.io.UnsupportedEncodingException;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;

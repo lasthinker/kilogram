@@ -55,7 +55,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.widget.NestedScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -76,6 +75,9 @@ import org.telegram.messenger.BotWebViewVibrationEffect;
 import org.telegram.messenger.CacheByChatsController;
 import org.telegram.messenger.Emoji;
 import org.telegram.messenger.ApplicationLoader;
+import org.telegram.messenger.DialogObject;
+import org.telegram.messenger.FileLoader;
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.BotWebViewVibrationEffect;
 import org.telegram.messenger.CacheByChatsController;
 import org.telegram.messenger.Emoji;
@@ -98,6 +100,7 @@ import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.Utilities;
 import org.telegram.tgnet.ConnectionsManager;
+import org.telegram.tgnet.NativeByteBuffer;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.ActionBar;
@@ -202,6 +205,7 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
     private long totalSize = -1;
     private long totalDeviceSize = -1;
     private long totalDeviceFreeSize = -1;
+
     private long migrateOldFolderRow = -1;
     private boolean calculating = true;
     private boolean collapsed = true;

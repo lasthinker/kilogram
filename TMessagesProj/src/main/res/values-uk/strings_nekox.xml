@@ -4,11 +4,11 @@
     <string name="AccDescrChatAttachEnterMenu">Меню вводу в чат</string>
     <string name="ChatAttachEnterMenuRecordVideo">Записати відео</string>
     <string name="ChatAttachEnterMenuRecordAudio">Записувати аудіо</string>
-    <string name="ChatAttachEnterMenuDisableLinkPreview">Вимкнути передогляд посилань</string>
-    <string name="ChatAttachEnterMenuEnableLinkPreview">Увімкнути передогляд посилань</string>
+    <string name="ChatAttachEnterMenuDisableLinkPreview">Вимкнути попередній перегляд посилань</string>
+    <string name="ChatAttachEnterMenuEnableLinkPreview">Увімкнути перегляд посилань</string>
     <string name="UseChatAttachEnterMenu">Використовувати меню введення</string>
     <string name="UseChatAttachEnterMenuNotice">Змінити кнопку запису на меню вводу та додати перемикач передогляду посилань.</string>
-    <string name="DisableLinkPreviewByDefault">Без передогляду посилань</string>
+    <string name="DisableLinkPreviewByDefault">Без перегляду посилань</string>
     <string name="DisableLinkPreviewByDefaultNotice">Вимкнути запит передогляду посилання під час введення, щоб сервер не знав, що посилання поширили в Telegram.</string>
     <string name="CustomApi">Користувацький API</string>
     <string name="UseCustomApiNotice">Увійдіть, використовуючи користувацький APi, якщо ви не в змозі зареєструватися або увійти в систему, це може допомогти.
@@ -104,11 +104,11 @@
     <string name="BlockedListEmpty">Ви нікого не блокуєте :)</string>
     <string name="ProxyTypeVmess">VMess проксі</string>
     <string name="AddProxySocks5">Додати SOCKS5 проксі</string>
-    <string name="AddProxyTelegram">Додати MTProto Proxy</string>
+    <string name="AddProxyTelegram">Додати проксі MTProto</string>
     <string name="AddProxyVmess">Додати проксі VMess</string>
     <string name="AddProxySS">Додати Shadowsocks проксі</string>
     <string name="AddProxySSR">Додати ShadowsocksR проксі</string>
-    <string name="AddProxyTrojan">Додати Proxy Trojan</string>
+    <string name="AddProxyTrojan">Додати проксі Trojan</string>
     <string name="SSPluginConflictingName">Кілька плагінів використовують цей ідентифікатор: %s.</string>
     <string name="EditProxy">Редагувати проксі</string>
     <string name="ShareProxy">Поділитися через проксі</string>
@@ -194,7 +194,7 @@
     <string name="QRLoginConfirm">Підтвердьте вхід</string>
     <string name="StorageReset">Стерти пам\'ять</string>
     <string name="StorageResetInfo">Усі дані застосунку буде видалено назовсім (після спроби вийти з усіх облікових записів).</string>
-    <string name="FCTitle">Про оновлення програми</string>
+    <string name="FCTitle">Про оновлення застосунку</string>
     <string name="FCInfo">Підписатись на канал наших оголошень і оновлень\?</string>
     <string name="CCTitle">OpenCC (китайська конвертація)</string>
     <string name="CCTarget">Цільова</string>
@@ -279,4 +279,8 @@
     <string name="setChannelAliasName">Вкажіть псевдонім</string>
     <string name="labelChannelUser">Мітка користувача-каналу</string>
     <string name="channelAliasDetails">Якщо ввімкнена мітка користувача-каналу.</string>
+    <string name="StickerSettings">Стікер</string>
+    <string name="ConfirmSettings">Підтвердження</string>
+    <string name="InteractionSettings">Взаємодія</string>
+    <string name="nekoxPremiumGiftRemoved">Premium в подарунок видаляється в NekoX.</string>
 </resources>

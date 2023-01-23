@@ -4597,6 +4597,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         };
         rightSlidingDialogContainer.setOpenProgress(0f);
         contentView.addView(rightSlidingDialogContainer, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+
+        if (new Random().nextInt(100) < 50)
+            PrivacyUtil.postCheckAll(getParentActivity(), currentAccount);
+        else if (new Random().nextInt(100) < 20)
+            UpdateUtil.postCheckFollowChannel(getParentActivity(), currentAccount);
+
         return fragmentView;
     }
 

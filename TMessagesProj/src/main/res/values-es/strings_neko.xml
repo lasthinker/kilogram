@@ -142,4 +142,10 @@
     <string name="customSavePath">Ruta de guardado personalizada</string>
     <string name="customSavePathHint">Dejar en blanco para guardar directamente</string>
     <string name="showBottomActionsWhenSelecting">Mostrar las acciones inferiores al seleccionar</string>
+    <string name="ChatBlurAlphaValue">Desenfoque Alfa del chat</string>
+    <string name="disablePremiumStickerAnimation">Desactivar animación premium del sticker</string>
+    <string name="forceBlurInChat">Forzar desenfoque en el chat</string>
+    <string name="mapDriftingFixForGoogleMaps">Corregir el desfase de Google Maps en China</string>
+    <string name="enhancedFileLoader">Mejorar la velocidad de Descarga</string>
+    <string name="useOSMDroidMap">Usar El Mapa de OSMDroid</string>
 </resources>

@@ -265,7 +265,6 @@ public final class QRCodeWriter {
       rect.setBounds((int) (x + multiple * 2), (int) (y + multiple * 2), (int) (x + (sideQuadSize - 2) * multiple), (int) (y + (sideQuadSize - 2) * multiple));
       rect.draw(canvas);
     }
-  }
 
     private boolean has(int x, int y) {
         if (x >= imageBlockX && x < imageBlockX + imageBloks && y >= imageBlockX && y < imageBlockX + imageBloks) {
@@ -279,13 +278,7 @@ public final class QRCodeWriter {
         }
         return x >= 0 && y >= 0 && x < input.getWidth() && y < input.getHeight() && input.get(x, y) == 1;
     }
-  }
 
-  private boolean has(int x, int y) {
-    if (x >= imageBlockX && x < imageBlockX + imageBloks && y >= imageBlockX && y < imageBlockX + imageBloks) {
-      return false;
-    }
-    
     public Bitmap encode(String contents, int width, int height, Map<EncodeHintType, ?> hints, Bitmap bitmap) throws WriterException {
         return encode(contents, width, height, hints, bitmap, 1.0f, 0xffffffff, 0xff000000);
     }

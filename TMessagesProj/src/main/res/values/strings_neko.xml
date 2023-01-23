@@ -172,4 +172,8 @@
     <string name="PasscodePanicCodeRemoveConfirmMessage">Are You Sure You Want To Turn Off Panic Code?</string>
     <string name="PasscodeRemoveConfirmMessage">Are You Sure You Want To Remove Passcode For This Account?</string>
     <string name="PasscodePanicCodeAbout">Use The Panic Code To Log Out Accounts If Something Goes Wrong.</string>
+    <string name="AutoTranslate">Auto Translate</string>
+    <string name="AutoTranslateAbout">Automatically Translate Messages That Are In Another Language.</string>
+    <string name="BrokenMLKit">Option Unavailable</string>
+    <string name="BrokenMLKitDetail">Google MLKit Language Identifier Is Somehow Broken On This Device.</string>
 </resources>

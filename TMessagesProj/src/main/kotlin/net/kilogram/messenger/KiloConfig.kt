@@ -358,6 +358,12 @@ object KiloConfig {
             ConfigItem.configTypeBool,
             false
         )
+    val showFullAbout =
+        addConfig(
+            "ShowFullAbout",
+            ConfigItem.configTypeBool,
+            false
+        )
 
     private fun addConfig(
         k: String,

@@ -65,6 +65,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import kotlin.Unit;
 import net.kilogram.messenger.NekoConfig;
 import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NaConfig;
 
 public class AboutLinkCell extends FrameLayout {
 
@@ -184,6 +185,9 @@ public class AboutLinkCell extends FrameLayout {
         backgroundPaint.setColor(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider));
 
         setWillNotDraw(false);
+        if (KiloConfig.INSTANCE.getShowFullAbout().Bool()) {
+            onClick();
+        }
     }
 
     @Override
@@ -759,5 +763,9 @@ public class AboutLinkCell extends FrameLayout {
 
     public void setMoreButtonDisabled(boolean moreButtonDisabled) {
         this.moreButtonDisabled = moreButtonDisabled;
+    }
+
+    public boolean isExpanded() {
+        return this.expanded;
     }
 }

@@ -34,8 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.kilogram.messenger.NekoConfig;
-import net.kilogram.messenger.location.NekoLocationSource;
+import tw.nekomimi.nekogram.NekoConfig;
+import nekox.messenger.NekoLocationSource;
 
 public class GoogleMapsProvider implements IMapsProvider {
 

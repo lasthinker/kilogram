@@ -2124,7 +2124,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                                                 sticker = path.replace("addstickers/", "");
                                             } else if (path.startsWith("addemoji/")) {
                                                 emoji = path.replace("addemoji/", "");
-                                            } else if (path.startsWith("nekosettings/")) {
+                                            } else if (path.startsWith("nasettings/")) {
                                                 SettingsHelper.processDeepLink(data, fragment -> {
                                                     AndroidUtilities.runOnUIThread(() -> presentFragment(fragment, false, false));
                                                     if (AndroidUtilities.isTablet()) {
@@ -2540,6 +2540,19 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                                         }
                                     } else if (url.startsWith("tg:upgrade") || url.startsWith("tg://upgrade") || url.startsWith("tg:update") || url.startsWith("tg://update")) {
                                         checkAppUpdate(true);
+                                    } else if (url.startsWith("tg:neko") || url.startsWith("tg://neko")) {
+                                        url = url.replace("tg:neko", "tg://t.me/nasettings").replace("tg://neko", "tg://t.me/nasettings");
+                                        data = Uri.parse(url);
+                                        SettingsHelper.processDeepLink(data, fragment -> {
+                                            AndroidUtilities.runOnUIThread(() -> presentFragment(fragment, false, false));
+                                            if (AndroidUtilities.isTablet()) {
+                                                actionBarLayout.showLastFragment();
+                                                rightActionBarLayout.showLastFragment();
+                                                drawerLayoutContainer.setAllowOpenDrawer(false, false);
+                                            } else {
+                                                drawerLayoutContainer.setAllowOpenDrawer(true, false);
+                                            }
+                                        }, () -> showBulletin(factory -> factory.createErrorBulletin(LocaleController.getString("UnknownNekoSettingsOption", R.string.UnknownNekoSettingsOption))));
                                     } else if ((url.startsWith("tg:search") || url.startsWith("tg://search"))) {
                                         url = url.replace("tg:search", "tg://telegram.org").replace("tg://search", "tg://telegram.org");
                                         data = Uri.parse(url);

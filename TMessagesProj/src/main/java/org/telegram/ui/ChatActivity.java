@@ -18679,6 +18679,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else if (id == NotificationCenter.dialogsUnreadCounterChanged) {
                 if (actionBar != null) { // NekoX
                     actionBar.unreadBadgeSetCount(getMessagesStorage().getMainUnreadCount());
+                }
             }
         }
     }
@@ -24330,7 +24331,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                             int totalHeight = contentView.getHeightWithKeyboard();
 
-                            if (!NaConfig.INSTANCE.getHideMessageSeenTooltip().Bool() && SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
+                            if (!KiloConfig.INSTANCE.getHideMessageSeenTooltip().Bool() && SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
                                 messageSeenPrivacyBulletin = BulletinFactory.of(Bulletin.BulletinWindow.make(getContext()), themeDelegate).createErrorBulletin(AndroidUtilities.replaceTags(LocaleController.getString("MessageSeenTooltipMessage", R.string.MessageSeenTooltipMessage)));
                                 messageSeenPrivacyBulletin.setDuration(4000);
                                 messageSeenPrivacyBulletin.show();

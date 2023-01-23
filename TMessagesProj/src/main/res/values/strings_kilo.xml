@@ -76,4 +76,5 @@
     <string name="HideBotButtonInInputField">Hide Bot Button In Input Field</string>
     <string name="ShowSendAsUnderMessageHint">Show Send As Under Message Hint</string>
     <string name="CheckAllForum">Add Forum</string>
+    <string name="ShowForumAsNormalChat">Show Forum As Normal Chat</string>
 </resources>

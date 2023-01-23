@@ -111,6 +111,7 @@ import java.util.Stack;
 
 import net.kilogram.messenger.ui.MessageHelper;
 import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class DialogCell extends BaseCell {
 
@@ -1661,8 +1662,10 @@ public class DialogCell extends BaseCell {
                 }
             }
         }
-    
-        nameString = net.kilogram.messenger.helper.MessageHelper.INSTANCE.zalgoFilter(nameString);
+
+        if (KiloConfig.INSTANCE.getZalgoFilter().Bool() && topicIconInName == null) {
+            nameString = net.kilogram.messenger.helper.MessageHelper.INSTANCE.zalgoFilter(nameString);
+        }
         int timeWidth;
         if (drawTime) {
             timeWidth = (int) Math.ceil(Theme.dialogs_timePaint.measureText(timeString));

@@ -49,6 +49,7 @@ import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.R;
 import org.telegram.messenger.browser.Browser;
+import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.AlertsCreator;
@@ -64,9 +65,9 @@ import org.telegram.ui.Components.URLSpanNoUnderline;
 import java.util.concurrent.atomic.AtomicReference;
 
 import kotlin.Unit;
-import net.kilogram.messenger.NekoConfig;
-import net.kilogram.messenger.ui.BottomBuilder;
-import net.kilogram.messenger.KiloConfig;
+import tw.nekomimi.nekogram.NekoConfig;
+import tw.nekomimi.nekogram.parts.DialogTransKt;
+import tw.nekomimi.nekogram.ui.BottomBuilder;
 
 public class AboutLinkCell extends FrameLayout {
 

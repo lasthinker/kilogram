@@ -9465,7 +9465,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                             aboutLinkCell.setTextAndValue(LocaleController.getString("UserBioDetail", R.string.UserBioDetail), LocaleController.getString("UserBio", R.string.UserBio), false);
                             currentBio = null;
                         }
-                        aboutLinkCell.setMoreButtonDisabled(true);
+                      aboutLinkCell.setMoreButtonDisabled(true);
                     }
                     break;
                 case VIEW_TYPE_PREMIUM_TEXT_CELL:

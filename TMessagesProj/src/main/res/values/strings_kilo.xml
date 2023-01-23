@@ -73,4 +73,5 @@
     <string name="ShowFullAbout">Show Full About Info</string>
     <string name="HideMessageSeenTooltip">Hide Message Seen Tooltip</string>
     <string name="TypeMessageHintUseGroupName">Use Group Name As Type Message Hint</string>
+    <string name="HideBotButtonInInputField">Hide Bot Button In Input Field</string>
 </resources>

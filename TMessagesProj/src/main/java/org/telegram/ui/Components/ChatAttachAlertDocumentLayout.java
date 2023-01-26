@@ -93,8 +93,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
-import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
-import tw.nekomimi.nekogram.utils.EnvUtil;
+import net.kilogram.messenger.helpers.remote.EmojiHelper;
+import net.kilogram.messenger.utils.EnvUtil;
 
 public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLayout {
 

@@ -203,7 +203,7 @@ public class NekoAccountSettingsActivity extends BaseNekoXSettingsActivity {
                         .setItems(
                                 new CharSequence[]{LocaleController.getString("CopyLink", R.string.CopyLink)},
                                 (dialogInterface, i) -> {
-                                    AndroidUtilities.addToClipboard(String.format(Locale.getDefault(), "https://%s/nasettings/%s?r=%s", getMessagesController().linkPrefix, "account", key));
+                                    AndroidUtilities.addToClipboard(String.format(Locale.getDefault(), "https://%s/kilosettings/%s?r=%s", getMessagesController().linkPrefix, "account", key));
                                     BulletinFactory.of(NekoAccountSettingsActivity.this).createCopyLinkBulletin().show();
                                 })
                         .create());

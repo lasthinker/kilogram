@@ -145,7 +145,7 @@ public class ActionBar extends FrameLayout {
     private View.OnTouchListener interceptTouchEventListener;
     private final Theme.ResourcesProvider resourcesProvider;
 
-    private PorterDuff.Mode colorFilterMode = PorterDuff.Mode.MULTIPLY;
+    private PorterDuff.Mode colorFilterMode = PorterDuff.Mode.SRC_IN;
 
     SizeNotifierFrameLayout contentView;
     boolean blurredBackground;
@@ -1864,6 +1864,40 @@ public class ActionBar extends FrameLayout {
     private class UnreadImageView extends ImageView {
         public UnreadImageView(Context context) {
             super(context);
+        }
+
+        private int unreadCount = 0;
+        private RectF rect = new RectF();
+
+        @Override
+        public void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            if (countLayout == null || unreadCount == 0)
+                return;
+
+            Paint paint = Theme.dialogs_countPaint;
+            String unreadCountString = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
+            int countWidth = Math.max(AndroidUtilities.dp(12), (int) Math.ceil(Theme.dialogs_countTextPaint.measureText(unreadCountString)));
+            int countLeft = getMeasuredWidth() - countWidth - AndroidUtilities.dp(20);
+            int countTop = 0;
+
+            int x = countLeft - AndroidUtilities.dp(5.5f);
+            rect.set(x, countTop, x + countWidth + AndroidUtilities.dp(11), countTop + AndroidUtilities.dp(23));
+            canvas.drawRoundRect(rect, 11.5f * AndroidUtilities.density, 11.5f * AndroidUtilities.density, paint);
+            canvas.save();
+            canvas.translate(countLeft, countTop + AndroidUtilities.dp(4));
+            countLayout.draw(canvas);
+            canvas.restore();
+        }
+
+        public void setUnread(int count) {
+            if (count != unreadCount) {
+                unreadCount = count;
+                String countString = count > 99 ? "99+" : Integer.toString(count);
+                int countWidth = count == 0 ? 0 : Math.max(AndroidUtilities.dp(12), (int) Math.ceil(Theme.dialogs_countTextPaint.measureText(countString)));
+                countLayout = new StaticLayout(countString, Theme.dialogs_countTextPaint, countWidth, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+                invalidate();
+            }
         }
     }
 

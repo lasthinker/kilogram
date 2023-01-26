@@ -323,26 +323,26 @@ import java.util.regex.Pattern;
 
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
-import tw.nekomimi.nekogram.DialogConfig;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
-import tw.nekomimi.nekogram.parts.MessageTransKt;
-import tw.nekomimi.nekogram.parts.PollTransUpdatesKt;
-import tw.nekomimi.nekogram.settings.NekoSettingsActivity;
-import tw.nekomimi.nekogram.transtale.Translator;
-import tw.nekomimi.nekogram.transtale.popupwrapper.LanguageDetector;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.ui.MessageDetailsActivity;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.EnvUtil;
-import tw.nekomimi.nekogram.utils.PGPUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
-import tw.nekomimi.nekogram.utils.TelegramUtil;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
-import xyz.nextalone.nagram.NaConfig;
-import xyz.nextalone.nagram.helper.DoubleTap;
-import xyz.nextalone.nagram.helper.MessageHelper;
+import net.kilogram.messenger.DialogConfig;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.helpers.remote.EmojiHelper;
+import net.kilogram.messenger.parts.MessageTransKt;
+import net.kilogram.messenger.parts.PollTransUpdatesKt;
+import net.kilogram.messenger.settings.NekoSettingsActivity;
+import net.kilogram.messenger.transtale.Translator;
+import net.kilogram.messenger.transtale.popupwrapper.LanguageDetector;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.ui.MessageDetailsActivity;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.EnvUtil;
+import net.kilogram.messenger.utils.PGPUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.TelegramUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
+import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.helper.DoubleTap;
+import net.kilogram.messenger.helper.MessageHelper;
 
 @SuppressWarnings("unchecked")
 public class ChatActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, LocationActivity.LocationActivityDelegate, ChatAttachAlertDocumentLayout.DocumentSelectActivityDelegate, ChatActivityInterface, FloatingDebugProvider {
@@ -398,8 +398,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int nkbtn_repeatascopy = 2028;
     private final static int nkbtn_setReminder = 2029;
 
-    public int shareAlertDebugMode = DEBUG_SHARE_ALERT_MODE_NORMAL;
-    public boolean shareAlertDebugTopicsSlowMotion;
 
     public int shareAlertDebugMode = DEBUG_SHARE_ALERT_MODE_NORMAL;
     public boolean shareAlertDebugTopicsSlowMotion;
@@ -1024,6 +1022,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int OPTION_EDIT_SCHEDULE_TIME = 102;
     private final static int OPTION_SPEED_PROMO = 103;
     private final static int OPTION_OPEN_PROFILE = 104;
+    private final static int OPTION_COPY_PHOTO = 150;
 
     private final static int[] allowedNotificationsDuringChatListAnimations = new int[]{
             NotificationCenter.messagesRead,
@@ -1570,11 +1569,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         return allowEdit;
                 }
             }
-            if (!available || !(view instanceof ChatMessageCell)) {
-                return false;
-            }
-            ChatMessageCell cell = (ChatMessageCell) view;
-            return !cell.getMessageObject().isSending() && !cell.getMessageObject().isEditing() && cell.getMessageObject().type != MessageObject.TYPE_PHONE_CALL && !actionBar.isActionModeShowed() && !isSecretChat() && !isInScheduleMode() && !cell.getMessageObject().isSponsored();
+            return false;
         }
 
         @Override
@@ -9640,6 +9635,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         if (createUnreadMessageAfterId != 0) {
             scrollToMessageId(createUnreadMessageAfterId, 0, false, returnToLoadIndex, true, 0, inCaseLoading);
         } else if (returnToMessageId > 0) {
+            if (NekoConfig.rememberAllBackMessages.Bool() && !returnToMessageIdsStack.empty())
+                returnToMessageId = returnToMessageIdsStack.pop();
             scrollToMessageId(returnToMessageId, 0, true, returnToLoadIndex, true, 0, inCaseLoading);
         } else {
             scrollToLastMessage(false, true, inCaseLoading);
@@ -12330,7 +12327,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 SendMessagesHelper.getInstance(currentAccount).sendMessage(caption, dialog_id, null, null, null, true, null, null, null, true, 0, null, false);
                 caption = null;
             }
-            getSendMessagesHelper().sendMessage(fmessages, dialog_id, false, false, true, 0);
+        getSendMessagesHelper().sendMessage(fmessages, dialog_id, noForwardQuote, false, true, 0);
             SendMessagesHelper.prepareSendingDocuments(getAccountInstance(), files, files, null, caption, null, dialog_id, replyingMessageObject, getThreadMessage(), null, editingMessageObject, notify, scheduleDate);
             afterMessageSend();
         }
@@ -18903,6 +18900,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (avatarContainer != null) {
                     avatarContainer.updateSubtitle();
                 }
+            } else if (id == NotificationCenter.dialogsUnreadCounterChanged) {
+                if (actionBar != null) { // NekoX
+                    actionBar.unreadBadgeSetCount(getMessagesStorage().getMainUnreadCount());
+                }
             }
         }
     }
@@ -24631,7 +24632,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                             int totalHeight = contentView.getHeightWithKeyboard();
 
-                            if (SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
+                            if (!KiloConfig.INSTANCE.getHideMessageSeenTooltip().Bool() && SharedConfig.messageSeenHintCount > 0 && contentView.getKeyboardHeight() < AndroidUtilities.dp(20)) {
                                 messageSeenPrivacyBulletin = BulletinFactory.of(Bulletin.BulletinWindow.make(getContext()), themeDelegate).createErrorBulletin(AndroidUtilities.replaceTags(LocaleController.getString("MessageSeenTooltipMessage", R.string.MessageSeenTooltipMessage)));
                                 messageSeenPrivacyBulletin.setDuration(4000);
                                 messageSeenPrivacyBulletin.show();

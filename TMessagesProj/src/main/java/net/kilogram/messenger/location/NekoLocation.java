@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.location;
+package net.kilogram.messenger.location;
 
 
 import android.location.Location;

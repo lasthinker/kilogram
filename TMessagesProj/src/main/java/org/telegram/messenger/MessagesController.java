@@ -7081,14 +7081,16 @@ public class MessagesController extends BaseController implements NotificationCe
                             }
                             promoDialog = dialogs_dict.get(did);
 
-                            TLRPC.TL_messages_getPeerDialogs req1 = new TLRPC.TL_messages_getPeerDialogs();
-                            TLRPC.TL_inputDialogPeer peer = new TLRPC.TL_inputDialogPeer();
-                            if (res.peer.user_id != 0) {
-                                peer.peer = new TLRPC.TL_inputPeerUser();
-                                peer.peer.user_id = res.peer.user_id;
-                                TLRPC.User user = usersDict.get(res.peer.user_id);
-                                if (user != null) {
-                                    peer.peer.access_hash = user.access_hash;
+                            if (promoDialog != null) {
+                                checkingPromoInfo = false;
+                                sortDialogs(null);
+                                getNotificationCenter().postNotificationName(NotificationCenter.dialogsNeedReload, true);
+                            } else {
+                                LongSparseArray<TLRPC.User> usersDict = new LongSparseArray<>();
+                                LongSparseArray<TLRPC.Chat> chatsDict = new LongSparseArray<>();
+                                for (int a = 0; a < res.users.size(); a++) {
+                                    TLRPC.User u = res.users.get(a);
+                                    usersDict.put(u.id, u);
                                 }
                                 for (int a = 0; a < res.chats.size(); a++) {
                                     TLRPC.Chat c = res.chats.get(a);

@@ -45,10 +45,10 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import org.telegram.ui.Components.AnimatedEmojiSpan;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helpers.remote.EmojiHelper;
+import net.kilogram.messenger.KiloConfig;
 
 public class Emoji {
 

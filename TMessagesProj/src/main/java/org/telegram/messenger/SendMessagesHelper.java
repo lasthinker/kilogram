@@ -3257,6 +3257,10 @@ public boolean retriedToSend;
     }
 
     private void sendMessage(String message, String caption, TLRPC.MessageMedia location, TLRPC.TL_photo photo, VideoEditedInfo videoEditedInfo, TLRPC.User user, TLRPC.TL_document document, TLRPC.TL_game game, TLRPC.TL_messageMediaPoll poll, TLRPC.TL_messageMediaInvoice invoice, long peer, String path, MessageObject replyToMsg, MessageObject replyToTopMsg, TLRPC.WebPage webPage, boolean searchLinks, MessageObject retryMessageObject, ArrayList<TLRPC.MessageEntity> entities, TLRPC.ReplyMarkup replyMarkup, HashMap<String, String> params, boolean notify, int scheduleDate, int ttl, Object parentObject, MessageObject.SendAnimationData sendAnimationData, boolean updateStickersOreder, boolean hasMediaSpoilers) {
+        sendMessage(message, caption, location, photo, videoEditedInfo, user, document, game, poll, invoice, peer, path, replyToMsg, replyToTopMsg, webPage, searchLinks, retryMessageObject, entities, replyMarkup, params, notify, scheduleDate, ttl, parentObject, sendAnimationData, updateStickersOreder, hasMediaSpoilers, true);
+    }
+
+    private void sendMessage(String message, String caption, TLRPC.MessageMedia location, TLRPC.TL_photo photo, VideoEditedInfo videoEditedInfo, TLRPC.User user, TLRPC.TL_document document, TLRPC.TL_game game, TLRPC.TL_messageMediaPoll poll, TLRPC.TL_messageMediaInvoice invoice, long peer, String path, MessageObject replyToMsg, MessageObject replyToTopMsg, TLRPC.WebPage webPage, boolean searchLinks, MessageObject retryMessageObject, ArrayList<TLRPC.MessageEntity> entities, TLRPC.ReplyMarkup replyMarkup, HashMap<String, String> params, boolean notify, int scheduleDate, int ttl, Object parentObject, MessageObject.SendAnimationData sendAnimationData, boolean updateStickersOreder, boolean hasMediaSpoilers, boolean canSendGames) {
         if (user != null && user.phone == null) {
             return;
         }

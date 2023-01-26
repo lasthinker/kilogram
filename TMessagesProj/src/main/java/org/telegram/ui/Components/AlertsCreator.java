@@ -124,13 +124,13 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.helpers.PasscodeHelper;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.VibrateUtil;
-import static tw.nekomimi.nekogram.settings.NekoChatSettingsActivity.getDeleteMenuChecks;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.helpers.PasscodeHelper;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
+import static net.kilogram.messenger.settings.NekoChatSettingsActivity.getDeleteMenuChecks;
+import net.kilogram.messenger.KiloConfig;
 
 public class AlertsCreator {
     public final static int PERMISSIONS_REQUEST_TOP_ICON_SIZE = 72;
@@ -3272,15 +3272,15 @@ public class AlertsCreator {
         buttonTextView.setText(LocaleController.getString("DisableAutoDeleteTimer", R.string.DisableAutoDeleteTimer));
 
         final NumberPicker.OnValueChangeListener onValueChangeListener = (picker, oldVal, newVal) -> {
-            try {
+            if (!NekoConfig.disableVibration.Bool()) {
+                try {
                 if (newVal == 0) {
                     buttonTextView.setText(LocaleController.getString("DisableAutoDeleteTimer", R.string.DisableAutoDeleteTimer));
                 } else {
                     buttonTextView.setText(LocaleController.getString("SetAutoDeleteTimer", R.string.SetAutoDeleteTimer));
                 }
-                container.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-            } catch (Exception ignore) {
-
+                    container.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                } catch (Exception ignore) {}
             }
         };
         numberPicker.setOnValueChangedListener(onValueChangeListener);
@@ -5404,7 +5404,17 @@ public class AlertsCreator {
                     MessagesController.getInstance(currentAccount).deleteUserChannelHistory(chat, userFinal, chatFinal, 0);
                 }
                 if (checks[3] && userFinal != null) {
-                    doActionsInCommonGroups(checks, currentAccount, userFinal);
+                    if (userFinal.contact || userFinal.bot) {
+                        AlertDialog confirm = new AlertDialog.Builder(activity, resourcesProvider)
+                                .setTitle(LocaleController.getString("DoActionsInCommonGroups", R.string.DoActionsInCommonGroups))
+                                .setMessage(LocaleController.getString("UserRestrictionsApplyChanges", R.string.UserRestrictionsApplyChanges))
+                                .setPositiveButton(LocaleController.getString("ApplyTheme", R.string.ApplyTheme), (dialogInterface_, i_) -> doActionsInCommonGroups(checks, currentAccount, userFinal))
+                                .setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null)
+                                .create();
+                        fragment.showDialog(confirm);
+                    } else {
+                        doActionsInCommonGroups(checks, currentAccount, userFinal);
+                    }
                 }
             }
             if (onDelete != null) {

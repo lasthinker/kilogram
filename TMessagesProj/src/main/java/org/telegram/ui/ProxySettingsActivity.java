@@ -482,63 +482,6 @@ public class ProxySettingsActivity extends BaseFragment {
         linearLayout2.addView(sectionCell[2], 1, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
         sectionCell[2].setVisibility(View.GONE);
 
-        shareCell = new TextSettingsCell(context);
-        shareCell.setBackgroundDrawable(Theme.getSelectorDrawable(true));
-        shareCell.setText(LocaleController.getString("ShareFile", R.string.ShareFile), false);
-        shareCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText4));
-        linearLayout2.addView(shareCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
-        shareCell.setOnClickListener(v -> {
-            StringBuilder params = new StringBuilder();
-            String address = inputFields[FIELD_IP].getText().toString();
-            String password = inputFields[FIELD_PASSWORD].getText().toString();
-            String user = inputFields[FIELD_USER].getText().toString();
-            String port = inputFields[FIELD_PORT].getText().toString();
-            String secret = inputFields[FIELD_SECRET].getText().toString();
-            String url;
-            try {
-                if (!TextUtils.isEmpty(address)) {
-                    params.append("server=").append(URLEncoder.encode(address, "UTF-8"));
-                }
-                if (!TextUtils.isEmpty(port)) {
-                    if (params.length() != 0) {
-                        params.append("&");
-                    }
-                    params.append("port=").append(URLEncoder.encode(port, "UTF-8"));
-                }
-                if (currentType == 1) {
-                    url = "https://t.me/proxy?";
-                    if (params.length() != 0) {
-                        params.append("&");
-                    }
-                    params.append("secret=").append(URLEncoder.encode(secret, "UTF-8"));
-                } else {
-                    url = "https://t.me/socks?";
-                    if (!TextUtils.isEmpty(user)) {
-                        if (params.length() != 0) {
-                            params.append("&");
-                        }
-                        params.append("user=").append(URLEncoder.encode(user, "UTF-8"));
-                    }
-                    if (!TextUtils.isEmpty(password)) {
-                        if (params.length() != 0) {
-                            params.append("&");
-                        }
-                        params.append("pass=").append(URLEncoder.encode(password, "UTF-8"));
-                    }
-                }
-            } catch (Exception ignore) {
-                return;
-            }
-            if (params.length() == 0) {
-                return;
-            }
-            String link = url + params.toString();
-            QRCodeBottomSheet alert = new QRCodeBottomSheet(context, LocaleController.getString("ShareQrCode", R.string.ShareQrCode), link, LocaleController.getString("QRCodeLinkHelpProxy", R.string.QRCodeLinkHelpProxy), true);
-            Bitmap icon = SvgHelper.getBitmap(RLottieDrawable.readRes(null, R.raw.qr_dog), AndroidUtilities.dp(60), AndroidUtilities.dp(60), false);
-            alert.setCenterImage(icon);
-            showDialog(alert);
-        });
-
         sectionCell[1] = new ShadowSectionCell(context);
         sectionCell[1].setBackgroundDrawable(Theme.getThemedDrawable(context, R.drawable.greydivider_bottom, Theme.key_windowBackgroundGrayShadow));
         linearLayout2.addView(sectionCell[1], LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));

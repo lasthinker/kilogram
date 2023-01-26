@@ -66,7 +66,7 @@ import org.telegram.ui.LNavigation.NavigationExt;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ContactAddActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, ImageUpdater.ImageUpdaterDelegate {
+import net.kilogram.messenger.KiloConfig;
 
 public class ContactAddActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, ImageUpdater.ImageUpdaterDelegate {
 
@@ -358,7 +358,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
                 checkBoxCell.setText(AndroidUtilities.replaceCharSequence("%1$s", AndroidUtilities.replaceTags(LocaleController.getString("SharePhoneNumberWith", R.string.SharePhoneNumberWith)), firstName), "", true, false);
                 checkBoxCell.setPadding(AndroidUtilities.dp(7), 0, AndroidUtilities.dp(7), 0);
                 checkBoxCell.setOnClickListener(v -> checkBoxCell.setChecked(!checkBoxCell.isChecked(), true));
-                checkBoxCell.setChecked(!NaConfig.INSTANCE.getDoNotShareMyPhoneNumber().Bool(), false);
+                checkBoxCell.setChecked(!KiloConfig.INSTANCE.getDoNotShareMyPhoneNumber().Bool(), false);
                 linearLayout.addView(checkBoxCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 10, 0, 0));
             }
         } else {
@@ -374,7 +374,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
                 photoSelectedType = TYPE_SUGGEST;
                 imageUpdater.setUser(user);
                 TLRPC.FileLocation avatar = (user == null || user.photo == null) ? null : user.photo.photo_small;
-                imageUpdater.openMenu(avatar != null, () -> {
+                imageUpdater.openMenu(false, () -> {
 
                 }, dialogInterface -> {
                     if (!imageUpdater.isUploadingImage()) {
@@ -403,7 +403,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
                 photoSelectedType = TYPE_SET;
                 imageUpdater.setUser(user);
                 TLRPC.FileLocation avatar = (user == null || user.photo == null) ? null : user.photo.photo_small;
-                imageUpdater.openMenu(avatar != null, () -> {
+                imageUpdater.openMenu(false, () -> {
 
                 }, dialogInterface -> {
                     if (!imageUpdater.isUploadingImage()) {

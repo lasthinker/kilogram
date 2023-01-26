@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.settings;
+package net.kilogram.messenger.settings;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -34,8 +34,8 @@ import org.telegram.ui.Components.CubicBezierInterpolator;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RadialProgressView;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helpers.remote.EmojiHelper;
 
 @SuppressLint("ViewConstructor")
 public class EmojiSetCell extends FrameLayout {

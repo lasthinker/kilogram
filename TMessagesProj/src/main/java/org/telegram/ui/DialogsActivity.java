@@ -2208,7 +2208,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         public float getSwipeThreshold(RecyclerView.ViewHolder viewHolder) {
             if (viewHolder != null && viewHolder.itemView instanceof DialogCell) {
                 if (((DialogCell) viewHolder.itemView).getCurrentDialogFolderId() == 0
-                && NaConfig.INSTANCE.getDoNotUnarchiveBySwipe().Bool()) {
+                && KiloConfig.INSTANCE.getDoNotUnarchiveBySwipe().Bool()) {
                     return 1.0f;
                 }
             }

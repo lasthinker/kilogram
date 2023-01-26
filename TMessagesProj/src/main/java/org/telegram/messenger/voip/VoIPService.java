@@ -2871,11 +2871,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 			builder.setSmallIcon(isMicMute() ? R.drawable.voicechat_muted : R.drawable.voicechat_active);
 		} else {
 			builder.setContentTitle(LocaleController.getString("VoipOutgoingCall", R.string.VoipOutgoingCall));
-			if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-				builder.setSmallIcon(R.drawable.notification_inverted);
-			}else {
-				builder.setSmallIcon(R.drawable.notification);
-			}
+			builder.setSmallIcon(R.drawable.notification);
 		}
 		Intent endIntent = new Intent(this, VoIPActionsReceiver.class);
 		endIntent.setAction(getPackageName() + ".END_CALL");
@@ -3066,11 +3062,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 				}
 				am.abandonAudioFocus(this);
 			}
-			try {
-				am.unregisterMediaButtonEventReceiver(new ComponentName(this, VoIPMediaButtonReceiver.class));
-			} catch (Exception e) {
-				FileLog.e(e);
-			}
+			am.unregisterMediaButtonEventReceiver(new ComponentName(this, VoIPMediaButtonReceiver.class));
 			if (hasAudioFocus) {
 				am.abandonAudioFocus(this);
 			}
@@ -3513,11 +3505,7 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 			if (groupCall != null) {
 				bldr.setSmallIcon(isMicMute() ? R.drawable.voicechat_muted : R.drawable.voicechat_active);
 			} else {
-				if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-					bldr.setSmallIcon(R.drawable.notification_inverted);
-				}else {
-					bldr.setSmallIcon(R.drawable.notification);
-				}
+				bldr.setSmallIcon(R.drawable.notification);
 			}
 			startForeground(ID_ONGOING_CALL_NOTIFICATION, bldr.build());
 		}
@@ -3930,16 +3918,10 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	private void showIncomingNotification(String name, CharSequence subText, TLObject userOrChat, boolean video, int additionalMemberCount) {
 		Intent intent = new Intent(this, LaunchActivity.class);
 		intent.setAction("voip");
-		int iconid;
-		if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-			iconid = R.drawable.notification_inverted;
-		}else{
-			iconid = R.drawable.notification;
-		}
 		Notification.Builder builder = new Notification.Builder(this)
 				.setContentTitle(video ? LocaleController.getString("VoipInVideoCallBranding", R.string.VoipInVideoCallBranding) : LocaleController.getString("VoipInCallBranding", R.string.VoipInCallBranding))
 				.setContentText(name)
-				.setSmallIcon(iconid)
+				.setSmallIcon(R.drawable.notification)
 				.setSubText(subText)
 				.setContentIntent(PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE));
 		Uri soundProviderUri = Uri.parse("content://" + ApplicationLoader.getApplicationId() + ".call_sound_provider/start_ringing");

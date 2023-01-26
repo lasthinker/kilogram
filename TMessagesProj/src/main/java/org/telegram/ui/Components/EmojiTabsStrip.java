@@ -369,7 +369,6 @@ public class EmojiTabsStrip extends ScrollableHorizontalScrollView {
             appearAnimation = null;
         }
         appearCount = emojiPacks.size();
-        final boolean isPremium = UserConfig.getInstance(UserConfig.selectedAccount).isPremium() || allowEmojisForNonPremium();
         for (int i = 0; i < emojipackTabs.size(); ++i) {
             EmojiTabButton emojipackTab = emojipackTabs.get(i);
             EmojiView.EmojiPack pack = null;

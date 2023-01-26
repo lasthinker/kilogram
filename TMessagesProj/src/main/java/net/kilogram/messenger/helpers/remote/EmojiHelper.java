@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.helpers.remote;
+package net.kilogram.messenger.helpers.remote;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -54,8 +54,8 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.helpers.UnzipHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helpers.UnzipHelper;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class EmojiHelper extends BaseRemoteHelper implements NotificationCenter.NotificationCenterDelegate {

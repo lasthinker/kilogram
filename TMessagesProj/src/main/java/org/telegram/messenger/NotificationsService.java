@@ -20,8 +20,6 @@ import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 
-import net.kilogram.messenger.KiloConfig;
-
 public class NotificationsService extends Service {
 
     @Override
@@ -36,17 +34,11 @@ public class NotificationsService extends Service {
 //            Intent explainIntent = new Intent("android.intent.action.VIEW");
 //            explainIntent.setData(Uri.parse("https://github.com/Telegram-FOSS-Team/Telegram-FOSS/blob/master/Notifications.md"));
 //            PendingIntent explainPendingIntent = PendingIntent.getActivity(this, 0, explainIntent, 0);
-            int iconid;
-            if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-                iconid = R.drawable.notification_inverted;
-            }else{
-                iconid = R.drawable.notification;
-            }
             Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
 //                    .setContentIntent(explainPendingIntent)
                     .setShowWhen(false)
                     .setOngoing(true)
-                    .setSmallIcon(iconid)
+                    .setSmallIcon(R.drawable.notification)
                     .setContentText(LocaleController.getString("NekoXPushService", R.string.NekoXPushService))
                     .build();
             startForeground(9999, notification);

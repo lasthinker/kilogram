@@ -81,30 +81,30 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.NekoConfig;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.KiloConfig;
 
 public class NotificationsController extends BaseController {
 
     public static final String EXTRA_VOICE_REPLY = "extra_voice_reply";
     public static String OTHER_NOTIFICATIONS_CHANNEL = null;
 
-    private static final DispatchQueue notificationsQueue = new DispatchQueue("notificationsQueue");
-    private final ArrayList<MessageObject> pushMessages = new ArrayList<>();
-    private final ArrayList<MessageObject> delayedPushMessages = new ArrayList<>();
-    private final LongSparseArray<SparseArray<MessageObject>> pushMessagesDict = new LongSparseArray<>();
-    private final LongSparseArray<MessageObject> fcmRandomMessagesDict = new LongSparseArray<>();
-    private final LongSparseArray<Point> smartNotificationsDialogs = new LongSparseArray<>();
+    private static DispatchQueue notificationsQueue = new DispatchQueue("notificationsQueue");
+    private ArrayList<MessageObject> pushMessages = new ArrayList<>();
+    private ArrayList<MessageObject> delayedPushMessages = new ArrayList<>();
+    private LongSparseArray<SparseArray<MessageObject>> pushMessagesDict = new LongSparseArray<>();
+    private LongSparseArray<MessageObject> fcmRandomMessagesDict = new LongSparseArray<>();
+    private LongSparseArray<Point> smartNotificationsDialogs = new LongSparseArray<>();
     private static NotificationManagerCompat notificationManager = null;
     private static NotificationManager systemNotificationManager = null;
-    private final LongSparseArray<Integer> pushDialogs = new LongSparseArray<>();
-    private final LongSparseArray<Integer> wearNotificationsIds = new LongSparseArray<>();
-    private final LongSparseArray<Integer> lastWearNotifiedMessageId = new LongSparseArray<>();
-    private final LongSparseArray<Integer> pushDialogsOverrideMention = new LongSparseArray<>();
+    private LongSparseArray<Integer> pushDialogs = new LongSparseArray<>();
+    private LongSparseArray<Integer> wearNotificationsIds = new LongSparseArray<>();
+    private LongSparseArray<Integer> lastWearNotifiedMessageId = new LongSparseArray<>();
+    private LongSparseArray<Integer> pushDialogsOverrideMention = new LongSparseArray<>();
     public ArrayList<MessageObject> popupMessages = new ArrayList<>();
     public ArrayList<MessageObject> popupReplyMessages = new ArrayList<>();
-    private final HashSet<Long> openedInBubbleDialogs = new HashSet<>();
+    private HashSet<Long> openedInBubbleDialogs = new HashSet<>();
     private long openedDialogId = 0;
     private int openedTopicId = 0;
     private int lastButtonId = 5000;
@@ -127,7 +127,7 @@ public class NotificationsController extends BaseController {
     public boolean showBadgeMuted;
     public boolean showBadgeMessages;
 
-    private final Runnable notificationDelayRunnable;
+    private Runnable notificationDelayRunnable;
     private PowerManager.WakeLock notificationDelayWakelock;
 
     private long lastSoundPlay;
@@ -142,12 +142,8 @@ public class NotificationsController extends BaseController {
     protected static AudioManager audioManager;
     private AlarmManager alarmManager;
 
-    private final int notificationId;
-    private final String notificationGroup;
-
-    private SpoilerEffect mediaSpoilerEffect = new SpoilerEffect();
-
-    private SpoilerEffect mediaSpoilerEffect = new SpoilerEffect();
+    private int notificationId;
+    private String notificationGroup;
 
     private SpoilerEffect mediaSpoilerEffect = new SpoilerEffect();
 
@@ -3307,7 +3303,7 @@ public class NotificationsController extends BaseController {
                     }
                     newSettings.append(channelLedColor);
                     if (channelSound != null) {
-                        newSettings.append(channelSound);
+                        newSettings.append(channelSound.toString());
                     }
                     newSettings.append(channelImportance);
                     if (!isDefault && secretChat) {
@@ -3425,7 +3421,7 @@ public class NotificationsController extends BaseController {
             }
             newSettings.append(ledColor);
             if (sound != null) {
-                newSettings.append(sound);
+                newSettings.append(sound.toString());
             }
             newSettings.append(importance);
             if (!isDefault && secretChat) {
@@ -3851,12 +3847,6 @@ public class NotificationsController extends BaseController {
             intent.putExtra("currentAccount", currentAccount);
             PendingIntent contentIntent = PendingIntent.getActivity(ApplicationLoader.applicationContext, 0, intent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
 
-            int iconid;
-            if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-                iconid = R.drawable.notification_inverted;
-            }else{
-                iconid = R.drawable.notification;
-            }
             mBuilder.setContentTitle(name)
                     .setSmallIcon(getNotificationIconResId())
                     .setAutoCancel(true)
@@ -4644,12 +4634,6 @@ public class NotificationsController extends BaseController {
 
             long date = ((long) messageObjects.get(0).messageOwner.date) * 1000;
 
-            int iconid;
-            if (KiloConfig.INSTANCE.getInvertedNotification().Bool()){
-                iconid = R.drawable.notification_inverted;
-            }else{
-                iconid = R.drawable.notification;
-            }
             NotificationCompat.Builder builder = new NotificationCompat.Builder(ApplicationLoader.applicationContext)
                     .setContentTitle(name)
                     .setSmallIcon(getNotificationIconResId())
@@ -5112,12 +5096,12 @@ public class NotificationsController extends BaseController {
     }
 
     private int getNotificationIconResId() {
-        int notificationIconConfigValue = NaConfig.INSTANCE.getNotificationIcon().Int();
+        int notificationIconConfigValue = KiloConfig.INSTANCE.getNotificationIcon().Int();
         switch (notificationIconConfigValue) {
             case 0:
                 return R.drawable.offical_notification;
             case 1:
-                return R.drawable.nagram_notification;
+                return R.drawable.kilogram_notification;
             case 2:
                 return R.drawable.notification;
         }

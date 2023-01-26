@@ -14,7 +14,7 @@ import androidx.core.util.Consumer;
 
 import java.util.List;
 
-import tw.nekomimi.nekogram.NekoConfig;
+import net.kilogram.messenger.NekoConfig;
 
 public interface IMapsProvider {
     int MAP_TYPE_NORMAL = 0,

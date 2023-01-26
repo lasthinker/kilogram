@@ -37,6 +37,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.kilogram.messenger.KiloConfig;
+
 public class SearchAdapterHelper {
 
     public static class HashtagObject {

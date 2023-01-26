@@ -354,6 +354,11 @@ public class SessionBottomSheet extends BottomSheet {
             iconId = R.raw.mac_30;
             colorKey = Theme.key_avatar_backgroundCyan;
             colorKey2 = Theme.key_avatar_background2Cyan;
+        } else if (session.app_name.contains("Kilogram")) {
+            animation = false;
+            iconId = R.drawable.kilogram_notification;
+            colorKey = Theme.key_avatar_backgroundBlue;
+            colorKey2 = Theme.key_avatar_background2Blue;
         } else if (platform.contains("android")) {
             iconId = R.raw.android_30;
             colorKey = Theme.key_avatar_backgroundGreen;

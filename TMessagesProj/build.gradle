@@ -3,9 +3,12 @@ import cn.hutool.core.util.RuntimeUtil
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 
-def verName = "9.3.3-preview01"
-def verCode = 700
+def verName = "9.3.3"
+def verCode = 1125
 
+if (System.getenv("DEBUG_BUILD") == "true") {
+    verName += "-" + RuntimeUtil.execForStr("git log --pretty=format:'%h' -n 1").trim().replace('\'','')
+}
 
 def officialVer = "9.3.3"
 def officialCode = 3026
@@ -54,23 +57,9 @@ if (properties != null) {
     pwd = properties.getProperty("ALIAS_PASS")
 }
 
-    compileOnly 'org.checkerframework:checker-qual:2.5.2'
-    compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.firebase:firebase-config:21.0.1'
-    implementation 'com.google.firebase:firebase-datatransport:18.1.0'
-    implementation 'com.google.firebase:firebase-appindexing:20.0.0'
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.google.android.gms:play-services-auth:20.4.0'
-    implementation 'com.google.android.gms:play-services-vision:20.1.3'
-    implementation 'com.google.android.gms:play-services-wearable:18.0.0'
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.google.android.gms:play-services-wallet:19.1.0'
-    implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
-    implementation 'com.stripe:stripe-android:2.0.2'
-    implementation 'com.google.mlkit:language-id:16.1.1'
-    implementation 'com.android.billingclient:billing:5.1.0'
-    implementation 'com.google.code.gson:gson:2.10'
+keystorePwd = keystorePwd ?: System.getenv("KEYSTORE_PASS")
+alias = alias ?: System.getenv("ALIAS_NAME")
+pwd = pwd ?: System.getenv("ALIAS_PASS")
 
 def targetTask = ""
 if (!gradle.startParameter.taskNames.isEmpty()) {
@@ -96,13 +85,17 @@ android {
                 enable false
                 universalApk true
             } else {
-                enable true
-                if (!nativeTarget.isBlank()) {
+                if (nativeTarget.toLowerCase().equals("universal")) {
+                    enable false
+                    universalApk true
+                } else if (!nativeTarget.isBlank()) {
+                    enable true
+                    universalApk false
                     reset()
                     include nativeTarget
-                    universalApk false
                 } else {
-                    universalApk true
+                    enable true
+                    universalApk false
                 }
             }
         }
@@ -112,7 +105,7 @@ android {
     defaultConfig {
         minSdkVersion 23
         //noinspection ExpiredTargetSdkVersion,OldTargetApi
-        targetSdkVersion 30
+        targetSdkVersion 32
 
         versionName verName
         versionCode verCode
@@ -135,9 +128,11 @@ android {
 
         externalNativeBuild {
             cmake {
+                version "3.10.2"
                 arguments "-DANDROID_STL=c++_static", "-DANDROID_PLATFORM=android-23"
             }
         }
+
     }
 
     bundle {
@@ -152,6 +147,10 @@ android {
         }
     }
 
+
+    dexOptions {
+        jumboMode = true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -183,8 +182,8 @@ android {
             debuggable true
             jniDebuggable true
             multiDexEnabled true
-            zipAlignEnabled true
-            signingConfig signingConfigs.release
+            zipAlignEnabled true;
+            signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
             ndk.debugSymbolLevel = "FULL"
         }
 
@@ -197,7 +196,7 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             matchingFallbacks = ["release", "debug"]
-            signingConfig signingConfigs.release
+            signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
         }
 
         release {
@@ -209,7 +208,7 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             matchingFallbacks = ["release", "debug"]
-            signingConfig signingConfigs.release
+            signingConfig keystorePwd == null ? signingConfigs.debug : signingConfigs.release
         }
 
         foss {

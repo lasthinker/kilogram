@@ -5291,7 +5291,7 @@ public class ChatActivityEnterView extends BlurredFrameLayout implements Notific
                     TLRPC.User us = accountInstance.getMessagesController().getUser(dialog_id);
                     SpannableStringBuilder messageEditTextText = SpannableStringBuilder.valueOf(LocaleController.getString("TypeMessage", R.string.TypeMessage));
                     SpannableString sendAsText = null;
-                    if (NaConfig.INSTANCE.getTypeMessageHintUseGroupName().Bool()) {
+                    if (KiloConfig.INSTANCE.getTypeMessageHintUseGroupName().Bool()) {
                         if (chat != null) {
                             messageEditTextText = SpannableStringBuilder.valueOf(chat.title);
                         } else if (us != null && us != accountInstance.getUserConfig().getCurrentUser()) {

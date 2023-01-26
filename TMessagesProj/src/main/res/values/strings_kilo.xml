@@ -14,7 +14,6 @@
     <string name="TextUndo">Undo</string>
     <string name="TextRedo">Redo</string>
     <string name="NoiseSuppressAndVoiceEnhance">Noise Suppress And Voice Enhance</string>
-    <string name="invertedNotification">Inverted Notification</string>
     <string name="RepeatAsCopy">Repeat As Copy</string>
     <string name="DoubleTapAction">Double Tap Action</string>
     <string name="SendReactions">Send Reactions</string>
@@ -67,7 +66,7 @@
     <string name="IconDecoration">Icon Decoration</string>
     <string name="NotificationIcon">Notification Icon</string>
     <string name="Official">Official</string>
-    <string name="Nekogram">Kilogram</string>
+    <string name="Nekogram">Nekogram</string>
     <string name="HalloWeen">HalloWeen</string>
     <string name="ShowOnlineStatus">Show Online Status</string>
     <string name="ShowOnlineStatusNotice">Show The Online Status Of Other People Next To Their Profile Photo In Groups</string>

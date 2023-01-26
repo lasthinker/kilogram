@@ -78,6 +78,7 @@ import org.telegram.ui.Components.BackupImageView;
 import org.telegram.ui.Components.CombinedDrawable;
 import org.telegram.ui.Components.ContextProgressView;
 import org.telegram.ui.Components.EditTextEmoji;
+import org.telegram.ui.Components.GroupCreateDividerItemDecoration;
 import org.telegram.ui.Components.ImageUpdater;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RadialProgressView;
@@ -87,6 +88,8 @@ import org.telegram.ui.Components.VerticalPositionAutoAnimator;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
+
+import net.kilogram.messenger.utils.VibrateUtil;
 
 public class GroupCreateFinalActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, ImageUpdater.ImageUpdaterDelegate {
 

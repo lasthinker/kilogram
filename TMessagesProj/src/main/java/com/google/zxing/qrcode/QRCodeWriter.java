@@ -133,6 +133,28 @@ public final class QRCodeWriter {
         imageSize = imageBloks * multiple - 24;
         int imageX = (size - imageSize) / 2;
 
+        for (int a = 0; a < 3; a++) {
+            int x, y;
+            if (a == 0) {
+                x = padding;
+                y = padding;
+            } else if (a == 1) {
+                x = size - sideQuadSize * multiple - padding;
+                y = padding;
+            } else {
+                x = padding;
+                y = size - sideQuadSize * multiple - padding;
+            }
+
+            float r = (sideQuadSize * multiple) / 3.0f;
+            Arrays.fill(radii, r);
+
+            rect.setColor(0xff000000);
+            rect.setBounds(x, y, x + sideQuadSize * multiple, y + sideQuadSize * multiple);
+            rect.draw(canvas);
+
+            canvas.drawRect(x + multiple, y + multiple, x + (sideQuadSize - 1) * multiple, y + (sideQuadSize - 1) * multiple, blackPaint);
+
             r = (sideQuadSize * multiple) / 4.0f;
             Arrays.fill(radii, r);
             rect.setColor(0xffffffff);
@@ -212,58 +234,7 @@ public final class QRCodeWriter {
 
         canvas.setBitmap(null);
 
-  public static void drawSideQuadsGradient(Canvas canvas, Paint blackPaint, GradientDrawable rect, float sideQuadSize, float multiple, int padding, float size, float radiusFactor, float[] radii, int backgroundColor, int color) {
-    boolean isTransparentBackground = Color.alpha(backgroundColor) == 0;
-    rect.setShape(GradientDrawable.RECTANGLE);
-    rect.setCornerRadii(radii);
-    Path clipPath = new Path();
-    RectF rectF = new RectF();
-    for (int a = 0; a < 3; a++) {
-      float x, y;
-      if (a == 0) {
-        x = padding;
-        y = padding;
-      } else if (a == 1) {
-        x = size - sideQuadSize * multiple - padding;
-        y = padding;
-      } else {
-        x = padding;
-        y = size - sideQuadSize * multiple - padding;
-      }
-
-      float r;
-      if (isTransparentBackground) {
-        rectF.set(x + multiple, y + multiple, x + (sideQuadSize - 1) * multiple, y + (sideQuadSize - 1) * multiple);
-        r = (sideQuadSize * multiple) / 4.0f * radiusFactor;
-        clipPath.reset();
-        clipPath.addRoundRect(rectF, r, r, Path.Direction.CW);
-        clipPath.close();
-        canvas.save();
-        canvas.clipPath(clipPath, Region.Op.DIFFERENCE);
-      }
-      r = (sideQuadSize * multiple) / 3.0f * radiusFactor;
-      Arrays.fill(radii, r);
-      rect.setColor(color);
-      rect.setBounds((int) x, (int) y, (int) (x + sideQuadSize * multiple), (int) (y + sideQuadSize * multiple));
-      rect.draw(canvas);
-      canvas.drawRect(x + multiple, y + multiple, x + (sideQuadSize - 1) * multiple, y + (sideQuadSize - 1) * multiple, blackPaint);
-      if (isTransparentBackground) {
-        canvas.restore();
-      }
-
-      if (!isTransparentBackground) {
-        r = (sideQuadSize * multiple) / 4.0f * radiusFactor;
-        Arrays.fill(radii, r);
-        rect.setColor(backgroundColor);
-        rect.setBounds((int) (x + multiple), (int) (y + multiple), (int) (x + (sideQuadSize - 1) * multiple), (int) (y + (sideQuadSize - 1) * multiple));
-        rect.draw(canvas);
-      }
-
-      r = ((sideQuadSize - 2) * multiple) / 4.0f * radiusFactor;
-      Arrays.fill(radii, r);
-      rect.setColor(color);
-      rect.setBounds((int) (x + multiple * 2), (int) (y + multiple * 2), (int) (x + (sideQuadSize - 2) * multiple), (int) (y + (sideQuadSize - 2) * multiple));
-      rect.draw(canvas);
+        return bitmap;
     }
 
     private boolean has(int x, int y) {

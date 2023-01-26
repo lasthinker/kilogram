@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.settings;
+package net.kilogram.messenger.settings;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -8,13 +8,13 @@ import org.telegram.ui.Components.BlurredRecyclerView;
 
 import java.util.HashMap;
 
-import tw.nekomimi.nekogram.config.CellGroup;
-import tw.nekomimi.nekogram.config.cell.AbstractConfigCell;
-import tw.nekomimi.nekogram.config.cell.ConfigCellCustom;
-import tw.nekomimi.nekogram.config.cell.ConfigCellSelectBox;
-import tw.nekomimi.nekogram.config.cell.ConfigCellTextCheck;
-import tw.nekomimi.nekogram.config.cell.ConfigCellTextDetail;
-import tw.nekomimi.nekogram.config.cell.ConfigCellTextInput;
+import net.kilogram.messenger.config.CellGroup;
+import net.kilogram.messenger.config.cell.AbstractConfigCell;
+import net.kilogram.messenger.config.cell.ConfigCellCustom;
+import net.kilogram.messenger.config.cell.ConfigCellSelectBox;
+import net.kilogram.messenger.config.cell.ConfigCellTextCheck;
+import net.kilogram.messenger.config.cell.ConfigCellTextDetail;
+import net.kilogram.messenger.config.cell.ConfigCellTextInput;
 
 public class BaseNekoXSettingsActivity extends BaseFragment {
     protected BlurredRecyclerView listView;

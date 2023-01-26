@@ -88,9 +88,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.location.NekoLocation;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.location.NekoLocation;
+import net.kilogram.messenger.ui.BottomBuilder;
 
 public class ChatAttachAlertLocationLayout extends ChatAttachAlert.AttachAlertLayout implements NotificationCenter.NotificationCenterDelegate {
 

@@ -258,13 +258,17 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import kotlin.Unit;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.transtale.TranslateDb;
-import tw.nekomimi.nekogram.transtale.Translator;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.transtale.TranslateDb;
+import net.kilogram.messenger.transtale.Translator;
+import net.kilogram.messenger.transtale.TranslatorKt;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.utils.AlertUtil;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.VibrateUtil;
+import net.kilogram.messenger.KiloConfig;
+import net.kilogram.messenger.helper.MessageHelper;
 
 @SuppressLint("WrongConstant")
 @SuppressWarnings("unchecked")
@@ -2142,6 +2146,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
         default void onPreOpen() {}
         default void onPreClose() {}
+
     }
 
     private class FrameLayoutDrawer extends SizeNotifierFrameLayoutPhoto {
@@ -5822,6 +5827,15 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         sendPressed(true, 0);
                     } else if (a == 4) {
                         sendPressed(true, 0, false, true, false);
+                    } else if (a == 5) {
+                        translateComment(TranslateDb.getChatLanguage(chatId, TranslatorKt.getCode2Locale(NekoConfig.translateInputLang.String())));
+                    } else if (a == 6) {
+                        if (placeProvider != null && !placeProvider.isPhotoChecked(currentIndex)) {
+                            setPhotoChecked();
+                        }
+                        MediaController.PhotoEntry entry = (MediaController.PhotoEntry) currentObject;
+                        entry.hasSpoiler = !entry.hasSpoiler;
+                        if (placeProvider != null) placeProvider.spoilerPressed();
                     }
                 });
                 cell.setOnLongClickListener(v -> {
@@ -11648,7 +11662,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 MessagesController.getInstance(currentAccount).loadDialogPhotos(avatarsDialogId, 80, 0, true, classGuid);
             }
         }
-        if (currentMessageObject != null && currentMessageObject.isVideo() || currentBotInlineResult != null && (currentBotInlineResult.type.equals("video") || MessageObject.isVideoDocument(currentBotInlineResult.document)) || (pageBlocksAdapter != null && pageBlocksAdapter.isVideo(index)) || (sendPhotoType == SELECT_TYPE_NO_SELECT && ((MediaController.PhotoEntry)imagesArrLocals.get(index)).isVideo)) {
+        if (currentMessageObject != null && (currentMessageObject.isVideo() || currentMessageObject.isGif()) || currentBotInlineResult != null && (currentBotInlineResult.type.equals("video") || MessageObject.isVideoDocument(currentBotInlineResult.document)) || (pageBlocksAdapter != null && pageBlocksAdapter.isVideo(index)) || (sendPhotoType == SELECT_TYPE_NO_SELECT && ((MediaController.PhotoEntry)imagesArrLocals.get(index)).isVideo)) {
             playerAutoStarted = true;
             onActionClick(false);
         } else if (!imagesArrLocals.isEmpty()) {

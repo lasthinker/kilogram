@@ -127,8 +127,8 @@ import org.telegram.ui.ActionBar.INavigationLayout;
 import org.telegram.ui.ActionBar.SimpleTextView;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Adapters.DrawerLayoutAdapter;
-import org.telegram.ui.Cells.DrawerActionCheckCell;
 import org.telegram.ui.Cells.CheckBoxCell;
+import org.telegram.ui.Cells.DrawerActionCheckCell;
 import org.telegram.ui.Cells.DrawerActionCell;
 import org.telegram.ui.Cells.DrawerAddCell;
 import org.telegram.ui.Cells.DrawerProfileCell;
@@ -195,20 +195,20 @@ import java.util.regex.Pattern;
 import cn.hutool.core.util.StrUtil;
 import kotlin.Unit;
 import kotlin.text.StringsKt;
-import tw.nekomimi.nekogram.InternalUpdater;
-import tw.nekomimi.nekogram.helpers.SettingsHelper;
-import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
-import tw.nekomimi.nekogram.ui.BottomBuilder;
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.NekoXConfig;
-import tw.nekomimi.nekogram.settings.NekoSettingsActivity;
-import tw.nekomimi.nekogram.proxy.SubInfo;
-import tw.nekomimi.nekogram.proxy.SubManager;
-import tw.nekomimi.nekogram.utils.AlertUtil;
-//import tw.nekomimi.nekogram.utils.MonetHelper;
-import tw.nekomimi.nekogram.utils.ProxyUtil;
-import tw.nekomimi.nekogram.utils.UIUtil;
-import xyz.nextalone.nagram.NaConfig;
+import net.kilogram.messenger.InternalUpdater;
+import net.kilogram.messenger.helpers.SettingsHelper;
+import net.kilogram.messenger.helpers.remote.EmojiHelper;
+import net.kilogram.messenger.ui.BottomBuilder;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.NekoXConfig;
+import net.kilogram.messenger.settings.NekoSettingsActivity;
+import net.kilogram.messenger.proxy.SubInfo;
+import net.kilogram.messenger.proxy.SubManager;
+import net.kilogram.messenger.utils.AlertUtil;
+//import net.kilogram.messenger.utils.MonetHelper;
+import net.kilogram.messenger.utils.ProxyUtil;
+import net.kilogram.messenger.utils.UIUtil;
+import net.kilogram.messenger.KiloConfig;
 
 public class LaunchActivity extends BasePermissionsActivity implements INavigationLayout.INavigationLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
     public final static Pattern PREFIX_T_ME_PATTERN = Pattern.compile("^(?:http(?:s|)://|)([A-z0-9-]+?)\\.t\\.me");
@@ -931,6 +931,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                         }
                     });
         }
+        EmojiHelper.getInstance().checkEmojiPacks();
     }
 
     @Override
@@ -2123,7 +2124,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                                                 sticker = path.replace("addstickers/", "");
                                             } else if (path.startsWith("addemoji/")) {
                                                 emoji = path.replace("addemoji/", "");
-                                            } else if (path.startsWith("nasettings/")) {
+                                            } else if (path.startsWith("kilosettings/")) {
                                                 SettingsHelper.processDeepLink(data, fragment -> {
                                                     AndroidUtilities.runOnUIThread(() -> presentFragment(fragment, false, false));
                                                     if (AndroidUtilities.isTablet()) {
@@ -2189,6 +2190,8 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                                                     if (userId != 0) {
                                                         push_user_id = userId;
                                                     }
+                                                } catch (Exception e) {
+                                                    FileLog.e(e);
                                                 }
                                             } else if (path.startsWith("contact/")) {
                                                 contactToken = path.substring(8);
@@ -2540,7 +2543,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                                     } else if (url.startsWith("tg:upgrade") || url.startsWith("tg://upgrade") || url.startsWith("tg:update") || url.startsWith("tg://update")) {
                                         checkAppUpdate(true);
                                     } else if (url.startsWith("tg:neko") || url.startsWith("tg://neko")) {
-                                        url = url.replace("tg:neko", "tg://t.me/nasettings").replace("tg://neko", "tg://t.me/nasettings");
+                                        url = url.replace("tg:neko", "tg://t.me/kilosettings").replace("tg://neko", "tg://t.me/kilosettings");
                                         data = Uri.parse(url);
                                         SettingsHelper.processDeepLink(data, fragment -> {
                                             AndroidUtilities.runOnUIThread(() -> presentFragment(fragment, false, false));

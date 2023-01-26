@@ -434,8 +434,8 @@ public class SharedConfig {
                 if (!username.isEmpty()) {
                     obj.put("username", username);
                 }
-                if (!TextUtils.isEmpty(secret)) {
-                    url.append("&secret=").append(URLEncoder.encode(secret, "UTF-8"));
+                if (!password.isEmpty()) {
+                    obj.put("password", password);
                 }
             } else {
                 obj.put("type", "mtproto");

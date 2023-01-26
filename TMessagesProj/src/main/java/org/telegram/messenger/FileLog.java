@@ -257,34 +257,8 @@ public class FileLog {
         Log.e(mkTag(), mkMessage(e), e);
     }
 
-    public static void e(final Throwable e, boolean logToAppCenter) {
-        if (!BuildVars.LOGS_ENABLED) {
-            return;
-        }
-        if (BuildVars.DEBUG_VERSION && needSent(e) && logToAppCenter) {
-            AndroidUtilities.appCenterLog(e);
-        }
-        if (BuildVars.DEBUG_VERSION && e instanceof SQLiteException && e.getMessage() != null && e.getMessage().contains("disk image is malformed")) {
-            databaseIsMalformed = true;
-        }
-        ensureInitied();
-        e.printStackTrace();
-        if (getInstance().streamWriter != null) {
-            getInstance().logQueue.postRunnable(() -> {
-                try {
-                    getInstance().streamWriter.write(getInstance().dateFormat.format(System.currentTimeMillis()) + " E/tmessages: " + e + "\n");
-                    StackTraceElement[] stack = e.getStackTrace();
-                    for (int a = 0; a < stack.length; a++) {
-                        getInstance().streamWriter.write(getInstance().dateFormat.format(System.currentTimeMillis()) + " E/tmessages: " + stack[a] + "\n");
-                    }
-                    getInstance().streamWriter.flush();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-            });
-        } else {
-            e.printStackTrace();
-        }
+    public static void e(final Throwable e, boolean dummyException) {
+        e(e);
     }
 
     public static void fatal(final Throwable e) {

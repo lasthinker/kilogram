@@ -31,6 +31,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -104,8 +106,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import xyz.nextalone.nagram.helper.Dialogs;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helper.Dialogs;
 
 public class ThemeActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
@@ -631,7 +633,7 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
             distanceRow = rowCount++;
             settings2Row = rowCount++;
 
-            if (SharedConfig.getDevicePerformanceClass() == SharedConfig.PERFORMANCE_CLASS_LOW || BuildVars.DEBUG_VERSION) {
+            if (true || SharedConfig.getDevicePerformanceClass() == SharedConfig.PERFORMANCE_CLASS_LOW || BuildVars.DEBUG_VERSION) {
                 lightModeRow = rowCount++;
                 lightModeTopInfoRow = rowCount++;
             }
@@ -1162,11 +1164,6 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
                     if (view instanceof TextCheckCell) {
                         ((TextCheckCell) view).setChecked(SharedConfig.chatBlurEnabled());
                     }
-                }
-            } else if (position == lightModeRow) {
-                SharedConfig.getLiteMode().toggleMode();
-                if (view instanceof TextCheckCell) {
-                    ((TextCheckCell) view).setChecked(SharedConfig.getLiteMode().enabled());
                 }
             } else if (position == lightModeRow) {
                 SharedConfig.getLiteMode().toggleMode();

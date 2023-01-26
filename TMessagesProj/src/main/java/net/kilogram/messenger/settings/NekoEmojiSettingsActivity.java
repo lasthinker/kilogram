@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.settings;
+package net.kilogram.messenger.settings;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -48,8 +48,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import tw.nekomimi.nekogram.NekoConfig;
-import tw.nekomimi.nekogram.helpers.remote.EmojiHelper;
+import net.kilogram.messenger.NekoConfig;
+import net.kilogram.messenger.helpers.remote.EmojiHelper;
 
 public class NekoEmojiSettingsActivity extends BaseNekoSettingsActivity implements EmojiHelper.EmojiPackLoadListener, EmojiHelper.EmojiPacksLoadedListener, ChatAttachAlertDocumentLayout.DocumentSelectActivityDelegate {
 

@@ -182,14 +182,14 @@ public class NekoGeneralSettingsActivity extends BaseNekoXSettingsActivity {
             LocaleController.getString("HalloWeen", R.string.HalloWeen),
             LocaleController.getString("DecorationNone", R.string.DecorationNone),
     }, null));
-    private final AbstractConfigCell chatDecorationRow = cellGroup.appendCell(new ConfigCellSelectBox(null, NaConfig.INSTANCE.getChatDecoration(), new String[]{
+    private final AbstractConfigCell chatDecorationRow = cellGroup.appendCell(new ConfigCellSelectBox(null, KiloConfig.INSTANCE.getChatDecoration(), new String[]{
             LocaleController.getString("DependsOnDate", R.string.DependsOnDate),
             LocaleController.getString("Snowflakes", R.string.Snowflakes),
             LocaleController.getString("DecorationNone", R.string.DecorationNone),
     }, null));
-    private final AbstractConfigCell notificationIconRow = cellGroup.appendCell(new ConfigCellSelectBox(null, NaConfig.INSTANCE.getNotificationIcon(), new String[]{
+    private final AbstractConfigCell notificationIconRow = cellGroup.appendCell(new ConfigCellSelectBox(null, KiloConfig.INSTANCE.getNotificationIcon(), new String[]{
             LocaleController.getString("Official", R.string.Official),
-            LocaleController.getString("Nagram", R.string.NekoX),
+            LocaleController.getString("Kilogram", R.string.NekoX),
             LocaleController.getString("Nekogram", R.string.Nekogram)
     }, null));
     private final AbstractConfigCell tabletModeRow = cellGroup.appendCell(new ConfigCellSelectBox(null, NekoConfig.tabletMode, new String[]{
@@ -206,7 +206,7 @@ public class NekoGeneralSettingsActivity extends BaseNekoXSettingsActivity {
 
     private final AbstractConfigCell header6 = cellGroup.appendCell(new ConfigCellHeader(LocaleController.getString("PrivacyTitle")));
     private final AbstractConfigCell disableSystemAccountRow = cellGroup.appendCell(new ConfigCellTextCheck(NekoConfig.disableSystemAccount));
-    private final AbstractConfigCell doNotShareMyPhoneNumberRow = cellGroup.appendCell(new ConfigCellTextCheck(NaConfig.INSTANCE.getDoNotShareMyPhoneNumber()));
+    private final AbstractConfigCell doNotShareMyPhoneNumberRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getDoNotShareMyPhoneNumber()));
     private final AbstractConfigCell divider6 = cellGroup.appendCell(new ConfigCellDivider());
 
     private final AbstractConfigCell header7 = cellGroup.appendCell(new ConfigCellHeader(LocaleController.getString("General")));
@@ -386,7 +386,7 @@ public class NekoGeneralSettingsActivity extends BaseNekoXSettingsActivity {
                         .setItems(
                                 new CharSequence[]{LocaleController.getString("CopyLink", R.string.CopyLink)},
                                 (dialogInterface, i) -> {
-                                    AndroidUtilities.addToClipboard(String.format(Locale.getDefault(), "https://%s/nasettings/%s?r=%s", getMessagesController().linkPrefix, "general", key));
+                                    AndroidUtilities.addToClipboard(String.format(Locale.getDefault(), "https://%s/kilosettings/%s?r=%s", getMessagesController().linkPrefix, "general", key));
                                     BulletinFactory.of(NekoGeneralSettingsActivity.this).createCopyLinkBulletin().show();
                                 })
                         .create());
@@ -420,7 +420,7 @@ public class NekoGeneralSettingsActivity extends BaseNekoXSettingsActivity {
                 }
             } else if (key.equals(NekoConfig.actionBarDecoration.getKey())) {
                 restartTooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);
-            } else if (key.equals(NaConfig.INSTANCE.getNotificationIcon().getKey())) {
+            } else if (key.equals(KiloConfig.INSTANCE.getNotificationIcon().getKey())) {
                 restartTooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);
             } else if (key.equals(NekoConfig.tabletMode.getKey())) {
                 restartTooltip.showWithAction(0, UndoView.ACTION_NEED_RESATRT, null, null);

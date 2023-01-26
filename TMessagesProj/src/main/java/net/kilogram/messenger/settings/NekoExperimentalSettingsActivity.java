@@ -95,7 +95,6 @@ public class NekoExperimentalSettingsActivity extends BaseNekoXSettingsActivity 
     private final AbstractConfigCell divider0 = cellGroup.appendCell(new ConfigCellDivider());
     
     private final AbstractConfigCell header2 = cellGroup.appendCell(new ConfigCellHeader(LocaleController.getString("KiloConfig")));
-    private final AbstractConfigCell invertedNotificationRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getInvertedNotification()));
     private final AbstractConfigCell forceCopyRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getForceCopy()));
     private final AbstractConfigCell audioEnhanceRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getNoiseSuppressAndVoiceEnhance()));
     private final AbstractConfigCell showRPCErrorRow = cellGroup.appendCell(new ConfigCellTextCheck(KiloConfig.INSTANCE.getShowRPCError()));
@@ -225,7 +224,7 @@ public class NekoExperimentalSettingsActivity extends BaseNekoXSettingsActivity 
                         .setItems(
                                 new CharSequence[]{LocaleController.getString("CopyLink", R.string.CopyLink)},
                                 (dialogInterface, i) -> {
-                                    AndroidUtilities.addToClipboard(String.format(Locale.getDefault(), "https://%s/nasettings/%s?r=%s", getMessagesController().linkPrefix, "experimental", key));
+                                    AndroidUtilities.addToClipboard(String.format(Locale.getDefault(), "https://%s/kilosettings/%s?r=%s", getMessagesController().linkPrefix, "experimental", key));
                                     BulletinFactory.of(NekoExperimentalSettingsActivity.this).createCopyLinkBulletin().show();
                                 })
                         .create());

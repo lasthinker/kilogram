@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Kilo Settings</string>
-    <string name="IPv6">Connecting Through IPv6</string>
+    <string name="NekoSettings"> Kilo Settings</string>
+    <string name="IPv6">Connecting Through IPV6</string>
     <string name="MessageMenu">Message Menu</string>
     <string name="HidePhone">Hide My Phone Number</string>
-    <string name="Hide">Hide</string>
     <string name="DeleteAllFromSelf">Delete All From Yourself</string>
     <string name="DeleteAllFromSelfAlert">Warning! This Will **Delete All Messages From You** In This Chat For **All** Participants.</string>
     <string name="BotLogin">Bot Login</string>

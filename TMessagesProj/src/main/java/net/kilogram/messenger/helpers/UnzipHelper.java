@@ -1,4 +1,4 @@
-package tw.nekomimi.nekogram.helpers;
+package net.kilogram.messenger.helpers;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.DispatchQueue;

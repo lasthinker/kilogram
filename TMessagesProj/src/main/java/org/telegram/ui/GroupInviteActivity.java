@@ -42,6 +42,8 @@ import org.telegram.ui.Components.RecyclerListView;
 
 import java.util.ArrayList;
 
+import net.kilogram.messenger.utils.ProxyUtil;
+
 public class GroupInviteActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
     private ListAdapter listAdapter;
